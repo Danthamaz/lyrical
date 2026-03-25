@@ -259,7 +259,7 @@ p {
 }
 
 .dropdown-group-label .fly-arrow {
-  color: var(--accent-muted);
+  color: var(--accent);
 }
 
 /* Hamburger — hidden on desktop */
