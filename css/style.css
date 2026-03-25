@@ -181,9 +181,30 @@ p {
   background: var(--surface);
 }
 
-.nav-links li:last-child .nav-dropdown {
+.nav-links li:last-child .nav-dropdown,
+.nav-links li:nth-last-child(2) .nav-dropdown {
   left: auto;
   right: 0;
+}
+
+.nav-dropdown .dropdown-section {
+  color: var(--accent);
+  font-family: Georgia, serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 10px 1rem 4px;
+  border-bottom: none;
+}
+
+.nav-dropdown .dropdown-section:not(:first-child) {
+  border-top: 1px solid var(--border);
+  margin-top: 2px;
+}
+
+.nav-dropdown .dropdown-indent {
+  padding-left: 1.8rem;
+  font-size: 0.8rem;
 }
 
 /* Hamburger — hidden on desktop */
