@@ -258,9 +258,8 @@ p {
   background: var(--surface);
 }
 
-/* Flyout arrow points left since submenu opens left */
 .dropdown-group-label .fly-arrow {
-  transform: scaleX(-1);
+  color: var(--accent-muted);
 }
 
 /* Hamburger — hidden on desktop */
