@@ -184,9 +184,9 @@ p {
   background: var(--surface);
 }
 
-.nav-links li:last-child .nav-dropdown,
-.nav-links li:nth-last-child(2) .nav-dropdown,
-.nav-links li:nth-last-child(3) .nav-dropdown {
+#dropdown-farms,
+#dropdown-tools,
+#dropdown-misc {
   left: auto;
   right: 0;
 }
