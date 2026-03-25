@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Song Twisting Guide — Lyrical.gg</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <div class="category-label">Songs</div>
+    <h1>Song Twisting Guide</h1>
+    <div class="subtitle">How to weave multiple songs as a bard on Quarm</div>
+  </div>
+
+  <div class="section-divider">
+    <img src="/assets/divider.svg" alt="">
+  </div>
+
+  <div class="content">
+
+    <!-- Prose Section -->
+    <div class="section-title">
+      <h2>Overview</h2>
+    </div>
+    <p>Song twisting is the core mechanic that separates a good bard from a great one. By timing your song casts correctly, you can maintain the effects of multiple songs simultaneously, even though only one can be actively playing at a time.</p>
+    <p>Each song has a 12-second duration once cast. By cycling through songs before each expires, you keep all their effects active on your group. The number of songs you can twist depends on cast time and your reaction speed.</p>
+
+    <hr class="section-divider-minor">
+
+    <!-- Column Grid Section -->
+    <div class="section-title">
+      <h2>Twist Timing by Song Count</h2>
+    </div>
+    <div class="section-columns cols-3">
+      <div class="col">
+        <h3>2-Song Twist</h3>
+        <p>Each song gets ~9s of effect time. Easiest to maintain. Good for leveling and when you need to do other things between casts.</p>
+      </div>
+      <div class="col">
+        <h3>3-Song Twist</h3>
+        <p>Standard raid twist. ~6s effective time per song. Requires steady attention but very manageable with practice.</p>
+      </div>
+      <div class="col">
+        <h3>4-Song Twist</h3>
+        <p>Expert level. Tight timing with short gaps. Some songs may drop briefly between cycles. Only attempt when comfortable with 3-song.</p>
+      </div>
+    </div>
+
+    <hr class="section-divider-minor">
+
+    <!-- Song Row Section -->
+    <div class="section-title">
+      <h2>Essential Songs</h2>
+    </div>
+
+    <div class="song-row">
+      <div class="song-icon">♫</div>
+      <div class="song-info">
+        <div class="song-name">Selo's Accelerando</div>
+        <div class="song-meta">Level 5 · Drums</div>
+        <div class="song-desc">Movement speed buff. Essential for travel and kiting. Always in your twist when moving between locations.</div>
+      </div>
+    </div>
+
+    <div class="song-row">
+      <div class="song-icon">♫</div>
+      <div class="song-info">
+        <div class="song-name">Anthem de Arms</div>
+        <div class="song-meta">Level 10 · Strings</div>
+        <div class="song-desc">ATK buff for melee group. Stacks with most other attack buffs. Core raid song for melee groups.</div>
+      </div>
+    </div>
+
+    <div class="song-row">
+      <div class="song-icon">♫</div>
+      <div class="song-info">
+        <div class="song-name">War March of Muram</div>
+        <div class="song-meta">Level 51 · Brass</div>
+        <div class="song-desc">Haste + ATK. One of the strongest melee support songs available. Upgrade to Veshma's March at 58.</div>
+      </div>
+    </div>
+
+    <hr class="section-divider-minor">
+
+    <!-- Priority Chain Section -->
+    <div class="section-title">
+      <h2>Melee Group Song Priority</h2>
+    </div>
+    <div class="priority-chain">
+      <span class="priority-item">War March</span>
+      <span class="priority-arrow">▸</span>
+      <span class="priority-item">Anthem de Arms</span>
+      <span class="priority-arrow">▸</span>
+      <span class="priority-item">Psalm of Warmth</span>
+      <span class="priority-arrow">▸</span>
+      <span class="priority-item">Selo's</span>
+    </div>
+
+    <div class="section-divider">
+      <img src="/assets/divider.svg" alt="">
+    </div>
+
+    <!-- Collapsible Section -->
+    <div class="section-title">
+      <h2>Advanced Techniques</h2>
+    </div>
+
+    <div class="collapsible-header">
+      <h3>Melody Command Macros</h3>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="collapsible-body">
+      <p>The /melody command automates song twisting. Use it to queue up songs in order:</p>
+      <p><code>/melody 1 2 3</code> — twists songs in slots 1, 2, and 3 automatically.</p>
+      <p>You can interrupt melody at any time to handle charm breaks, pulls, or manual song casts. Re-run the /melody command to restart the cycle.</p>
+    </div>
+
+    <div class="collapsible-header">
+      <h3>Twisting During Combat</h3>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="collapsible-body">
+      <p>During combat, prioritize keeping your haste and ATK songs up. If you need to drop a song, drop the lowest priority one from your chain. Resist songs can be woven in for specific encounters.</p>
+    </div>
+
+    <hr class="section-divider-minor">
+
+    <!-- Quest Steps with Checkboxes (demo) -->
+    <div class="section-title">
+      <h2>Practice Checklist</h2>
+    </div>
+
+    <div class="quest-step">
+      <div class="quest-step-header">
+        <div class="quest-step-left">
+          <input type="checkbox" class="quest-step-checkbox" data-step="step1">
+          <span class="quest-step-label">Practice 2-song twist for 10 minutes</span>
+        </div>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="quest-step-body">
+        <p>Start with Selo's and any other song. Focus on the rhythm: cast song 1, wait for cast to finish, cast song 2, repeat. Get comfortable with the timing before adding more songs.</p>
+      </div>
+    </div>
+
+    <div class="quest-step">
+      <div class="quest-step-header">
+        <div class="quest-step-left">
+          <input type="checkbox" class="quest-step-checkbox" data-step="step2">
+          <span class="quest-step-label">Upgrade to 3-song twist</span>
+        </div>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="quest-step-body">
+        <p>Add a third song. The timing is tighter — you'll notice songs starting to drop if you're too slow. Use /melody 1 2 3 to automate if available.</p>
+      </div>
+    </div>
+
+    <div class="quest-step">
+      <div class="quest-step-header">
+        <div class="quest-step-left">
+          <input type="checkbox" class="quest-step-checkbox" data-step="step3">
+          <span class="quest-step-label">Set up /melody macros for common rotations</span>
+        </div>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="quest-step-body">
+        <p>Create hotkeys for your most-used rotations: melee group, caster group, solo kiting. Having these ready means you can switch roles instantly.</p>
+      </div>
+    </div>
+
+    <div class="quest-progress">✓ Progress saved in your browser</div>
+
+  </div>
+
+  <button class="back-to-top">↑ Top</button>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
