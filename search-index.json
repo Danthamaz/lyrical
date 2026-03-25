@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Song Twisting Guide",
+    "url": "/songs/twisting.html",
+    "category": "Songs",
+    "description": "How to weave multiple songs as a bard on Quarm. Covers 2, 3, and 4-song twisting, timing, melody macros, and essential songs.",
+    "tags": ["twisting", "melody", "songs", "bard", "macro", "haste", "selo"]
+  },
+  {
+    "title": "Song Rotations",
+    "url": "/songs/song-rotation.html",
+    "category": "Songs",
+    "description": "What to twist at each level range. Recommended song loadouts for leveling, grouping, and raiding.",
+    "tags": ["rotation", "songs", "leveling", "raiding", "grouping"]
+  },
+  {
+    "title": "Charm Kiting",
+    "url": "/songs/charm-kiting.html",
+    "category": "Songs",
+    "description": "Solo charm kiting techniques for bards. How to charm, position, and maximize XP solo.",
+    "tags": ["charm", "kiting", "solo", "xp", "leveling"]
+  },
+  {
+    "title": "Epic 1.0 — Singing Short Sword",
+    "url": "/quests/epic-1.0.html",
+    "category": "Quests",
+    "description": "Complete walkthrough for the bard epic 1.0 quest. Step by step guide to obtaining the Singing Short Sword.",
+    "tags": ["epic", "quest", "singing short sword", "walkthrough"]
+  },
+  {
+    "title": "Leveling Guide",
+    "url": "/quests/leveling.html",
+    "category": "Quests",
+    "description": "Best leveling path for bards on Quarm. Zones, quests, and strategies by level range.",
+    "tags": ["leveling", "zones", "xp", "guide"]
+  },
+  {
+    "title": "Song Calculator",
+    "url": "/tools/song-calculator.html",
+    "category": "Tools",
+    "description": "Bard song modifier and stacking calculator. Select your gear, AAs, and instruments to see song values.",
+    "tags": ["calculator", "modifiers", "instruments", "AAs", "stacking"]
+  }
+]

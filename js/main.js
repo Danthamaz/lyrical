@@ -5,6 +5,7 @@ $(function () {
     initNavDropdowns();
     initMobileNav();
     initComingSoonModal();
+    initSearch();
   });
 
   // === Nav Dropdowns (desktop) ===
@@ -106,6 +107,115 @@ $(function () {
       if (e.key === 'Escape') {
         $('#coming-soon-modal').removeClass('open');
       }
+    });
+  }
+
+  // === Site Search ===
+  function initSearch() {
+    var fuseInstance = null;
+    var searchData = [];
+    var debounceTimer = null;
+
+    // Load Fuse.js dynamically, then fetch index
+    $.getScript('https://cdn.jsdelivr.net/npm/fuse.js@7.0.0').done(function () {
+      $.getJSON('/search-index.json').done(function (data) {
+        searchData = data;
+        fuseInstance = new Fuse(data, {
+          keys: [
+            { name: 'title', weight: 2 },
+            { name: 'tags', weight: 1.5 },
+            { name: 'description', weight: 1 },
+            { name: 'category', weight: 0.5 }
+          ],
+          threshold: 0.4,
+          includeScore: true
+        });
+      });
+    });
+
+    function openSearch() {
+      $('#search-overlay').addClass('open');
+      $('#search-input').val('').focus();
+      $('#search-results').html('<div class="search-placeholder">Start typing to search guides...</div>');
+    }
+
+    function closeSearch() {
+      $('#search-overlay').removeClass('open');
+    }
+
+    function renderResults(query) {
+      if (!query.trim()) {
+        $('#search-results').html('<div class="search-placeholder">Start typing to search guides...</div>');
+        return;
+      }
+
+      if (!fuseInstance) {
+        $('#search-results').html('<div class="search-placeholder">Search is loading...</div>');
+        return;
+      }
+
+      var results = fuseInstance.search(query);
+
+      if (results.length === 0) {
+        $('#search-results').html('<div class="search-placeholder">No guides found</div>');
+        return;
+      }
+
+      var html = '';
+      for (var i = 0; i < results.length; i++) {
+        var item = results[i].item;
+        html += '<a href="' + item.url + '" class="search-result-item"' +
+          (item.url !== '/songs/twisting.html' ? ' data-coming-soon' : '') + '>' +
+          '<div class="search-result-category">' + item.category + '</div>' +
+          '<div class="search-result-title">' + item.title + '</div>' +
+          '<div class="search-result-desc">' + item.description + '</div>' +
+          '</a>';
+      }
+      $('#search-results').html(html);
+    }
+
+    // Open search
+    $(document).on('click', '.nav-search-btn', function () {
+      openSearch();
+    });
+
+    // Close search
+    $(document).on('click', '.search-close', function () {
+      closeSearch();
+    });
+
+    $(document).on('click', '.search-overlay', function (e) {
+      if ($(e.target).hasClass('search-overlay')) {
+        closeSearch();
+      }
+    });
+
+    // Live search with debounce
+    $(document).on('input', '#search-input', function () {
+      var query = $(this).val();
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function () {
+        renderResults(query);
+      }, 150);
+    });
+
+    // Keyboard shortcuts
+    $(document).on('keydown', function (e) {
+      // Ctrl+K or / to open (when not in input)
+      if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && !$(e.target).is('input, textarea'))) {
+        e.preventDefault();
+        openSearch();
+      }
+      // Escape to close search (search takes priority over modal)
+      if (e.key === 'Escape' && $('#search-overlay').hasClass('open')) {
+        e.stopImmediatePropagation();
+        closeSearch();
+      }
+    });
+
+    // Click result — close search, let navigation happen (or coming-soon modal)
+    $(document).on('click', '.search-result-item', function () {
+      closeSearch();
     });
   }
 

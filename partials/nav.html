@@ -1,6 +1,8 @@
 <nav class="site-nav">
   <a href="/" class="logo">♪ Lyrical.gg</a>
 
+  <button class="nav-search-btn" aria-label="Search">⌕ Search <span class="search-shortcut">Ctrl+K</span></button>
+
   <ul class="nav-links">
     <li>
       <a href="#" class="nav-has-dropdown" data-dropdown="songs">Songs</a>
@@ -61,5 +63,15 @@
     <div class="modal-icon">♪</div>
     <h2 class="modal-title">Coming Soon</h2>
     <p class="modal-message">This guide is still being written. Check back soon!</p>
+  </div>
+</div>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-container">
+    <button class="search-close">&times;</button>
+    <input type="text" class="search-input" id="search-input" placeholder="Search guides..." autocomplete="off">
+    <div class="search-results" id="search-results">
+      <div class="search-placeholder">Start typing to search guides...</div>
+    </div>
   </div>
 </div>
