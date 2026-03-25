@@ -119,6 +119,10 @@ p {
   gap: 0;
 }
 
+.nav-links li {
+  position: relative;
+}
+
 .nav-links li + li::before {
   content: "\25C6"; /* solid diamond */
   color: var(--diamond);
@@ -142,6 +146,7 @@ p {
 .nav-dropdown {
   position: absolute;
   top: calc(var(--nav-height) - 1px);
+  left: 0;
   background: #120c08;
   border: 1px solid var(--border);
   border-top: none;
@@ -152,7 +157,7 @@ p {
 }
 
 .nav-dropdown.open {
-  display: flex;
+  display: block;
 }
 
 .nav-dropdown a {
@@ -724,7 +729,215 @@ p {
 }
 
 /* ============================================================
-   19. RESPONSIVE BREAKPOINTS
+   19. COMING SOON MODAL
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: modalFadeIn 0.2s ease;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--accent);
+  border-radius: 6px;
+  max-width: 400px;
+  width: 90%;
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--accent-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: var(--accent);
+}
+
+.modal-icon {
+  color: var(--accent);
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  font-family: Georgia, serif;
+}
+
+.modal-title {
+  color: var(--accent);
+  font-family: Georgia, serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.modal-message {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   20. SEARCH
+   ============================================================ */
+
+.nav-search-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.nav-search-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent-muted);
+}
+
+.nav-search-btn .search-shortcut {
+  color: var(--diamond);
+  font-size: 0.7rem;
+  margin-left: 6px;
+}
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  justify-content: center;
+  padding-top: 80px;
+  z-index: 1001;
+  animation: modalFadeIn 0.2s ease;
+}
+
+.search-overlay.open {
+  display: flex;
+}
+
+.search-container {
+  width: 90%;
+  max-width: 560px;
+  position: relative;
+}
+
+.search-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--accent-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.search-close:hover {
+  color: var(--accent);
+}
+
+.search-input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 1.1rem;
+  padding: 14px 18px;
+  outline: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: var(--accent-muted);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-results {
+  margin-top: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.search-placeholder {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 24px 0;
+  font-style: italic;
+}
+
+.search-result-item {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-bottom: 6px;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+
+.search-result-item:hover {
+  border-color: var(--accent-muted);
+}
+
+.search-result-category {
+  color: var(--accent);
+  font-family: Georgia, serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.search-result-title {
+  color: var(--text);
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.search-result-desc {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   21. RESPONSIVE BREAKPOINTS
    ============================================================ */
 
 /* --- 900px breakpoint --- */
@@ -806,5 +1019,14 @@ p {
   /* Priority chain */
   .priority-chain {
     gap: 0.3rem;
+  }
+
+  /* Search */
+  .nav-search-btn .search-shortcut {
+    display: none;
+  }
+
+  .search-overlay {
+    padding-top: 60px;
   }
 }
