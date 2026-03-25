@@ -40,6 +40,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 110%;
 }
 
 /* ============================================================
@@ -98,9 +99,9 @@ p {
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 1.5rem;
   z-index: 100;
+  overflow-x: clip;
 }
 
 .logo {
@@ -109,6 +110,11 @@ p {
   font-size: 1.25rem;
   letter-spacing: 0.08em;
   font-weight: normal;
+  flex-shrink: 0;
+}
+
+.site-nav .nav-links {
+  margin-left: auto;
 }
 
 /* Nav link list */
@@ -175,6 +181,11 @@ p {
 .nav-dropdown a:hover {
   color: var(--accent);
   background: var(--surface);
+}
+
+.nav-links li:last-child .nav-dropdown {
+  left: auto;
+  right: 0;
 }
 
 /* Hamburger — hidden on desktop */
@@ -812,6 +823,7 @@ p {
   color: var(--text-muted);
   font-size: 0.85rem;
   padding: 4px 12px;
+  margin: 0 auto 0 1.5rem;
   cursor: pointer;
   transition: color 0.2s, border-color 0.2s;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
