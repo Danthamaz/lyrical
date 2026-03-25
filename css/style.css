@@ -185,7 +185,8 @@ p {
 }
 
 .nav-links li:last-child .nav-dropdown,
-.nav-links li:nth-last-child(2) .nav-dropdown {
+.nav-links li:nth-last-child(2) .nav-dropdown,
+.nav-links li:nth-last-child(3) .nav-dropdown {
   left: auto;
   right: 0;
 }
