@@ -1,0 +1,810 @@
+/* ============================================================
+   Lyrical.gg — Tavern Hearth Theme
+   Pure CSS, no preprocessor, no build tools
+   ============================================================ */
+
+/* ============================================================
+   1. CSS CUSTOM PROPERTIES (THEME VARIABLES)
+   ============================================================ */
+
+:root {
+  /* Palette */
+  --bg:               #0e0a08;
+  --surface:          #161010;
+  --accent:           #d4824a;
+  --accent-secondary: #a06030;
+  --accent-muted:     #7a5030;
+  --text:             #e0d4c8;
+  --text-muted:       #6a5a4a;
+  --text-body:        #b0a898;
+  --border:           #2a1a10;
+  --border-subtle:    #1e1208;
+  --diamond:          #4a3020;
+
+  /* Layout */
+  --content-width: 780px;
+  --nav-height:    52px;
+}
+
+/* ============================================================
+   2. BASE RESETS
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================================================
+   3. BODY
+   ============================================================ */
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   4. LINKS
+   ============================================================ */
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-secondary);
+}
+
+/* ============================================================
+   5. TYPOGRAPHY
+   ============================================================ */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  letter-spacing: 0.03em;
+  line-height: 1.25;
+}
+
+p {
+  color: var(--text-body);
+}
+
+/* ============================================================
+   6. NAVIGATION
+   ============================================================ */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  height: var(--nav-height);
+  background: #120c08;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 100;
+}
+
+.logo {
+  color: var(--accent);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.08em;
+  font-weight: normal;
+}
+
+/* Nav link list */
+.nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 0;
+}
+
+.nav-links li + li::before {
+  content: "\25C6"; /* solid diamond */
+  color: var(--diamond);
+  font-size: 0.45rem;
+  margin: 0 0.75rem;
+  vertical-align: middle;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+/* Dropdown */
+.nav-dropdown {
+  position: absolute;
+  top: calc(var(--nav-height) - 1px);
+  background: #120c08;
+  border: 1px solid var(--border);
+  border-top: none;
+  min-width: 180px;
+  display: none;
+  flex-direction: column;
+  z-index: 200;
+}
+
+.nav-dropdown.open {
+  display: flex;
+}
+
+.nav-dropdown a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav-dropdown a:last-child {
+  border-bottom: none;
+}
+
+.nav-dropdown a:hover {
+  color: var(--accent);
+  background: var(--surface);
+}
+
+/* Hamburger — hidden on desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-muted);
+  border-radius: 2px;
+  transition: background 0.2s ease;
+}
+
+.hamburger:hover span {
+  background: var(--accent);
+}
+
+/* Mobile nav overlay — hidden by default */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  background: #120c08;
+  z-index: 300;
+  display: none;
+  flex-direction: column;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.mobile-nav.open {
+  display: flex;
+}
+
+.mobile-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Mobile accordion category */
+.mobile-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: pointer;
+  color: var(--text);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  user-select: none;
+}
+
+.mobile-category:hover {
+  color: var(--accent);
+}
+
+/* Mobile accordion links — hidden by default */
+.mobile-category-links {
+  display: none;
+  flex-direction: column;
+  padding-left: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.mobile-category-links.open {
+  display: flex;
+}
+
+.mobile-category-links a {
+  padding: 0.4rem 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.mobile-category-links a:last-child {
+  border-bottom: none;
+}
+
+.mobile-category-links a:hover {
+  color: var(--accent);
+}
+
+/* ============================================================
+   7. HERO SECTION
+   ============================================================ */
+
+.hero {
+  text-align: center;
+  padding: 4rem 1.5rem 3.5rem;
+  background: linear-gradient(180deg, #1a0e06 0%, var(--bg) 100%);
+}
+
+.hero-title {
+  color: var(--accent);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 2.5rem;
+  font-weight: normal;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+  color: var(--accent-muted);
+  font-variant: small-caps;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  margin-bottom: 1rem;
+}
+
+.hero-tagline {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   8. GUIDE CARDS
+   ============================================================ */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  max-width: var(--content-width);
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.guide-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.guide-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-muted);
+}
+
+.card-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.card-title {
+  color: var(--accent);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+}
+
+.card-desc {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   9. PAGE HEADER (GUIDE PAGES)
+   ============================================================ */
+
+.page-header {
+  text-align: center;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 1.5rem;
+}
+
+.page-header h1 {
+  color: var(--accent);
+  font-size: 2rem;
+  font-weight: normal;
+  margin-bottom: 0.4rem;
+}
+
+.category-label {
+  color: var(--accent);
+  font-variant: small-caps;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   10. CONTENT CONTAINER
+   ============================================================ */
+
+.content {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+/* ============================================================
+   11. SECTION TITLE
+   ============================================================ */
+
+.section-title {
+  text-align: center;
+  color: var(--accent);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.1rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin: 2rem 0 1rem;
+}
+
+/* ============================================================
+   12. SECTION COLUMNS
+   ============================================================ */
+
+.section-columns {
+  display: grid;
+  gap: 1rem;
+}
+
+.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.col {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 1.25rem 1rem;
+}
+
+.col h3 {
+  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: normal;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6rem;
+}
+
+.col p,
+.col li {
+  color: var(--text-body);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.col ul,
+.col ol {
+  padding-left: 1.25rem;
+}
+
+.col li {
+  margin-bottom: 0.25rem;
+}
+
+/* ============================================================
+   13. SONG ROW
+   ============================================================ */
+
+.song-row {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.song-icon {
+  color: var(--accent);
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.song-name {
+  color: var(--accent);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 0.95rem;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.song-meta {
+  color: var(--text-muted);
+  font-size: 0.775rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.song-desc {
+  color: var(--text-body);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   14. PRIORITY CHAIN
+   ============================================================ */
+
+.priority-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.75rem 0;
+}
+
+.priority-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-body);
+}
+
+.priority-arrow {
+  color: var(--accent);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   15. DIVIDERS
+   ============================================================ */
+
+.section-divider {
+  text-align: center;
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+.section-divider svg {
+  width: 100%;
+  max-width: 500px;
+}
+
+.section-divider-minor {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin: 1.25rem 0;
+}
+
+/* ============================================================
+   16. COLLAPSIBLE
+   ============================================================ */
+
+.collapsible-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  user-select: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.collapsible-header:hover {
+  border-color: var(--accent-muted);
+  background: #1c1414;
+}
+
+.collapsible-header .arrow {
+  color: var(--accent-muted);
+  font-size: 0.85rem;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.collapsible-header.open .arrow {
+  transform: rotate(90deg);
+}
+
+.collapsible-body {
+  display: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  padding: 1rem 1rem 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.collapsible-body.open {
+  display: block;
+}
+
+/* ============================================================
+   17. QUEST STEPS
+   ============================================================ */
+
+.quest-step {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.quest-step-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+}
+
+.quest-step-header:hover {
+  background: #1c1414;
+}
+
+/* Custom checkbox */
+.quest-step-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--accent-muted);
+  border-radius: 3px;
+  background: var(--bg);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  position: relative;
+}
+
+.quest-step-checkbox:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.quest-step-checkbox:checked::after {
+  content: "\2713";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--bg);
+  font-size: 10px;
+  line-height: 1;
+}
+
+/* Checked state — strikethrough label */
+.quest-step-checkbox:checked ~ .quest-step-label {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.quest-step-label {
+  color: var(--text);
+  font-size: 0.9rem;
+  transition: color 0.15s ease;
+  flex: 1;
+}
+
+.quest-step-body {
+  display: none;
+  padding: 0 1rem 0.75rem 2.75rem;
+  color: var(--text-body);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.quest-step-body.open {
+  display: block;
+}
+
+.quest-progress {
+  text-align: right;
+  font-style: italic;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ============================================================
+   18. BACK TO TOP
+   ============================================================ */
+
+.back-to-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, color 0.2s ease, border-color 0.2s ease;
+  z-index: 50;
+  text-decoration: none;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  color: var(--accent);
+  border-color: var(--accent-muted);
+}
+
+/* ============================================================
+   19. RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* --- 900px breakpoint --- */
+@media (max-width: 900px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- 600px breakpoint --- */
+@media (max-width: 600px) {
+  /* Single column everything */
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cols-2,
+  .cols-3,
+  .cols-4 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Nav: hide links, show hamburger */
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Smaller hero text */
+  .hero {
+    padding: 2.5rem 1rem 2rem;
+  }
+
+  .hero-title {
+    font-size: 1.75rem;
+    letter-spacing: 0.07em;
+  }
+
+  .hero-subtitle {
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+  }
+
+  .hero-tagline {
+    font-size: 0.8rem;
+  }
+
+  /* Page header */
+  .page-header {
+    padding: 1.75rem 1rem 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Content */
+  .content {
+    padding: 0 1rem 3rem;
+  }
+
+  /* Song row */
+  .song-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* Priority chain */
+  .priority-chain {
+    gap: 0.3rem;
+  }
+}
