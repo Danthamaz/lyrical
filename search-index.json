@@ -32,7 +32,14 @@
     "url": "/quests/leveling.html",
     "category": "Quests",
     "description": "Best leveling path for bards on Quarm. Zones, quests, and strategies by level range.",
-    "tags": ["leveling", "zones", "xp", "guide"]
+    "tags": ["leveling", "zones", "xp", "guide", "ZEM", "swarming"]
+  },
+  {
+    "title": "Vah Shir Cloak Quest",
+    "url": "/quests/vah-shir-cloak.html",
+    "category": "Quests",
+    "description": "Complete guide to Shar Vahl cloak quests for all five Vah Shir classes. Citizenship through Garrison cloak.",
+    "tags": ["cloak", "vah shir", "shar vahl", "quest", "jharin", "sonic wolf bane", "citizenship"]
   },
   {
     "title": "Song Calculator",
