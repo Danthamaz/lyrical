@@ -4,6 +4,7 @@ $(function () {
   $('#nav-placeholder').load('/partials/nav.html', function () {
     initNavDropdowns();
     initMobileNav();
+    initComingSoonModal();
   });
 
   // === Nav Dropdowns (desktop) ===
@@ -80,6 +81,33 @@ $(function () {
     $step.find('.arrow').toggleClass('open');
     $step.find('.quest-step-body').slideToggle(200);
   });
+
+  // === Coming Soon Modal ===
+  function initComingSoonModal() {
+    $(document).on('click', '[data-coming-soon]', function (e) {
+      e.preventDefault();
+      $('#coming-soon-modal').addClass('open');
+    });
+
+    // Close on X button
+    $(document).on('click', '.modal-close', function () {
+      $('#coming-soon-modal').removeClass('open');
+    });
+
+    // Close on overlay click (not modal box)
+    $(document).on('click', '.modal-overlay', function (e) {
+      if ($(e.target).hasClass('modal-overlay')) {
+        $(this).removeClass('open');
+      }
+    });
+
+    // Close on Escape
+    $(document).on('keydown', function (e) {
+      if (e.key === 'Escape') {
+        $('#coming-soon-modal').removeClass('open');
+      }
+    });
+  }
 
   // === Back to Top ===
   $(window).on('scroll', function () {
