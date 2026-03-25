@@ -184,11 +184,17 @@ p {
   background: var(--surface);
 }
 
-#dropdown-farms,
-#dropdown-tools,
+/* Center dropdown under its nav button */
+.nav-dropdown {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Misc: right edge flush with page edge */
 #dropdown-misc {
   left: auto;
-  right: 0;
+  right: -1.5rem;
+  transform: none;
 }
 
 /* Flyout groups */
