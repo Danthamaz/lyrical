@@ -38,6 +38,11 @@ $(function () {
       $('#mobile-' + cat).toggleClass('open');
     });
 
+    // Close button
+    $('.mobile-nav-close').on('click', function () {
+      $('.mobile-nav').removeClass('open');
+    });
+
     // Close mobile nav when a link is clicked
     $('.mobile-nav a').on('click', function () {
       $('.mobile-nav').removeClass('open');
