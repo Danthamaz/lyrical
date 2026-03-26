@@ -496,24 +496,32 @@ p {
   display: flex;
   gap: 24px;
   align-items: flex-start;
-  padding: 28px 28px 28px 24px;
+  padding: 28px 28px 28px 28px;
   background: linear-gradient(135deg, var(--surface) 0%, #1a1210 100%);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
+  border-left: 5px solid var(--accent);
   border-radius: 6px;
-  margin-bottom: 24px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  margin-bottom: 0;
+  transition: box-shadow 0.3s, transform 0.2s;
 }
 
 .home-section:hover {
-  border-left-color: var(--accent);
-  box-shadow: 0 4px 24px rgba(212, 130, 74, 0.06), inset 0 0 30px rgba(212, 130, 74, 0.02);
+  box-shadow: 0 4px 30px rgba(212, 130, 74, 0.08), inset 0 0 40px rgba(212, 130, 74, 0.03);
+  transform: translateX(4px);
 }
 
-.home-section:nth-child(2) { border-left-color: var(--accent); }
-.home-section:nth-child(4) { border-left-color: var(--accent-secondary); }
-.home-section:nth-child(6) { border-left-color: var(--accent-muted); }
-.home-section:nth-child(8) { border-left-color: var(--diamond); }
+.home-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 32px;
+  padding-bottom: 48px;
+}
+
+.home-section--basics { border-left-color: var(--accent); }
+.home-section--mechanics { border-left-color: var(--accent-secondary); }
+.home-section--quests { border-left-color: var(--accent-muted); }
+.home-section--farms { border-left-color: var(--diamond); }
 
 .home-section-icon {
   flex-shrink: 0;
