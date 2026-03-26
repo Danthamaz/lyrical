@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hollowshade Moors War Event — Lyrical.gg</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <div class="category-label">Quests / Luclin</div>
+    <h1>Hollowshade Moors War Event</h1>
+    <div class="subtitle">How the three-faction zone war works and how to manipulate it</div>
+  </div>
+
+  <div class="section-divider">
+    <img src="/assets/divider.svg" alt="">
+  </div>
+
+  <div class="content">
+
+    <!-- Overview -->
+    <div class="section-title">
+      <h2>Overview</h2>
+    </div>
+    <p>Hollowshade Moors is a dynamic zone on Luclin with a three-way war between Owlbears (north), Sonic Wolves (east), and Grimlings (south). Each faction controls its own territory by default, and wars erupt when specific named mobs are killed. The war cycles through attacks, defenses, and territory conquest until one faction dominates all three areas — or the zone resets to a balanced state.</p>
+    <p>For bards, this is a strong leveling zone from roughly levels 20–34 with a 193% ZEM. Understanding the war lets you control which mobs are available in each area and set up ideal swarm conditions.</p>
+
+    <hr class="section-divider-minor">
+
+    <!-- Default State -->
+    <div class="section-title">
+      <h2>Default State</h2>
+    </div>
+    <p>When the zone first loads or fully resets, all three factions occupy their home territories. This is the "balanced" state — no war is active.</p>
+    <div class="section-columns cols-3">
+      <div class="col">
+        <h3>North</h3>
+        <p>Owlbears hold the northern area by default. All warriors, no casters — ideal for swarming.</p>
+      </div>
+      <div class="col">
+        <h3>East</h3>
+        <p>Sonic Wolves hold the eastern area by default. Wolves here drop items needed for the Vah Shir cloak quest.</p>
+      </div>
+      <div class="col">
+        <h3>South</h3>
+        <p>Grimlings hold the southern area by default. Mixed melee and caster mobs.</p>
+      </div>
+    </div>
+
+    <hr class="section-divider-minor">
+
+    <!-- How Wars Start -->
+    <div class="section-title">
+      <h2>How Wars Start</h2>
+    </div>
+    <p>A war begins when you kill one of the named mobs tied to a faction. Only one war can be active at a time — the first named kill triggers it, and subsequent kills are ignored until the current war resolves.</p>
+    <ul>
+      <li><strong>Kill an Owlbear named (Cha, Chu, Den Mother)</strong> — triggers a Sonic Wolf offensive; wolves march on owlbear territory</li>
+      <li><strong>Kill a Sonic Wolf named (Pack Leader, Ghowlik)</strong> — triggers a Grimling offensive; grimlings march on wolf territory</li>
+      <li><strong>Kill the Grimling Chieftain</strong> — triggers an Owlbear offensive; owlbears march on grimling territory</li>
+    </ul>
+    <p>To avoid triggering a war, avoid killing named mobs. If you only want to farm a specific faction's regular population, killing nameds is the main thing to watch for.</p>
+
+    <hr class="section-divider-minor">
+
+    <!-- War Mechanics -->
+    <div class="section-title">
+      <h2>War Mechanics</h2>
+    </div>
+    <p>When a war starts, the attacking faction spawns 5 attackers that follow a waypoint path toward the defender's territory. The defending faction spawns 3–5 defenders at their home area. A 12-minute timer begins.</p>
+    <p>If the attackers reach their destination waypoint before being killed, they conquer the territory — the zone emotes announce the takeover, and the attacking faction now holds that area. The losing faction loses access to those spawns.</p>
+    <p>After each battle, if no single faction controls all three territories, another war starts after the 12-minute timer. The next attacker and defender are chosen with a 50/50 random chance between the eligible factions. Wars continue chaining until one faction dominates or the zone resets.</p>
+    <p>A faction that already holds two territories may be unable to defend a third attack — their forces are described as "stretched thin" and no defenders spawn.</p>
+
+    <hr class="section-divider-minor">
+
+    <!-- Zone Emotes -->
+    <div class="section-title">
+      <h2>Zone Emotes</h2>
+    </div>
+    <p>The zone broadcasts emotes to all players to signal war events. These are your primary indication that something has changed or is about to change.</p>
+
+    <div class="collapsible-header">
+      <h3>Attack Announcements</h3>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="collapsible-body">
+      <ul>
+        <li><strong>Owlbear attack:</strong> "Somewhere in the distance, the Owlbear sharpen their claws on boulders..."</li>
+        <li><strong>Grimling attack:</strong> "Hollowshade is abuzz with activity as the Grimlings make preparations to invade..."</li>
+        <li><strong>Sonic Wolf attack:</strong> "Frenzied howling fills the air, the sound taking on every aspect of an angry wail..."</li>
+      </ul>
+    </div>
+
+    <div class="collapsible-header">
+      <h3>Defense &amp; Overextension Announcements</h3>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="collapsible-body">
+      <p>Defending factions may "nervously scurry about," "seem disoriented," or "frantically prepare for the assault" depending on their current state.</p>
+      <p>When a faction is overextended and already holds two territories, they may be unable to muster a defense: <em>"Their forces stretched thin... unable to muster a defense."</em></p>
+    </div>
+
+    <div class="collapsible-header">
+      <h3>Territory Conquest Announcements</h3>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="collapsible-body">
+      <p>Each territorial takeover is announced with a zone-wide emote, for example:</p>
+      <ul>
+        <li><em>"Your ears are filled with the screeches of the Owlbear as they lay claim to the swampland in the east."</em></li>
+      </ul>
+      <p>Similar emotes play for Sonic Wolf and Grimling conquests. When you hear a conquest emote, the mob population in that area has shifted to the conquering faction.</p>
+    </div>
+
+    <hr class="section-divider-minor">
+
+    <!-- Total Domination -->
+    <div class="section-title">
+      <h2>Total Domination</h2>
+    </div>
+    <p>When a single faction controls all three territories, a powerful boss mob spawns and a special zone-wide emote fires. The Shar Vahl guard post also evacuates at this point — an NPC shouts, <em>"Guards, merchants, we cannot win this battle! Grab what you can carry and retreat!"</em> — and rain begins.</p>
+    <ul>
+      <li><strong>All Owlbear:</strong> <strong>Skriat'Chakku</strong> (mother owlbear) spawns — <em>"The moor is shaken by the piercing screech of the mother owlbear!"</em></li>
+      <li><strong>All Sonic Wolf:</strong> <strong>Gnarlick</strong> spawns — <em>"The eerie howls of triumphant wolves emanate from every corner of the moor..."</em></li>
+      <li><strong>All Grimling:</strong> <strong>Garzemort</strong> (Grimling Prince) spawns — <em>"The Grimling Chieftain shouts, 'All shall bear witness to the power of our master!'"</em></li>
+    </ul>
+
+    <hr class="section-divider-minor">
+
+    <!-- Resetting the Zone -->
+    <div class="section-title">
+      <h2>Resetting the Zone</h2>
+    </div>
+    <p>Killing the domination boss — Skriat'Chakku, Gnarlick, or Garzemort — resets the zone back to the default balanced state. Each boss has a unique death emote announcing the return to peace, all three factions retreat to their home territories, and the Shar Vahl guard post repopulates.</p>
+    <p>If you want to return the zone to default conditions quickly (for example, to restore Sonic Wolf spawns for cloak quest drops), triggering a war that leads to domination and then killing the boss is the most reliable path to a full reset.</p>
+
+    <hr class="section-divider-minor">
+
+    <!-- Why This Matters for Bards -->
+    <div class="section-title">
+      <h2>Why This Matters for Bards</h2>
+    </div>
+    <p>Hollowshade Moors is one of the better Luclin leveling zones for bards in the 20–34 range, with a 193% ZEM boosting experience noticeably. The war system directly affects which mobs spawn where, so knowing how to steer it gives you control over your camp.</p>
+    <ul>
+      <li><strong>Owlbears are all warriors</strong> — no casters means no interrupts or roots, making them the cleanest faction to swarm. If you want pure swarm conditions, manipulate the war to keep or expand owlbear territory.</li>
+      <li><strong>Sonic Wolves drop cloak quest items</strong> — the Vah Shir cloak quest requires drops from wolves in this zone. Keep wolves in their home territory or expand their holdings to maximize drop opportunities.</li>
+      <li><strong>The war changes mob density per area</strong> — when one faction holds two or three territories, their population increases across a larger area, which changes pull routes significantly.</li>
+      <li><strong>Avoid killing nameds casually</strong> — if you're mid-swarm and content with the current faction layout, leave named mobs alone to avoid triggering an unwanted war.</li>
+    </ul>
+
+  </div>
+
+  <button class="back-to-top">↑ Top</button>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
