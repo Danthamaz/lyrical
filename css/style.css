@@ -651,6 +651,24 @@ p {
 }
 
 /* ============================================================
+   10b. ALTERNATING SECTION BANDS
+   Full-width bands that alternate background color.
+   Each band contains a .content wrapper for the 780px constraint.
+   ============================================================ */
+
+.band {
+  position: relative;
+  z-index: 1;
+  padding: 0.5rem 0;
+}
+
+.band:nth-child(even) {
+  background: rgba(30, 18, 8, 0.6);
+  border-top: 1px solid rgba(212, 130, 74, 0.06);
+  border-bottom: 1px solid rgba(212, 130, 74, 0.06);
+}
+
+/* ============================================================
    11. SECTION TITLE
    ============================================================ */
 
