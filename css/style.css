@@ -409,13 +409,18 @@ p {
 }
 
 .hero-quote {
-  color: var(--text-muted);
+  color: var(--accent-muted);
   font-style: italic;
   font-size: 1rem;
   max-width: 500px;
   margin: 20px auto 0;
   line-height: 1.8;
   font-family: Georgia, serif;
+}
+
+.hero-quote::before,
+.hero-quote::after {
+  content: '';
 }
 
 /* ============================================================
@@ -471,12 +476,16 @@ p {
   display: flex;
   gap: 20px;
   align-items: flex-start;
-  padding: 24px 0;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 24px;
 }
 
 .home-section-icon {
   flex-shrink: 0;
-  font-size: 2rem;
+  font-size: 2.2rem;
   width: 50px;
   text-align: center;
   padding-top: 4px;
@@ -507,11 +516,11 @@ p {
 }
 
 .home-tag {
-  background: var(--surface);
+  background: var(--bg);
   border: 1px solid var(--border);
   color: var(--text-muted);
   font-size: 0.8rem;
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: 3px;
   text-decoration: none;
   transition: border-color 0.2s, color 0.2s;
@@ -1173,12 +1182,12 @@ p {
   }
 
   .home-section {
-    flex-direction: column;
-    gap: 10px;
+    padding: 16px;
   }
 
   .home-section-icon {
-    width: auto;
+    font-size: 1.6rem;
+    width: 36px;
   }
 
   /* Page header */
