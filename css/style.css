@@ -408,6 +408,16 @@ p {
   font-size: 0.9rem;
 }
 
+.hero-quote {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 1rem;
+  max-width: 500px;
+  margin: 20px auto 0;
+  line-height: 1.8;
+  font-family: Georgia, serif;
+}
+
 /* ============================================================
    8. GUIDE CARDS
    ============================================================ */
@@ -454,6 +464,62 @@ p {
   color: var(--text-muted);
   font-size: 0.8rem;
   line-height: 1.5;
+}
+
+/* === Home Page Sections === */
+.home-section {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 24px 0;
+}
+
+.home-section-icon {
+  flex-shrink: 0;
+  font-size: 2rem;
+  width: 50px;
+  text-align: center;
+  padding-top: 4px;
+}
+
+.home-section-body {
+  flex: 1;
+}
+
+.home-section-title {
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.home-section-body p {
+  color: var(--text-body);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.home-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.home-tag {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding: 4px 12px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.home-tag:hover {
+  border-color: var(--accent-muted);
+  color: var(--accent);
 }
 
 /* ============================================================
@@ -1100,6 +1166,19 @@ p {
 
   .hero-tagline {
     font-size: 0.8rem;
+  }
+
+  .hero-quote {
+    font-size: 0.85rem;
+  }
+
+  .home-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .home-section-icon {
+    width: auto;
   }
 
   /* Page header */
