@@ -381,17 +381,22 @@ p {
 
 .hero {
   text-align: center;
-  padding: 4rem 1.5rem 3.5rem;
-  background: linear-gradient(180deg, #1a0e06 0%, var(--bg) 100%);
+  padding: 5rem 1.5rem 4rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(212, 130, 74, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 50%, rgba(122, 80, 48, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(122, 80, 48, 0.05) 0%, transparent 50%),
+    linear-gradient(180deg, #1a0e06 0%, var(--bg) 100%);
 }
 
 .hero-title {
   color: var(--accent);
   font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: normal;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.2em;
   margin-bottom: 0.5rem;
+  text-shadow: 0 0 40px rgba(212, 130, 74, 0.3), 0 0 80px rgba(212, 130, 74, 0.1);
 }
 
 .hero-subtitle {
@@ -474,21 +479,34 @@ p {
 /* === Home Page Sections === */
 .home-section {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   align-items: flex-start;
-  padding: 24px;
-  background: var(--surface);
+  padding: 28px 28px 28px 24px;
+  background: linear-gradient(135deg, var(--surface) 0%, #1a1210 100%);
   border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
   border-radius: 6px;
   margin-bottom: 24px;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
+
+.home-section:hover {
+  border-left-color: var(--accent);
+  box-shadow: 0 4px 24px rgba(212, 130, 74, 0.06), inset 0 0 30px rgba(212, 130, 74, 0.02);
+}
+
+.home-section:nth-child(2) { border-left-color: var(--accent); }
+.home-section:nth-child(4) { border-left-color: var(--accent-secondary); }
+.home-section:nth-child(6) { border-left-color: var(--accent-muted); }
+.home-section:nth-child(8) { border-left-color: var(--diamond); }
 
 .home-section-icon {
   flex-shrink: 0;
-  font-size: 2.2rem;
-  width: 50px;
+  font-size: 2.4rem;
+  width: 54px;
   text-align: center;
-  padding-top: 4px;
+  padding-top: 2px;
+  filter: drop-shadow(0 0 8px rgba(212, 130, 74, 0.2));
 }
 
 .home-section-body {
@@ -496,23 +514,23 @@ p {
 }
 
 .home-section-title {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .home-section-body p {
   color: var(--text-body);
   font-size: 0.9rem;
   line-height: 1.7;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .home-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
 }
 
 .home-tag {
@@ -520,15 +538,17 @@ p {
   border: 1px solid var(--border);
   color: var(--text-muted);
   font-size: 0.8rem;
-  padding: 5px 14px;
-  border-radius: 3px;
+  padding: 6px 16px;
+  border-radius: 20px;
   text-decoration: none;
-  transition: border-color 0.2s, color 0.2s;
+  transition: all 0.2s;
 }
 
 .home-tag:hover {
-  border-color: var(--accent-muted);
+  border-color: var(--accent);
   color: var(--accent);
+  background: rgba(212, 130, 74, 0.08);
+  box-shadow: 0 0 12px rgba(212, 130, 74, 0.1);
 }
 
 /* ============================================================
