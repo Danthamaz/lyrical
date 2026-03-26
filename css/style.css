@@ -511,9 +511,9 @@ p {
 }
 
 .home-section:nth-child(2) { border-left-color: var(--accent); }
-.home-section:nth-child(4) { border-left-color: var(--accent-secondary); }
-.home-section:nth-child(6) { border-left-color: var(--accent-muted); }
-.home-section:nth-child(8) { border-left-color: var(--diamond); }
+.home-section:nth-child(4) { border-left-color: var(--accent); }
+.home-section:nth-child(6) { border-left-color: var(--accent); }
+.home-section:nth-child(8) { border-left-color: var(--accent); }
 
 .home-section-icon {
   flex-shrink: 0;
