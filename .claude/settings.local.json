@@ -18,7 +18,14 @@
       "Bash(grep -n \"INSERT INTO \\\\`tradeskill_recipe_entries\\\\`\" /c/Apps/quarm/db/quarm_2026-03-20-09_37.sql)",
       "Bash(grep -n \"INSERT INTO \\\\`tradeskill_recipe\\\\`\" /c/Apps/quarm/db/quarm_2026-03-20-09_37.sql)",
       "Bash(grep -n \"INSERT INTO \\\\`tradeskill_recipe\\\\` \" /c/Apps/quarm/db/quarm_2026-03-20-09_37.sql)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Edit",
+      "Write",
+      "Bash(mkdir:*)",
+      "Bash(ls:*)",
+      "Glob",
+      "Grep",
+      "Read"
     ]
   }
 }

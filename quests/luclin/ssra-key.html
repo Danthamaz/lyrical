@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SSRA Key — Lyri Cal</title>
+  <title>SSRA Key — Lyrical</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -13,189 +13,501 @@
   <div class="page-header">
     <div class="category-label">Quests / Luclin</div>
     <h1>Ssraeshza Temple Key</h1>
-    <div class="subtitle">How to gain access to the upper floors of Ssraeshza Temple</div>
+    <div class="subtitle">Ring of the Shissar &amp; Zazuzh's Key -- accessing the upper floors and Emperor's chamber</div>
   </div>
 
   <div class="section-divider">
-    <img src="/assets/divider.svg" alt="">
+    <img src="/assets/divider-header.svg" alt="">
   </div>
 
-  <div class="content">
+  <section class="band">
+    <div class="content">
 
-    <!-- Overview -->
+    <!-- ============================================================
+         TABLE OF CONTENTS
+         ============================================================ -->
+    <div class="section-title">
+      <h2>Table of Contents</h2>
+    </div>
+    <ol style="columns: 2; column-gap: 2rem; padding-left: 1.2rem;">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#key-npcs">Key NPCs</a></li>
+      <li><a href="#key-items">Key Items</a></li>
+      <li><a href="#phase1">Phase 1 — Elder Glanoxx &amp; the Secret of the Key</a></li>
+      <li><a href="#phase2">Phase 2 — Killing Commanders &amp; Collecting Components</a></li>
+      <li><a href="#phase3">Phase 3 — The Taskmaster's Pouch Combine</a></li>
+      <li><a href="#tips">Tips &amp; Notes</a></li>
+    </ol>
+
+    </div>
+  </section>
+
+  <section class="band" id="overview">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- ============================================================
+         OVERVIEW
+         ============================================================ -->
     <div class="section-title">
       <h2>Overview</h2>
     </div>
-    <p>Ssraeshza Temple is the home of the Shissar — ancient serpent-like creatures banished to Luclin millennia ago. The temple has multiple floors, with the deeper areas housing increasingly powerful enemies culminating in <strong>Emperor Ssraeshza</strong> himself on the highest floor.</p>
-    <p>The lower floors of the temple are accessible to anyone. However, access to the upper floors (and ultimately Emperor Ssraeshza's chamber) requires the <strong>Ssraeshza Temple Access Key</strong>, obtained through a quest chain involving the Shissar's own servants and the politics of the temple hierarchy.</p>
-    <p>The key is obtained by completing a quest for <strong>High Priest of Ssraeshza</strong> involving the collection of specific items that demonstrate your worthiness to the Shissar — or more precisely, your usefulness as a pawn in the temple's internal power struggles.</p>
+    <p>Ssraeshza Temple is the home of the Shissar -- ancient serpent-like creatures banished to Luclin millennia ago. The temple has multiple floors, with the deeper areas housing increasingly powerful enemies culminating in <strong>Emperor Ssraeshza</strong> (level 66, 1,250,000 HP) at the top. The temple is accessed from <strong>The Deep</strong> on Luclin.</p>
+    <p>The lower floors of the temple are accessible to anyone. However, there are two separate keys required to fully access the temple's upper areas:</p>
+    <ul>
+      <li><strong>Zazuzh's Key</strong> (item 19711) -- drops from Commander Zazuzh; opens a locked door on the mid-level floors.</li>
+      <li><strong>Ring of the Shissar</strong> (item 19719) -- crafted by combining three No Drop components in the Taskmaster's Pouch; activates the teleporter to Emperor Ssraeshza's chamber. Also a wearable finger slot ring: +8 AC, +4 INT, +4 STA, +4 WIS, +80 HP, +65 Mana. Magic, Lore, No Drop, All/All.</li>
+    </ul>
+    <p>The quest information comes from <strong>Elder Glanoxx</strong>, an Iksar slave held captive within the temple itself. When you hail him, he looks sick and motions for something to drink. Give him a <strong>Water Flask</strong> and follow the dialogue keywords to learn the secret of the key.</p>
 
-    <div class="section-divider"><img src="/assets/divider.svg" alt=""></div>
+    <div class="priority-chain" style="margin: 1rem 0;">
+      <div class="priority-item">Give Water Flask to Elder Glanoxx</div>
+      <span class="priority-arrow">→</span>
+      <div class="priority-item">Say "release" → "crusaders of prophecy" → "secret of the key"</div>
+      <span class="priority-arrow">→</span>
+      <div class="priority-item">Loot Zazuzh's Idol + Zeruzsh's Ring + Ssraeshzian Insignia</div>
+      <span class="priority-arrow">→</span>
+      <div class="priority-item">Loot Taskmaster's Pouch</div>
+      <span class="priority-arrow">→</span>
+      <div class="priority-item">Combine all 3 in Pouch</div>
+      <span class="priority-arrow">→</span>
+      <div class="priority-item">Ring of the Shissar</div>
+    </div>
 
-    <!-- Key NPCs -->
+    </div>
+  </section>
+
+  <section class="band" id="key-npcs">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- ============================================================
+         KEY NPCs
+         ============================================================ -->
     <div class="section-title">
       <h2>Key NPCs</h2>
     </div>
-    <ul>
-      <li><strong>Ssra Ambassador Rish</strong> — located in Acrylia Caverns; the entry point into the Ssraeshza key quest chain. Speak with him to begin.</li>
-      <li><strong>High Priest of Ssraeshza</strong> — deep within Ssraeshza Temple; involved in the turn-in for upper temple access</li>
-      <li><strong>Various Shissar priests and guards</strong> — throughout the temple, some involved in quest steps</li>
-    </ul>
+    <div class="section-columns cols-2">
+      <div class="col" style="border-left: 3px solid var(--accent);">
+        <h3>Quest NPCs</h3>
+        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+          <thead>
+            <tr>
+              <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: left;">NPC</th>
+              <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: left;">Location</th>
+              <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: left;">Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>Elder Glanoxx</strong></td>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Ssraeshza Temple (lower floors)</td>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Iksar slave; give him a Water Flask, then say "release" → "crusaders of prophecy" → "secret of the key" to learn the combine recipe</td>
+            </tr>
+            <tr>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>an Iksar foreman</strong></td>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Ssraeshza Temple (near smelting furnaces)</td>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Optional -- say "glanoxx sent me" then "weakness" then "tainted metal" to learn about forging tainted Shissar weapons using green metal from the mines</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <h3>Kill Targets (Component Drops)</h3>
+        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+          <thead>
+            <tr>
+              <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: left;">NPC</th>
+              <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: left;">Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>Commander Zazuzh</strong> (Lv 56, 17,500 HP)</td>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Drops <strong>Zazuzh's Idol</strong> + <strong>Zazuzh's Key</strong></td>
+            </tr>
+            <tr>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>Commander Zherozsh</strong> (Lv 58, 18,270 HP)</td>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Drops <strong>Zeruzsh's Ring</strong></td>
+            </tr>
+            <tr>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>General Kizuhx</strong> (Lv 53, 150,000 HP)</td>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Drops <strong>Ssraeshzian Insignia</strong></td>
+            </tr>
+            <tr>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>Advisor Zekuzh</strong> (Lv 53, 150,000 HP)</td>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Drops <strong>Ssraeshzian Insignia</strong> (alternate)</td>
+            </tr>
+            <tr>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>Arbiter Korazhk</strong> (Lv 53, 150,000 HP)</td>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Drops <strong>Ssraeshzian Insignia</strong> (alternate)</td>
+            </tr>
+            <tr>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>Named Taskmasters / Warden / Rhozth</strong> (Lv 60, 32,000 HP)</td>
+              <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Drop the <strong>Taskmaster's Pouch</strong> (container)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-    <div class="section-divider"><img src="/assets/divider.svg" alt=""></div>
+    </div>
+  </section>
 
-    <!-- Key Items -->
+  <section class="band" id="key-items">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- ============================================================
+         KEY ITEMS
+         ============================================================ -->
     <div class="section-title">
       <h2>Key Items</h2>
     </div>
-    <ul>
-      <li><strong>Ssraeshza Temple Access Key</strong> — the result of the quest; No Drop; allows access to the upper floors</li>
-      <li><strong>Shissar Signet Ring</strong> — an intermediate item in the chain, obtained from specific Shissar named</li>
-      <li><strong>Scaled Tablet</strong> — turn-in item obtained by completing tasks for the lower temple NPCs</li>
-    </ul>
+    <table style="width:100%; border-collapse:collapse; font-size:0.85rem; margin-bottom: 1rem;">
+      <thead>
+        <tr>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: left;">Item</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: left;">Type</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: left;">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>Ring of the Shissar</strong></td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Final Reward (Finger)</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">MAGIC LORE NO DROP -- activates the teleporter to Emperor Ssraeshza's chamber. Wearable ring: +8 AC, +4 INT, +4 STA, +4 WIS, +80 HP, +65 Mana. All/All.</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>Zazuzh's Key</strong></td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Door Key</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">LORE NO DROP -- drops from Commander Zazuzh; opens the locked door on the mid-level floors</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>Zazuzh's Idol</strong></td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Combine Component</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">LORE NO DROP -- drops from Commander Zazuzh (100% drop rate). Glanoxx calls it "Idol of Zazuzh."</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>Zeruzsh's Ring</strong></td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Combine Component</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">LORE NO DROP -- drops from Commander Zherozsh (100% drop rate). Glanoxx calls it "Ring of Zeruzsh."</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>Ssraeshzian Insignia</strong></td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Combine Component</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">LORE NO DROP -- drops from General Kizuhx, Advisor Zekuzh, or Arbiter Korazhk (100% drop rate)</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);"><strong>Taskmaster's Pouch</strong></td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Container (4-slot)</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">LORE NO DROP -- drops from seven named Taskmasters, plus Warden Mekuzh and Rhozth Ssravizh. Consumed on combine.</td>
+        </tr>
+      </tbody>
+    </table>
 
-    <div class="section-divider"><img src="/assets/divider.svg" alt=""></div>
+    </div>
+  </section>
 
-    <!-- Steps -->
+  <section class="band" id="phase1">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- ============================================================
+         PHASE 1
+         ============================================================ -->
     <div class="section-title">
-      <h2>Step-by-Step Guide</h2>
+      <h2>Phase 1 — Elder Glanoxx &amp; the Secret of the Key</h2>
     </div>
 
     <div class="collapsible-header">
-      <h3>Phase 1: Initial Contact via Ssra Ambassador Rish</h3>
+      <h3>Ssraeshza Temple (Lower Floors) — NPC: Elder Glanoxx</h3>
       <span class="arrow">▶</span>
     </div>
     <div class="collapsible-body">
+
       <div class="quest-step">
         <div class="quest-step-header">
           <div class="quest-step-left">
             <input type="checkbox" class="quest-step-checkbox" data-step="ssra1">
-            <span class="quest-step-label">Locate Ssra Ambassador Rish in Acrylia Caverns</span>
+            <span class="quest-step-label">Locate Elder Glanoxx and hail him</span>
           </div>
           <span class="arrow">▶</span>
         </div>
         <div class="quest-step-body">
-          <p>Ssra Ambassador Rish is found in Acrylia Caverns, a zone accessible from Grey. He acts as a diplomatic contact for the Shissar and is the starting point for any adventurer seeking access to the temple's upper levels. Speak with him and express your desire to enter.</p>
+          <p>Elder Glanoxx is an Iksar slave held captive in the lower floors of Ssraeshza Temple. When you hail him:</p>
+          <blockquote><em>Elder Glanoxx looks like he's been sick for some time. He looks at you for a moment and motions for something to drink.</em></blockquote>
         </div>
       </div>
+
       <div class="quest-step">
         <div class="quest-step-header">
           <div class="quest-step-left">
             <input type="checkbox" class="quest-step-checkbox" data-step="ssra2">
-            <span class="quest-step-label">Complete Ambassador Rish's introductory task to establish intent</span>
+            <span class="quest-step-label">Give Elder Glanoxx a Water Flask</span>
           </div>
           <span class="arrow">▶</span>
         </div>
         <div class="quest-step-body">
-          <p>Rish will ask you to prove your competence and utility. This typically involves killing a minor enemy in the nearby area and returning with proof. The task is accessible to a small group or well-geared solo player.</p>
+          <p>Hand Elder Glanoxx a <strong>Water Flask</strong> (item 13006 -- a common drink sold by many vendors). He responds:</p>
+          <blockquote><em>'Are you here for them... are you here to release us?'</em></blockquote>
         </div>
       </div>
+
+      <div class="quest-step">
+        <div class="quest-step-header">
+          <div class="quest-step-left">
+            <input type="checkbox" class="quest-step-checkbox" data-step="ssra2b">
+            <span class="quest-step-label">Follow the dialogue keywords to learn the secret</span>
+          </div>
+          <span class="arrow">▶</span>
+        </div>
+        <div class="quest-step-body">
+          <p>Say <strong>"release"</strong>. Glanoxx responds:</p>
+          <blockquote><em>'The ones that keep us here... the ones who defy the gods. They must be destroyed. I cannot recall a time outside of this place, but I believe the stories. I trust that we are from somewhere else. These creatures claim to be gods. They claim to have created us from the filth of the mines. This cannot be. I have seen the face of our true god. He told me of their blasphemy. He came to me and handed me the knowledge of how to reach their Emperor. He taught me to resist the prying magic of the fanatics. Are you the crusaders of prophecy... the ones who walk in the mist?'</em></blockquote>
+
+          <p>Say <strong>"crusaders of prophecy"</strong>. He responds:</p>
+          <blockquote><em>'The prophecy will come to pass at last. Take my knowledge... the knowledge of our lord. I will not last much longer. This sickness will kill me like the others. There is one other who can help you. He claims to know some weakness of these creatures, seek him at the smelting furnaces near the mines. Now I must tell you the secret of the key.'</em></blockquote>
+
+          <p>Say <strong>"secret of the key"</strong>. Glanoxx reveals the three items you need:</p>
+          <blockquote><em>'There is a pouch to be found. It was specially made and requires three separate components to function. Seek out the Idol of Zazuzh and the Ring of Zeruzsh. These items are kept by the Emperor's must loyal Taskmasters. Place with them the Ssreashzian Insignia. This item will be much harder to acquire. I am sure you will be successful... our lord walks with you. Please be swift.'</em></blockquote>
+
+          <p>Glanoxx uses slightly different names than the actual item names:</p>
+          <ul>
+            <li>"Idol of Zazuzh" = <strong>Zazuzh's Idol</strong> -- drops from Commander Zazuzh, not the Taskmasters</li>
+            <li>"Ring of Zeruzsh" = <strong>Zeruzsh's Ring</strong> -- drops from Commander Zherozsh, not the Taskmasters</li>
+            <li>"Ssreashzian Insignia" = <strong>Ssraeshzian Insignia</strong> -- drops from General Kizuhx, Advisor Zekuzh, or Arbiter Korazhk</li>
+          </ul>
+          <p>The <strong>Taskmaster's Pouch</strong> he mentions drops from the named Taskmasters, Warden Mekuzh, and Rhozth Ssravizh throughout the temple.</p>
+        </div>
+      </div>
+
+    </div>
+
+    </div>
+  </section>
+
+  <section class="band" id="phase2">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- ============================================================
+         PHASE 2
+         ============================================================ -->
+    <div class="section-title">
+      <h2>Phase 2 — Killing Commanders &amp; Collecting Components</h2>
     </div>
 
     <div class="collapsible-header">
-      <h3>Phase 2: Entering the Lower Temple and Collecting the Signet</h3>
+      <h3>Ssraeshza Temple — Component Drops from Named NPCs</h3>
       <span class="arrow">▶</span>
     </div>
     <div class="collapsible-body">
+
       <div class="quest-step">
         <div class="quest-step-header">
           <div class="quest-step-left">
             <input type="checkbox" class="quest-step-checkbox" data-step="ssra3">
-            <span class="quest-step-label">Enter Ssraeshza Temple through the zone entrance in Grey</span>
+            <span class="quest-step-label">Obtain a Taskmaster's Pouch from a named Taskmaster, Warden, or Rhozth</span>
           </div>
           <span class="arrow">▶</span>
         </div>
         <div class="quest-step-body">
-          <p>The temple entrance is in the Grey zone on Luclin. The lower floors are accessible without a key and contain undead and living Shissar servants. Clear through carefully — many mobs see through invisibility.</p>
+          <p>The <strong>Taskmaster's Pouch</strong> (item 17118) is a 4-slot No Drop container required for the final combine. It is consumed when you combine. It drops from the following NPCs, all level 60 with 32,000 HP:</p>
+          <ul>
+            <li><strong>Taskmaster Keuzozh</strong> (NPC 162021)</li>
+            <li><strong>Taskmaster Zhe`Vozh</strong> (NPC 162059)</li>
+            <li><strong>Taskmaster Zerumaz</strong> (NPC 162011)</li>
+            <li><strong>Taskmaster Kavamezh</strong> (NPC 162012)</li>
+            <li><strong>Taskmaster Vezhkah</strong> (NPC 162024)</li>
+            <li><strong>Taskmaster Mikazha</strong> (NPC 162013)</li>
+            <li><strong>Taskmaster Revan`Kezh</strong> (NPC 162060)</li>
+            <li><strong>Warden Mekuzh</strong> (NPC 162023)</li>
+            <li><strong>Rhozth Ssravizh</strong> (NPC 162089)</li>
+          </ul>
+          <p>This is usually the easiest piece to obtain since there are nine potential sources. Farm this first while organizing the harder Commander/General kills.</p>
         </div>
       </div>
+
       <div class="quest-step">
         <div class="quest-step-header">
           <div class="quest-step-left">
             <input type="checkbox" class="quest-step-checkbox" data-step="ssra4">
-            <span class="quest-step-label">Kill a named Shissar in the lower temple to obtain the Shissar Signet Ring</span>
+            <span class="quest-step-label">Kill Commander Zazuzh for Zazuzh's Idol and Zazuzh's Key</span>
           </div>
           <span class="arrow">▶</span>
         </div>
         <div class="quest-step-body">
-          <p>A named Shissar in the lower temple drops the Shissar Signet Ring. This ring is a key component proving your ability to fight within the temple itself. The named is a challenging fight requiring a competent group — bring crowd control and healing.</p>
+          <p><strong>Commander Zazuzh</strong> (NPC 162003, level 56, 17,500 HP) drops two important items:</p>
+          <ul>
+            <li><strong>Zazuzh's Idol</strong> (item 19716) -- one of the three combine components (100% drop rate, No Drop)</li>
+            <li><strong>Zazuzh's Key</strong> (item 19711) -- No Drop key that opens the locked door on the mid-level floors</li>
+          </ul>
+          <p>Commander Zazuzh is a challenging named Shissar requiring a well-geared group. He has max hit of 150 and a 3,500 HP enrage threshold.</p>
         </div>
       </div>
+
       <div class="quest-step">
         <div class="quest-step-header">
           <div class="quest-step-left">
             <input type="checkbox" class="quest-step-checkbox" data-step="ssra5">
-            <span class="quest-step-label">Collect a Scaled Tablet from Shissar scribes or librarians in the lower temple</span>
+            <span class="quest-step-label">Kill Commander Zherozsh for Zeruzsh's Ring</span>
           </div>
           <span class="arrow">▶</span>
         </div>
         <div class="quest-step-body">
-          <p>Shissar scribes and librarian-type NPCs in the temple drop or trade Scaled Tablets. These are inscribed texts used as proof items in the turn-in chain. Multiple tablets may be needed.</p>
+          <p><strong>Commander Zherozsh</strong> (NPC 162027, level 58, 18,270 HP) drops <strong>Zeruzsh's Ring</strong> (item 19717) at a 100% drop rate (No Drop). He is the higher-level of the two Commanders with a max hit of 150 and a 3,500 HP enrage threshold. Bring a solid group with crowd control.</p>
         </div>
       </div>
+
+      <div class="quest-step">
+        <div class="quest-step-header">
+          <div class="quest-step-left">
+            <input type="checkbox" class="quest-step-checkbox" data-step="ssra5b">
+            <span class="quest-step-label">Kill General Kizuhx, Advisor Zekuzh, or Arbiter Korazhk for the Ssraeshzian Insignia</span>
+          </div>
+          <span class="arrow">▶</span>
+        </div>
+        <div class="quest-step-body">
+          <p>The <strong>Ssraeshzian Insignia</strong> (item 19718) is the third and hardest combine component. It drops (No Drop, 100% drop rate) from three different named NPCs, all level 53 with 150,000 HP -- despite their lower level, these are among the most powerful non-boss mobs in the temple:</p>
+          <ul>
+            <li><strong>General Kizuhx</strong> (NPC 162066) -- max hit 4,500</li>
+            <li><strong>Advisor Zekuzh</strong> (NPC 162017) -- max hit 4,500, casts spells</li>
+            <li><strong>Arbiter Korazhk</strong> (NPC 162018) -- max hit 4,500</li>
+          </ul>
+          <p>Elder Glanoxx warns that this item will be "much harder to acquire" -- and he's right. With 150,000 HP and 4,500 max hit, these NPCs are significantly tougher than the Commanders and require a strong raid force to take down. For comparison, the Commanders have only ~18,000 HP.</p>
+        </div>
+      </div>
+
+    </div>
+
+    </div>
+  </section>
+
+  <section class="band" id="phase3">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- ============================================================
+         PHASE 3
+         ============================================================ -->
+    <div class="section-title">
+      <h2>Phase 3 — The Taskmaster's Pouch Combine</h2>
     </div>
 
     <div class="collapsible-header">
-      <h3>Phase 3: Turn-in to the High Priest</h3>
+      <h3>Combine the three components in the Taskmaster's Pouch</h3>
       <span class="arrow">▶</span>
     </div>
     <div class="collapsible-body">
+
       <div class="quest-step">
         <div class="quest-step-header">
           <div class="quest-step-left">
             <input type="checkbox" class="quest-step-checkbox" data-step="ssra6">
-            <span class="quest-step-label">Navigate to the High Priest of Ssraeshza's chamber (requires a group push through mid-level floors)</span>
+            <span class="quest-step-label">Place all three components into the Taskmaster's Pouch and Combine</span>
           </div>
           <span class="arrow">▶</span>
         </div>
         <div class="quest-step-body">
-          <p>The High Priest resides deeper in the temple. Reaching him requires clearing through floors populated with powerful Shissar and undead. This section of the temple is significantly more dangerous than the lower floors — a well-coordinated group of 6+ is recommended at minimum.</p>
+          <p>Once you have all three items, place them into the <strong>Taskmaster's Pouch</strong>:</p>
+          <ol>
+            <li><strong>Zazuzh's Idol</strong> (item 19716)</li>
+            <li><strong>Zeruzsh's Ring</strong> (item 19717)</li>
+            <li><strong>Ssraeshzian Insignia</strong> (item 19718)</li>
+          </ol>
+          <p>Hit Combine. This is a <strong>no-fail combine</strong> (recipe 9933) that does not require any tradeskill level. The pouch is consumed in the process (replace_container). The result is the <strong>Ring of the Shissar</strong>.</p>
         </div>
       </div>
+
       <div class="quest-step">
         <div class="quest-step-header">
           <div class="quest-step-left">
             <input type="checkbox" class="quest-step-checkbox" data-step="ssra7">
-            <span class="quest-step-label">Turn in the Shissar Signet Ring + Scaled Tablet to the High Priest</span>
+            <span class="quest-step-label">Receive the Ring of the Shissar</span>
           </div>
           <span class="arrow">▶</span>
         </div>
         <div class="quest-step-body">
-          <p>Give both the Shissar Signet Ring and the Scaled Tablet to the High Priest of Ssraeshza simultaneously. He will accept your offering and provide you with the <strong>Ssraeshza Temple Access Key</strong>.</p>
+          <p>The <strong>Ring of the Shissar</strong> (item 19719) is both a wearable ring and a key item:</p>
+          <ul>
+            <li><strong>Slot:</strong> Finger</li>
+            <li><strong>AC:</strong> 8</li>
+            <li><strong>Stats:</strong> +4 INT, +4 STA, +4 WIS</li>
+            <li><strong>HP/Mana:</strong> +80 HP, +65 Mana</li>
+            <li><strong>Flags:</strong> MAGIC LORE NO DROP, All Classes / All Races</li>
+          </ul>
         </div>
       </div>
+
       <div class="quest-step">
         <div class="quest-step-header">
           <div class="quest-step-left">
             <input type="checkbox" class="quest-step-checkbox" data-step="ssra8">
-            <span class="quest-step-label">Receive the Ssraeshza Temple Access Key — upper floors are now accessible</span>
+            <span class="quest-step-label">Use Zazuzh's Key and the Ring of the Shissar to access the upper temple</span>
           </div>
           <span class="arrow">▶</span>
         </div>
         <div class="quest-step-body">
-          <p>With the key in your inventory, the locked doors to the upper floors of the temple will open. The upper floors contain the most powerful Shissar and ultimately Emperor Ssraeshza himself.</p>
+          <p>There are two key-locked barriers in the temple (verified from the door table):</p>
+          <ul>
+            <li><strong>Zazuzh's Key</strong> (item 19711) -- opens the locked door at the mid-level floors (door ID 8924, near coordinates 221, 528, 129). Keep this in your inventory to pass through.</li>
+            <li><strong>Ring of the Shissar</strong> (item 19719) -- activates the fungus translocator (door ID 8926, at coordinates -881, 235, 279) that teleports you to the Emperor's chamber area (coordinates 620, -324, 405). Keep this in your inventory to use the teleporter.</li>
+          </ul>
+          <p>With both keys, you have full access to the entire temple, including Emperor Ssraeshza's room and the bosses leading to him.</p>
         </div>
       </div>
+
     </div>
 
-
-    <div class="section-divider">
-      <img src="/assets/divider.svg" alt="">
     </div>
+  </section>
 
-    <!-- Tips -->
+  <section class="band" id="tips">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- ============================================================
+         TIPS & NOTES
+         ============================================================ -->
     <div class="section-title">
       <h2>Tips &amp; Notes</h2>
     </div>
     <ul>
-      <li>Many Shissar see through Invisibility — use Invis vs Undead for the undead sections and be prepared to fight your way through.</li>
-      <li>The temple is a no-portal, no-succor zone on many server versions. Bring multiple ways out and do not overextend.</li>
-      <li>Emperor Ssraeshza (the final boss) drops the <strong>Blood of Ssraeshza</strong>, which is required for the Vex Thal key quest. Plan accordingly when you reach the upper floor.</li>
-      <li>The upper floors of SSRA are a major stepping stone toward Vex Thal tier content. Gear your raid here before attempting VT.</li>
-      <li>Having a Bard in your group is invaluable — the ability to mez multiple adds and use charm allows for efficient navigation through the temple.</li>
+      <li><strong>All key items are No Drop.</strong> The Ring of the Shissar, Zazuzh's Key, Zazuzh's Idol, Zeruzsh's Ring, the Ssraeshzian Insignia, and the Taskmaster's Pouch are all No Drop. Every player who needs the ring must loot their own components.</li>
+      <li>The <strong>Taskmaster's Pouch</strong> is the easiest piece to get since it drops from nine different NPCs (seven Taskmasters plus Warden Mekuzh and Rhozth Ssravizh, all level 60 with 32,000 HP). Farm this first while organizing the harder kills. Note: the pouch is consumed on combine.</li>
+      <li>The three <strong>Insignia mobs</strong> (General Kizuhx, Advisor Zekuzh, Arbiter Korazhk) each have 150,000 HP and hit for up to 4,500 -- far more than the Commanders (~18,000 HP, ~150 max hit). These are raid-level encounters.</li>
+      <li>The <strong>Iksar foreman</strong> near the smelting furnaces (referenced by Elder Glanoxx) has optional dialogue about tainted green metal from the mines that Shissar despise. Say "glanoxx sent me", then "weakness", then "tainted metal". He reveals you can taint Shissar weapons with the green metal to exploit their weakness.</li>
     </ul>
 
-  </div>
+    <div class="section-title" style="margin-top: 1.5rem;">
+      <h3>Emperor Ssraeshza Encounter Details</h3>
+    </div>
+    <ul>
+      <li><strong>Xerkizh The Creator</strong> (NPC 162190, level 66, 800,000 HP, max hit 24,195) is a major boss in the upper temple on the way to Emperor Ssraeshza.</li>
+      <li>The Emperor encounter begins with the <strong>Blood of Ssraeshza</strong> (NPC 162189, level 63, 200,000 HP, max hit 7,530). The Blood must be killed before the Emperor becomes targetable.</li>
+      <li>When the Blood is engaged, <strong>4 corner trap NPCs</strong> spawn that cast Avatar Power, and <strong>8 room guards</strong> spawn:
+        <ul style="columns: 2; column-gap: 2rem;">
+          <li>Grziz the Tormentor</li>
+          <li>Heriz the Malignant</li>
+          <li>Klazaz the Slayer</li>
+          <li>Nilasz the Devourer</li>
+          <li>Skzik the Tormentor</li>
+          <li>Slakiz the Malignant</li>
+          <li>Yasiz the Devourer</li>
+          <li>Zlakas the Slayer</li>
+        </ul>
+      </li>
+      <li>Room guards respawn 120-150 seconds after being killed (random timer). They continue respawning until the Emperor is dead.</li>
+      <li>After the Blood dies, the Emperor "twitches" emote fires after ~10 seconds: <em>"The Emperor twitches. He appears to have been weakened by the destruction of the golem."</em> Then the <strong>real Emperor Ssraeshza</strong> (NPC 162491, level 66, 1,250,000 HP, max hit 50,000) spawns approximately 2 minutes later.</li>
+      <li><strong>Curse of Ssraeshza</strong> timer: approximately 18.5 minutes after the traps enter combat, the emote <em>"Something tells you that this room isn't safe anymore..."</em> fires. Then approximately 5.2 minutes later, <em>"A hissing echos in your ears..."</em> and the Curse of Ssraeshza (spell 2069) is cast. Push DPS hard to avoid this.</li>
+      <li>Traps despawn either ~2 minutes or ~3.3 minutes after the Blood dies (random 50/50 chance between 115 and 200 seconds).</li>
+      <li>On Emperor death, 5 <strong>Wraith</strong> NPCs spawn in the chamber.</li>
+      <li>The High Priest of Ssraeshza (in the upper temple) has a reset mechanic: his adds are teleported back to their spawn point and healed if they are pulled to a lower floor (below z=240).</li>
+    </ul>
+
+    </div>
+  </section>
 
   <button class="back-to-top">↑ Top</button>
 
