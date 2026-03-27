@@ -571,10 +571,10 @@ p {
   padding-bottom: 48px;
 }
 
-.home-section--basics { border-left-color: var(--accent); }
-.home-section--mechanics { border-left-color: var(--accent-secondary); }
-.home-section--quests { border-left-color: var(--accent-muted); }
-.home-section--farms { border-left-color: var(--diamond); }
+.home-section:nth-child(2) { border-left-color: var(--accent); }
+.home-section:nth-child(4) { border-left-color: var(--accent); }
+.home-section:nth-child(6) { border-left-color: var(--accent); }
+.home-section:nth-child(8) { border-left-color: var(--accent); }
 
 .home-section-icon {
   flex-shrink: 0;
