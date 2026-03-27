@@ -9,7 +9,16 @@
       "Bash(npx serve:*)",
       "Bash(git rm:*)",
       "Bash(find:*)",
-      "Bash(gh auth:*)"
+      "Bash(gh auth:*)",
+      "WebFetch(domain:wingsisup.com)",
+      "Bash(bash \"C:\\\\Users\\\\Danie\\\\.claude\\\\plugins\\\\cache\\\\claude-plugins-official\\\\superpowers\\\\5.0.6\\\\skills\\\\brainstorming\\\\scripts\\\\start-server.sh\" --project-dir \"C:\\\\Apps\\\\lyrical\")",
+      "Bash(npx http-server:*)",
+      "Bash(pkill -f http-server)",
+      "Bash(grep -n \"INSERT INTO \\\\`npc_types\\\\`\" /c/Apps/quarm/db/quarm_2026-03-20-09_37.sql)",
+      "Bash(grep -n \"INSERT INTO \\\\`tradeskill_recipe_entries\\\\`\" /c/Apps/quarm/db/quarm_2026-03-20-09_37.sql)",
+      "Bash(grep -n \"INSERT INTO \\\\`tradeskill_recipe\\\\`\" /c/Apps/quarm/db/quarm_2026-03-20-09_37.sql)",
+      "Bash(grep -n \"INSERT INTO \\\\`tradeskill_recipe\\\\` \" /c/Apps/quarm/db/quarm_2026-03-20-09_37.sql)",
+      "Bash(grep:*)"
     ]
   }
 }

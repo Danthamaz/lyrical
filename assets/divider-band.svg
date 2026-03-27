@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 40" fill="none">
+  <!-- Main horizontal lines -->
+  <line x1="20" y1="20" x2="570" y2="20" stroke="#4a3020" stroke-width="1.2"/>
+  <line x1="50" y1="16" x2="550" y2="16" stroke="#2a1a10" stroke-width="0.5"/>
+  <line x1="50" y1="24" x2="550" y2="24" stroke="#2a1a10" stroke-width="0.5"/>
+
+  <!-- Left lute silhouette -->
+  <!-- Neck -->
+  <rect x="105" y="18" width="22" height="4" rx="1" fill="#4a3020"/>
+  <!-- Body -->
+  <ellipse cx="136" cy="20" rx="10" ry="7" fill="#2a1a10" stroke="#7a5030" stroke-width="0.75"/>
+  <ellipse cx="136" cy="20" rx="5" ry="3.5" fill="none" stroke="#4a3020" stroke-width="0.5"/>
+  <!-- Sound hole -->
+  <circle cx="136" cy="20" r="1.5" fill="#4a3020"/>
+  <!-- Tuning pegs -->
+  <line x1="104" y1="17" x2="104" y2="23" stroke="#7a5030" stroke-width="0.75"/>
+  <circle cx="104" cy="16.5" r="1" fill="#7a5030"/>
+  <circle cx="104" cy="23.5" r="1" fill="#7a5030"/>
+
+  <!-- Right lute silhouette (mirrored) -->
+  <rect x="473" y="18" width="22" height="4" rx="1" fill="#4a3020"/>
+  <ellipse cx="464" cy="20" rx="10" ry="7" fill="#2a1a10" stroke="#7a5030" stroke-width="0.75"/>
+  <ellipse cx="464" cy="20" rx="5" ry="3.5" fill="none" stroke="#4a3020" stroke-width="0.5"/>
+  <circle cx="464" cy="20" r="1.5" fill="#4a3020"/>
+  <line x1="496" y1="17" x2="496" y2="23" stroke="#7a5030" stroke-width="0.75"/>
+  <circle cx="496" cy="16.5" r="1" fill="#7a5030"/>
+  <circle cx="496" cy="23.5" r="1" fill="#7a5030"/>
+
+  <!-- Small flanking diamonds -->
+  <polygon points="165,20 170,15 175,20 170,25" fill="#4a3020" stroke="#7a5030" stroke-width="0.5"/>
+  <polygon points="425,20 430,15 435,20 430,25" fill="#4a3020" stroke="#7a5030" stroke-width="0.5"/>
+
+  <!-- Music notes -->
+  <text x="195" y="24" fill="#7a5030" font-size="13" font-family="serif">&#9834;</text>
+  <text x="220" y="17" fill="#4a3020" font-size="11" font-family="serif">&#9835;</text>
+  <text x="375" y="24" fill="#7a5030" font-size="13" font-family="serif">&#9834;</text>
+  <text x="395" y="17" fill="#4a3020" font-size="11" font-family="serif">&#9835;</text>
+
+  <!-- Inner accent diamonds -->
+  <polygon points="250,20 255,16 260,20 255,24" fill="#4a3020" stroke="#7a5030" stroke-width="0.5"/>
+  <polygon points="340,20 345,16 350,20 345,24" fill="#4a3020" stroke="#7a5030" stroke-width="0.5"/>
+
+  <!-- Center diamond (larger, accent-colored) -->
+  <polygon points="288,20 300,6 312,20 300,34" fill="#4a3020" stroke="#d4824a" stroke-width="1"/>
+  <polygon points="292,20 300,10 308,20 300,30" fill="#7a5030"/>
+  <polygon points="296,20 300,15 304,20 300,25" fill="#d4824a" opacity="0.4"/>
+
+  <!-- End ornaments -->
+  <circle cx="28" cy="20" r="3" fill="#2a1a10" stroke="#4a3020" stroke-width="0.75"/>
+  <circle cx="572" cy="20" r="3" fill="#2a1a10" stroke="#4a3020" stroke-width="0.75"/>
+  <circle cx="40" cy="20" r="1.5" fill="#4a3020"/>
+  <circle cx="560" cy="20" r="1.5" fill="#4a3020"/>
+
+  <!-- Outer small accent dots -->
+  <circle cx="75" cy="20" r="1.5" fill="#2a1a10"/>
+  <circle cx="525" cy="20" r="1.5" fill="#2a1a10"/>
+</svg>
