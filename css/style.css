@@ -54,6 +54,39 @@ body {
     "Helvetica Neue", Arial, sans-serif;
   min-height: 100vh;
   line-height: 1.6;
+  isolation: isolate;
+}
+
+/* ============================================================
+   3b. BODY TEXTURE (leather/parchment grain)
+   Excluded on homepage via body.home
+   ============================================================ */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(135deg, rgba(42,26,16,0.3) 0%, transparent 50%),
+    linear-gradient(225deg, rgba(42,26,16,0.2) 0%, transparent 50%);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.4' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+body.home::before,
+body.home::after {
+  display: none;
 }
 
 /* ============================================================
@@ -85,7 +118,27 @@ h4 {
 }
 
 strong {
-  color: var(--text);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+ul,
+ol {
+  padding-left: 1.25rem;
+}
+
+blockquote {
+  border-left: 3px solid var(--accent-muted);
+  margin: 0.75rem 0;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0 4px 4px 0;
+}
+
+blockquote p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
 }
 
 code {
@@ -496,18 +549,26 @@ p {
   display: flex;
   gap: 24px;
   align-items: flex-start;
-  padding: 28px 28px 28px 24px;
+  padding: 28px 28px 28px 28px;
   background: linear-gradient(135deg, var(--surface) 0%, #1a1210 100%);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
+  border-left: 5px solid var(--accent);
   border-radius: 6px;
-  margin-bottom: 24px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  margin-bottom: 0;
+  transition: box-shadow 0.3s, transform 0.2s;
 }
 
 .home-section:hover {
-  border-left-color: var(--accent);
-  box-shadow: 0 4px 24px rgba(212, 130, 74, 0.06), inset 0 0 30px rgba(212, 130, 74, 0.02);
+  box-shadow: 0 4px 30px rgba(212, 130, 74, 0.08), inset 0 0 40px rgba(212, 130, 74, 0.03);
+  transform: translateX(4px);
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 32px;
+  padding-bottom: 48px;
 }
 
 .home-section:nth-child(2) { border-left-color: var(--accent); }
@@ -607,6 +668,41 @@ p {
   max-width: var(--content-width);
   margin: 0 auto;
   padding: 0 1.5rem 4rem;
+}
+
+/* ============================================================
+   10b. ALTERNATING SECTION BANDS
+   Full-width bands that alternate background color.
+   Each band contains a .content wrapper for the 780px constraint.
+   ============================================================ */
+
+.band {
+  position: relative;
+  z-index: 1;
+  padding: 0.5rem 0;
+}
+
+.band:nth-child(even of .band) {
+  background: rgba(30, 18, 8, 0.6);
+  border-top: 1px solid rgba(212, 130, 74, 0.06);
+  border-bottom: 1px solid rgba(212, 130, 74, 0.06);
+}
+
+.band-divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 500px;
+  z-index: 2;
+  padding: 0 1.5rem;
+  pointer-events: none;
+}
+
+.band-divider img {
+  width: 100%;
+  display: block;
 }
 
 /* ============================================================
@@ -881,10 +977,21 @@ p {
 }
 
 .quest-step-label {
-  color: var(--text);
+  color: var(--text-body);
   font-size: 0.9rem;
   transition: color 0.15s ease;
   flex: 1;
+}
+
+.quest-step-header .arrow {
+  color: var(--accent-muted);
+  font-size: 0.85rem;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.quest-step-header .arrow.open {
+  transform: rotate(90deg);
 }
 
 .quest-step-body {

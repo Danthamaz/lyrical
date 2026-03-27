@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 50" fill="none">
+  <!-- Outer horizontal lines -->
+  <line x1="80" y1="14" x2="520" y2="14" stroke="#2a1a10" stroke-width="0.5"/>
+  <line x1="80" y1="36" x2="520" y2="36" stroke="#2a1a10" stroke-width="0.5"/>
+  <!-- Main horizontal lines -->
+  <line x1="30" y1="25" x2="250" y2="25" stroke="#4a3020" stroke-width="1.5"/>
+  <line x1="350" y1="25" x2="570" y2="25" stroke="#4a3020" stroke-width="1.5"/>
+  <!-- Ornate center piece -->
+  <!-- Outer diamond frame -->
+  <polygon points="280,25 300,3 320,25 300,47" fill="none" stroke="#4a3020" stroke-width="1"/>
+  <!-- Inner diamond -->
+  <polygon points="287,25 300,10 313,25 300,40" fill="#2a1a10" stroke="#d4824a" stroke-width="1"/>
+  <!-- Core diamond -->
+  <polygon points="293,25 300,16 307,25 300,34" fill="#7a5030"/>
+  <!-- Center dot -->
+  <circle cx="300" cy="25" r="2" fill="#d4824a"/>
+  <!-- Flanking diamonds -->
+  <polygon points="245,25 252,17 259,25 252,33" fill="#2a1a10" stroke="#7a5030" stroke-width="0.75"/>
+  <polygon points="249,25 252,21 255,25 252,29" fill="#4a3020"/>
+  <polygon points="341,25 348,17 355,25 348,33" fill="#2a1a10" stroke="#7a5030" stroke-width="0.75"/>
+  <polygon points="345,25 348,21 351,25 348,29" fill="#4a3020"/>
+  <!-- Small accent diamonds -->
+  <polygon points="130,25 135,20 140,25 135,30" fill="#4a3020" stroke="#7a5030" stroke-width="0.5"/>
+  <polygon points="460,25 465,20 470,25 465,30" fill="#4a3020" stroke="#7a5030" stroke-width="0.5"/>
+  <!-- Music notes flanking center -->
+  <text x="215" y="29" fill="#4a3020" font-size="14" font-family="serif">&#9835;</text>
+  <text x="375" y="29" fill="#4a3020" font-size="14" font-family="serif">&#9835;</text>
+  <!-- End ornaments — small circles -->
+  <circle cx="40" cy="25" r="3" fill="#2a1a10" stroke="#4a3020" stroke-width="0.75"/>
+  <circle cx="560" cy="25" r="3" fill="#2a1a10" stroke="#4a3020" stroke-width="0.75"/>
+  <!-- Tiny end dots -->
+  <circle cx="52" cy="25" r="1.5" fill="#4a3020"/>
+  <circle cx="548" cy="25" r="1.5" fill="#4a3020"/>
+</svg>
