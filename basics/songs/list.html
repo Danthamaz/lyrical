@@ -1806,8 +1806,9 @@
         // Filter individual songs within the group
         $group.find('.song-card').each(function() {
           var $song = $(this);
-          var songName = $song.data('song-name');
-          var nameMatch = !query || songName.indexOf(query) !== -1;
+          var songName = ($song.data('song-name') || '').toString().toLowerCase();
+          var songText = $song.text().toLowerCase();
+          var nameMatch = !query || songName.indexOf(query) !== -1 || songText.indexOf(query) !== -1;
           var show = levelInRange && nameMatch;
 
           if (show) {
