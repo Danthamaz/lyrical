@@ -25,7 +25,8 @@
       "Bash(ls:*)",
       "Glob",
       "Grep",
-      "Read"
+      "Read",
+      "Bash(netstat -ano)"
     ]
   }
 }
