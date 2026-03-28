@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Song Twisting Guide — Lyri Cal</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -135,7 +136,18 @@
     <div class="collapsible-body">
       <p>The /melody command automates song twisting. Use it to queue up songs in order:</p>
       <p><code>/melody 1 2 3</code> — twists songs in slots 1, 2, and 3 automatically.</p>
+      <p>You can melody 5 songs.</p>
       <p>You can interrupt melody at any time to handle charm breaks, pulls, or manual song casts. Re-run the /melody command to restart the cycle.</p>
+      <p>Zeal version 6.8 beta 0 adds a "/melody resume" command. It will resume a melody where it left off. With it, we can make macros to stop song, do something else, resume melody. Useful for making macros to use clickies, for example.</p>
+      <p>If singing songs in your melody, don't melody amp since it lasts so long. Instead have a macro for it, that allows you to cast it then /melody resume.</p>
+    </div>
+
+    <div class="collapsible-header">
+      <h3>Bandoliers</h3>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="collapsible-body">
+      <p>Bandoliers are a new addition. More info to come on it once I learn it.</p>
     </div>
 
     <div class="collapsible-header">
@@ -144,6 +156,58 @@
     </div>
     <div class="collapsible-body">
       <p>During combat, prioritize keeping your haste and ATK songs up. If you need to drop a song, drop the lowest priority one from your chain. Resist songs can be woven in for specific encounters.</p>
+    </div>
+
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- Melody & Instrument Rules -->
+    <div class="section-title">
+      <h2>Melody &amp; Instrument Rules</h2>
+    </div>
+
+    <div class="song-row">
+      <div class="song-icon">⟳</div>
+      <div class="song-info">
+        <div class="song-name">Auto-Retry</div>
+        <div class="song-desc">The /melody command restarts automatically if a song fails.</div>
+      </div>
+    </div>
+
+    <div class="song-row">
+      <div class="song-icon">🎵</div>
+      <div class="song-info">
+        <div class="song-name">Skill Leveling</div>
+        <div class="song-desc">Equip the right instrument to level that specific skill. Singing skill levels up if you use the wrong instrument or none at all.</div>
+      </div>
+    </div>
+
+    <div class="song-row">
+      <div class="song-icon">✦</div>
+      <div class="song-info">
+        <div class="song-name">Mana</div>
+        <div class="song-desc">Mana songs do not work on Bards. You must use Flowing Thought (FT) items. Bards don't regen mana.</div>
+      </div>
+    </div>
+
+    <div class="song-row">
+      <div class="song-icon">⇈</div>
+      <div class="song-info">
+        <div class="song-name">Stacking</div>
+        <div class="song-desc">Higher-level songs replace lower ones.</div>
+      </div>
+    </div>
+
+    <div class="song-row">
+      <div class="song-icon">📊</div>
+      <div class="song-info">
+        <div class="song-name">Instrument Skill-ups</div>
+        <div class="song-desc">There is big debate on how to go about skilling your instruments, read rules on discord and do some searching in PQ discord to learn more.</div>
+      </div>
     </div>
 
     </div>
