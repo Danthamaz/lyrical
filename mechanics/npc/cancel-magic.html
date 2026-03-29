@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cancel Magic &amp; NPC Dispels — Lyri Cal</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <div class="category-label">Mechanics / NPC</div>
+    <h1>Cancel Magic &amp; NPC Dispels</h1>
+    <div class="subtitle">How NPC dispel abilities work under the hood, and how bards can protect their buffs</div>
+  </div>
+
+  <div class="section-divider">
+    <img src="/assets/divider-header.svg" alt="">
+  </div>
+
+  <!-- ============================================================
+       TABLE OF CONTENTS
+       ============================================================ -->
+  <section class="band">
+    <div class="content">
+
+    <div class="section-title">
+      <h2>Table of Contents</h2>
+    </div>
+    <ol style="columns: 2; column-gap: 2rem; padding-left: 1.2rem;">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#how-it-works">How Cancel Magic Works</a></li>
+      <li><a href="#dispel-chance">The Dispel Chance Formula</a></li>
+      <li><a href="#spell-hierarchy">The Dispel Spell Hierarchy</a></li>
+      <li><a href="#klandicar">Case Study: Klandicar's Silver Breath</a></li>
+      <li><a href="#common-npc-dispels">Common NPC Dispel Abilities</a></li>
+      <li><a href="#non-dispellable">What Can't Be Dispelled</a></li>
+      <li><a href="#bard-strategy">Bard Strategy: Protecting Your Buffs</a></li>
+    </ol>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       OVERVIEW
+       ============================================================ -->
+  <section class="band" id="overview">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <div class="section-title">
+      <h2>Overview</h2>
+    </div>
+    <p>Many NPCs in EverQuest -- particularly dragons and high-level raid mobs -- have abilities that strip buffs from players. These abilities use the <strong>Cancel Magic</strong> spell effect (spell effect ID 27). Understanding exactly how this mechanic works lets you make informed decisions about buff order, what gear to wear, and how to minimize the impact on your raid.</p>
+    <p>This page is built from the actual server code and spell data, not guesswork.</p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HOW CANCEL MAGIC WORKS
+       ============================================================ -->
+  <section class="band" id="how-it-works">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <div class="section-title">
+      <h2>How Cancel Magic Works</h2>
+    </div>
+
+    <p>When an NPC casts a spell containing the Cancel Magic effect, here is exactly what happens:</p>
+
+    <ol>
+      <li><strong>Dispel Immunity Check:</strong> If the target has the DispelImmunity special ability, the spell has no effect.</li>
+      <li><strong>Iterate from buff slot 0 (top of the buff window) downward.</strong> The code walks through your buff slots starting at the very first slot.</li>
+      <li><strong>Skip non-dispellable buffs.</strong> Certain spells can never be dispelled (see the <a href="#non-dispellable">non-dispellable section</a> below).</li>
+      <li><strong>Roll the dispel check.</strong> For the first dispellable buff found, a probability roll is made based on the caster's level vs. the buff caster's level (see <a href="#dispel-chance">formula below</a>).</li>
+      <li><strong>If the roll succeeds, remove that one buff and stop.</strong> Only one buff is removed per Cancel Magic effect slot.</li>
+      <li><strong>If the roll fails, stop.</strong> No further buffs are checked -- the dispel attempt is over for that effect slot.</li>
+    </ol>
+
+    <div style="border-left: 3px solid var(--accent); padding: 0.75rem 1rem; margin: 1rem 0; background: var(--surface);">
+      <strong>Key insight:</strong> Cancel Magic iterates from the <em>top</em> of your buff window (slot 0) downward. It attempts to dispel the first dispellable buff it finds, then stops -- regardless of success or failure. This means the buff in your topmost slot is always the one at risk.
+    </div>
+
+    <p>Spells with multiple Cancel Magic effect slots (like <strong>Annul Magic</strong> or <strong>Pillage Enchantment</strong>) repeat this process once per slot. Each slot independently walks through the buff window from the top, finds the first dispellable buff, rolls, and either removes it or fails. This means a spell with 4 Cancel Magic slots can remove up to 4 buffs -- but always starting from the top each time.</p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THE DISPEL CHANCE FORMULA
+       ============================================================ -->
+  <section class="band" id="dispel-chance">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <div class="section-title">
+      <h2>The Dispel Chance Formula</h2>
+    </div>
+
+    <p>Each Cancel Magic effect slot carries an <strong>effect base value</strong> that acts as a level modifier. The dispel chance is calculated as follows:</p>
+
+    <div style="border-left: 3px solid var(--accent); padding: 0.75rem 1rem; margin: 1rem 0; background: var(--surface); font-family: monospace; font-size: 0.9rem;">
+      <p style="margin: 0;">effective_caster_level = caster_level + level_modifier</p>
+      <p style="margin: 0;">level_diff = effective_caster_level - buff_caster_level</p>
+      <p style="margin: 0;">dispel_chance = 50 + (level_diff * 5)</p>
+      <p style="margin: 0;">dispel_chance is clamped to a range of <strong>5% to 95%</strong></p>
+    </div>
+
+    <p>Breaking this down:</p>
+    <ul>
+      <li><strong>Baseline 50%:</strong> If the NPC and the buff caster are the same effective level, there's a flat 50% chance to strip the buff.</li>
+      <li><strong>+5% per level advantage:</strong> Each level the NPC has above the buff caster adds 5% to the chance.</li>
+      <li><strong>-5% per level disadvantage:</strong> Each level the buff caster has above the NPC subtracts 5%.</li>
+      <li><strong>Floor of 5%, ceiling of 95%:</strong> No matter how large the level difference, there's always at least a 5% chance to resist (or land) the dispel.</li>
+      <li><strong>Level modifier:</strong> The spell's effect base value is added to the caster's level. A value of 9 (common on dragon breaths) effectively makes the NPC act as if it's 9 levels higher for the dispel check.</li>
+    </ul>
+
+    <h3>Example: Klandicar (level 70) vs. a level 60 buff</h3>
+    <p>Silver Breath has a Cancel Magic level modifier of <strong>9</strong>.</p>
+    <div style="border-left: 3px solid var(--accent); padding: 0.75rem 1rem; margin: 1rem 0; background: var(--surface); font-family: monospace; font-size: 0.9rem;">
+      <p style="margin: 0;">effective_level = 70 + 9 = 79</p>
+      <p style="margin: 0;">level_diff = 79 - 60 = 19</p>
+      <p style="margin: 0;">dispel_chance = 50 + (19 * 5) = <strong>95% (capped)</strong></p>
+    </div>
+    <p>Against a buff cast by a level 60 player, Klandicar's Silver Breath has a 95% chance to strip each buff it targets. Even a level 65 caster only gives: 50 + (14 * 5) = <strong>95% (capped)</strong>. The level modifier of +9 makes it nearly impossible to resist the dispel from a high-level raid mob.</p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SPELL HIERARCHY
+       ============================================================ -->
+  <section class="band" id="spell-hierarchy">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <div class="section-title">
+      <h2>The Dispel Spell Hierarchy</h2>
+    </div>
+
+    <p>Not all dispel spells are equal. Here are the player-cast and NPC dispel variants, ordered by power, with data taken directly from the spell database:</p>
+
+    <table style="width:100%; border-collapse:collapse; font-size:0.85rem; margin: 1rem 0;">
+      <thead>
+        <tr>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: left;">Spell</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">ID</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Slots</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Modifier</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Target</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: left;">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Taper Enchantment</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">289</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">1</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">0</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Single</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Special: halves remaining duration instead of removing. 5 mana.</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Cancel Magic</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">48</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">1</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+1</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Single</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Removes 1 buff. 30 mana. Available to many classes.</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Strip Enchantment</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">24</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">4</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+1</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Single</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Up to 4 buffs. 70 mana.</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Pillage Enchantment</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">25</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">4</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+4</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Single</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Up to 4 buffs, higher modifier. 70 mana.</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Annul Magic</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">1526</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">2</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+9</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Single</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Up to 2 buffs, high modifier. 75 mana.</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Recant Magic</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">1697</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">4</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+9</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Single</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Up to 4 buffs, high modifier. 90 mana. Most powerful player dispel.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>"Slots"</strong> = how many Cancel Magic effect slots the spell has, meaning how many times the top-down dispel check is performed per cast. <strong>"Modifier"</strong> = the level modifier added to the caster's level for the dispel chance calculation.</p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       KLANDICAR CASE STUDY
+       ============================================================ -->
+  <section class="band" id="klandicar">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <div class="section-title">
+      <h2>Case Study: Klandicar's Silver Breath</h2>
+    </div>
+
+    <div class="section-columns cols-2">
+      <div class="col" style="border-left: 3px solid var(--accent);">
+        <h3>Silver Breath (Spell ID 1480)</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">NPC-Only Spell</p>
+        <ul style="list-style: none; padding: 0;">
+          <li><strong>Effect 1:</strong> Direct Damage -400 HP</li>
+          <li><strong>Effect 2:</strong> Cancel Magic (modifier +9)</li>
+          <li><strong>Target:</strong> PB AoE (centered on caster)</li>
+          <li><strong>AoE Range:</strong> 300 units</li>
+          <li><strong>Cast Time:</strong> Instant</li>
+          <li><strong>Recast:</strong> 12 seconds</li>
+          <li><strong>Resist Type:</strong> Unresistable (type 0)</li>
+        </ul>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Cast message: "You feel your skin freeze."</p>
+      </div>
+      <div class="col">
+        <h3>Klandicar (NPC ID 120084)</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Western Wastes &mdash; Level 70 Dragon</p>
+        <ul style="list-style: none; padding: 0;">
+          <li><strong>HP:</strong> 97,500</li>
+          <li><strong>Min/Max Damage:</strong> 198 / 540</li>
+          <li><strong>Resists:</strong> MR 230, CR 1000, DR 80, FR 105, PR 325</li>
+          <li><strong>AC:</strong> 550</li>
+          <li><strong>Abilities:</strong> Summon, Enrage, Rampage, Triple Attack, Dual Wield</li>
+          <li><strong>Immunities:</strong> Mesmerize, Charm, Stun, Snare, Fear, Pacify</li>
+          <li><strong>Spells:</strong> Silver Breath, Dragon Roar (AoE fear)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 1.5rem;">What This Means in Practice</h3>
+
+    <p>Silver Breath is a PBAE spell -- it hits everyone within 300 units of Klandicar. Every 12 seconds, everyone in melee range (and some beyond) takes 400 damage and has their topmost dispellable buff targeted for removal with an effective caster level of 79 (70 + 9 modifier). Since Silver Breath only has one Cancel Magic slot, it removes at most <strong>one buff per cast</strong>.</p>
+
+    <p>Over a long fight, this adds up. A 5-minute Klandicar fight could see 25 Silver Breath casts, each stripping one buff from every player in range. This is why buff order and dispel fodder matter.</p>
+
+    <p>Klandicar also uses <strong>Dragon Roar</strong> (spell ID 981), a 300-unit PBAE fear with a 36-second duration. It has no dispel component, but the fear can scatter your raid if your tank group lacks fear immunity.</p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       COMMON NPC DISPELS
+       ============================================================ -->
+  <section class="band" id="common-npc-dispels">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <div class="section-title">
+      <h2>Common NPC Dispel Abilities</h2>
+    </div>
+
+    <p>Many dragon and raid mob abilities combine direct damage with Cancel Magic. Here are the most common ones from the spell database:</p>
+
+    <table style="width:100%; border-collapse:collapse; font-size:0.85rem; margin: 1rem 0;">
+      <thead>
+        <tr>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: left;">Ability</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">ID</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Damage</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Dispel Mod</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Resist</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Target</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: left;">Used By</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Silver Breath</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">1480</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">400</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+9</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Unresist.</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">PB AoE</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Klandicar</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Lava Breath</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">861</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">500</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+9</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Fire</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">AE Target</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Fire dragons (Nagafen, etc.)</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Frost Breath</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">862</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">500</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+9</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Cold</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">AE Target</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Ice dragons (Vox, etc.)</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Cloud of Disempowerment</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">1485</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">500</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">--</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Magic</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">PB AoE</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Stat debuff (ATK/Mana) + slow, no Cancel Magic</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">Wave of Cold</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">1489</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">350</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">--</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Cold</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">PB AoE</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border);">DD only, no Cancel Magic component</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Key distinction:</strong> Lava Breath and Frost Breath use target type "AE Target" (type 8), meaning they radiate from the NPC's current target outward. Silver Breath uses "PB AoE" (type 4), centered on the NPC itself. In practice, both hit a wide area around the dragon.</p>
+
+    <p>Not all dragon abilities include Cancel Magic. <strong>Dragon Roar</strong> (AoE fear), <strong>Stun Breath</strong> (AoE stun + DD), <strong>Cloud of Fear</strong> (AoE fear), <strong>Tsunami</strong> (AoE DD + knockback), and <strong>Wave of Cold</strong> (AoE DD) do not dispel buffs.</p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       NON-DISPELLABLE
+       ============================================================ -->
+  <section class="band" id="non-dispellable">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <div class="section-title">
+      <h2>What Can't Be Dispelled</h2>
+    </div>
+
+    <p>The server code explicitly protects several categories of buffs from Cancel Magic. These buffs are skipped during the top-down iteration, meaning Cancel Magic will pass over them and attempt to dispel the next eligible buff below:</p>
+
+    <ul>
+      <li><strong>Non-buff spells</strong> (duration formula = 0): Instant spells that happen to appear in your buff bar.</li>
+      <li><strong>Spells with counters:</strong> Anything using Poison Counter, Disease Counter, or Curse Counter effects. These must be cured using the appropriate cure spell -- Cancel Magic cannot remove them.</li>
+      <li><strong>Eye of Zomm</strong></li>
+      <li><strong>Summon Horse</strong> (mount buffs)</li>
+      <li><strong>Complete Heal</strong> effect</li>
+      <li><strong>Spells with the dispel_flag set</strong> in the database (a custom field for specific spells the developers want to protect).</li>
+    </ul>
+
+    <div style="border-left: 3px solid var(--accent); padding: 0.75rem 1rem; margin: 1rem 0; background: var(--surface);">
+      <strong>Bard note:</strong> Your songs that continuously pulse are typically not sitting in your buff window as traditional buffs. However, any "worn" or "clicked" buff effects you have (like JBoots, haste items, etc.) are fully dispellable and subject to Cancel Magic.
+    </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BARD STRATEGY
+       ============================================================ -->
+  <section class="band" id="bard-strategy">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <div class="section-title">
+      <h2>Bard Strategy: Protecting Your Buffs</h2>
+    </div>
+
+    <p>Since Cancel Magic always starts from the top of your buff window and works down, the order of your buffs matters enormously. Here are practical strategies:</p>
+
+    <h3>1. Buff Order: Expendable Buffs on Top</h3>
+    <p>Your most valuable buffs should be as far down your buff window as possible. Expendable or cheap-to-recast buffs should sit at the top to act as "dispel fodder." Buffs are placed in the first available empty slot, so to control order:</p>
+    <ul>
+      <li>Get your most important buffs first (they fill the top slots).</li>
+      <li>Then add expendable buffs on top -- but wait: buffs fill from the top, so the first buff cast goes in slot 1. This means you want expendable buffs cast <em>last</em>, since they fill the first empty slot from the top.</li>
+      <li>Actually, to put cheap buffs at the top, you need to get expensive buffs first, then click them off, then get cheap buffs first, then get the expensive buffs again so they go below. This requires planning.</li>
+    </ul>
+
+    <div style="border-left: 3px solid var(--accent); padding: 0.75rem 1rem; margin: 1rem 0; background: var(--surface);">
+      <strong>Practical approach:</strong> The simplest method is to accept that your top buffs will be stripped and keep easy-to-replace buffs in those slots. Self-buffs, low-level clickies, and buffs that take seconds to re-apply are ideal candidates for the top of your buff bar.
+    </div>
+
+    <h3>2. JBoots as Dispel Fodder</h3>
+    <p>A classic technique: click your <strong>Journeyman's Boots</strong> (or any other instant-click item) to keep a cheap, instantly replaceable buff in your buff window. When it gets dispelled, just click them again. The JBoots Spirit of Wolf effect sits in your buff bar and will absorb a dispel that would otherwise hit something more valuable.</p>
+
+    <h3>3. Selo's Accelerating Chorus — Group Dispel Fodder</h3>
+    <p><strong>Selo's Accelerating Chorus</strong> is unique among bard songs because it consumes a <strong>buff slot</strong> instead of a song slot. This makes it an automatic dispel shield for your entire group. Every time it gets stripped by Cancel Magic, your next pulse puts it right back — protecting the important buffs underneath. Keep Selo's in your melody during dispel-heavy fights and your group's buffs stay safe.</p>
+
+    <h3>4. Self-Buff Clickies</h3>
+    <p>Items with click effects that grant self-buffs can serve the same role as JBoots. Any instant-click buff effect that you can immediately re-apply is useful dispel fodder. Stack several of these and you have multiple layers of protection for the buffs that matter.</p>
+
+    <h3>5. Stay Out of AoE Range</h3>
+    <p>Silver Breath and similar dragon breaths have a range of 200-300 units. If you're not in melee and don't need to be, staying at maximum range (or beyond) avoids the dispel entirely. As a bard, if you're in a caster group or singing from range, position yourself beyond 300 units from the mob when possible.</p>
+
+    <h3>6. Know What's Worth Rebuffing</h3>
+    <p>During a raid, communicate with your buff classes. Know which buffs are critical (haste, stat buffs, resist buffs) and which can wait. Enchanters and clerics can rebuff during the fight if needed, but knowing the priority order saves time and mana.</p>
+
+    <h3>7. Accept the Mechanic</h3>
+    <p>On fights like Klandicar where Silver Breath fires every 12 seconds and is unresistable, you will lose buffs. Plan for it: bring extra clickies, coordinate rebuffs between AoE cycles, and don't rely on buffs that can't be quickly replaced for your survival.</p>
+
+    </div>
+  </section>
+
+  <button class="back-to-top">↑ Top</button>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
