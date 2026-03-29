@@ -26,7 +26,8 @@
       "Glob",
       "Grep",
       "Read",
-      "Bash(netstat -ano)"
+      "Bash(netstat -ano)",
+      "Bash(node -e \":*)"
     ]
   }
 }
