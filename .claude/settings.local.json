@@ -27,7 +27,10 @@
       "Grep",
       "Read",
       "Bash(netstat -ano)",
-      "Bash(node -e \":*)"
+      "Bash(node -e \":*)",
+      "Read(//c//**)",
+      "Read(//d//**)",
+      "Bash(du -sh /c/Apps/quarm/*)"
     ]
   }
 }
