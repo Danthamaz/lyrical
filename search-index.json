@@ -14,11 +14,39 @@
     "tags": ["zeal", "setup", "settings", "instrument swapping", "lag", "fps", "keybinds"]
   },
   {
+    "title": "Acronyms & Abbreviations",
+    "url": "/misc/acronyms.html",
+    "category": "Getting Started",
+    "description": "Reference glossary of common EverQuest shorthand: general terms, class names, bard-specific, zones, and raid lingo.",
+    "tags": ["acronyms", "abbreviations", "glossary", "terms", "jargon", "zones", "classes", "raid"]
+  },
+  {
+    "title": "Leveling Route",
+    "url": "/basics/leveling/route.html",
+    "category": "Leveling",
+    "description": "Best leveling path for bards on Quarm. Zones, ZEMs, quests, and strategies by level range.",
+    "tags": ["leveling", "zones", "xp", "guide", "ZEM", "swarming", "route"]
+  },
+  {
     "title": "Melodies",
     "url": "/basics/songs/melodies.html",
     "category": "Leveling / Songs",
     "description": "Song twisting, melody commands, and essential songs for Quarm bards. Covers 2, 3, and 4-song twisting and timing.",
     "tags": ["twisting", "melody", "songs", "bard", "macro", "haste", "selo"]
+  },
+  {
+    "title": "Song Compendium",
+    "url": "/basics/songs/list.html",
+    "category": "Leveling / Songs",
+    "description": "Complete filterable list of all bard songs by level, instrument type, and effect. Searchable reference for every song.",
+    "tags": ["songs", "list", "compendium", "filterable", "instrument", "level", "reference", "all songs"]
+  },
+  {
+    "title": "Instruments",
+    "url": "/basics/gear/instruments.html",
+    "category": "Leveling / Gear",
+    "description": "Instrument progression for bards. Percussion, stringed, brass, and wind instrument best-in-slot by level.",
+    "tags": ["instruments", "percussion", "stringed", "brass", "wind", "gear"]
   },
   {
     "title": "PBAoE Swarming",
@@ -35,18 +63,116 @@
     "tags": ["charm", "kiting", "solo", "xp", "leveling", "reverse charm"]
   },
   {
-    "title": "Leveling Route",
-    "url": "/basics/leveling/route.html",
-    "category": "Leveling",
-    "description": "Best leveling path for bards on Quarm. Zones, ZEMs, quests, and strategies by level range.",
-    "tags": ["leveling", "zones", "xp", "guide", "ZEM", "swarming", "route"]
+    "title": "Chanting (Solo Kiting)",
+    "url": "/mechanics/solo/chanting.html",
+    "category": "Leveling / Tactics",
+    "description": "Fear kiting and DoT kiting technique for solo bards. Snare, Chant of Flame, Chant of Frost, and single-target rotations.",
+    "tags": ["chanting", "solo", "kiting", "fear", "dot", "snare", "chant of flame", "chant of frost"]
   },
   {
-    "title": "Instruments",
-    "url": "/basics/gear/instruments.html",
-    "category": "Leveling / Gear",
-    "description": "Instrument progression for bards. Percussion, stringed, brass, and wind instrument best-in-slot by level.",
-    "tags": ["instruments", "percussion", "stringed", "brass", "wind", "gear"]
+    "title": "AA Leveling Spots",
+    "url": "/basics/leveling/aa.html",
+    "category": "End-Game",
+    "description": "Best zones for grinding alternate advancement at 60: Fungus Grove, Chardok, Maiden's Eye, and Dragon Necropolis. AA recommendations included.",
+    "tags": ["AA", "alternate advancement", "leveling", "level 60", "fungus grove", "chardok", "disciplines"]
+  },
+  {
+    "title": "Bard Epic 1.0",
+    "url": "/quests/epics/bard-epic.html",
+    "category": "End-Game / Epic",
+    "description": "Full walkthrough for the Singing Short Sword epic quest. Relay race, Serra's Doll, Mystical Lute, and final turn-in.",
+    "tags": ["epic", "singing short sword", "quest", "walkthrough", "relay race", "lute", "baldric"]
+  },
+  {
+    "title": "AFK Barding (Group Support)",
+    "url": "/mechanics/group/afk.html",
+    "category": "End-Game / Mechanics",
+    "description": "Melody setups for supporting your group. Haste songs, mana/HP regen, and utility songs for raids and groups.",
+    "tags": ["afk", "group", "support", "haste", "regen", "melody", "warsong", "cantata", "kazumi"]
+  },
+  {
+    "title": "Cancel Magic & NPC Dispels",
+    "url": "/mechanics/npc/cancel-magic.html",
+    "category": "End-Game / Mechanics",
+    "description": "How NPC dispel abilities work: the dispel formula, buff order strategy, and how bards can protect buffs on raids.",
+    "tags": ["cancel magic", "dispel", "buffs", "buff order", "dragons", "klandicar", "silver breath", "raid"]
+  },
+  {
+    "title": "Sebilis Key (Trakanon Idol)",
+    "url": "/quests/kunark/seb-key.html",
+    "category": "End-Game / Quests",
+    "description": "How to obtain the Trakanon Idol to enter Old Sebilis. Kill froglok forager and hunter in Trakanon's Teeth, hand in to Emperor Ganak.",
+    "tags": ["sebilis", "seb key", "trakanon idol", "old sebilis", "trakanon's teeth", "emperor ganak", "kunark"]
+  },
+  {
+    "title": "Coldain Prayer Shawl",
+    "url": "/quests/velious/shawl.html",
+    "category": "End-Game / Quests",
+    "description": "Eight-stage shawl progression through Thurgadin. Tradeskills, faction, and a raid event for top-tier shoulder slot.",
+    "tags": ["shawl", "coldain", "prayer shawl", "thurgadin", "tradeskill", "velious", "shoulder", "faction"]
+  },
+  {
+    "title": "Ring of Dain Frostreaver IV",
+    "url": "/quests/velious/dain-ring.html",
+    "category": "End-Game / Quests",
+    "description": "Ten-stage Coldain Ring War quest from Ring 1 through the Dain Ring. Step-by-step guide for all ten rings.",
+    "tags": ["dain ring", "coldain ring", "ring war", "velious", "quest", "thurgadin", "ring of dain"]
+  },
+  {
+    "title": "Sleeper's Key",
+    "url": "/quests/velious/st-key.html",
+    "category": "End-Game / Quests",
+    "description": "Obtain the Sleeper's Key from Jaled Dar's Shade in Dragon Necropolis by turning in any one of six dragon talismans.",
+    "tags": ["sleeper's key", "jaled dar", "dragon necropolis", "velious", "talisman", "sleeper's tomb", "first brood"]
+  },
+  {
+    "title": "Sleeper's Tomb Key",
+    "url": "/quests/velious/sleepers-tomb-key.html",
+    "category": "End-Game / Quests",
+    "description": "Full guide to the Sleeper's Key, the four Warders, their loot tables, and the replacement key from Nelef the Trader.",
+    "tags": ["sleeper's tomb", "warders", "kerafyrm", "primal velium", "ancient prismatic", "velious", "eastern wastes"]
+  },
+  {
+    "title": "Ssraeshza Temple Key",
+    "url": "/quests/luclin/ssra-key.html",
+    "category": "End-Game / Quests",
+    "description": "Ring of the Shissar and Zazuzh's Key guide. Kill Commanders and Generals, combine components in Taskmaster's Pouch.",
+    "tags": ["ssra key", "ring of the shissar", "zazuzh", "ssraeshza temple", "luclin", "emperor ssraeshza", "shissar"]
+  },
+  {
+    "title": "Vex Thal Key",
+    "url": "/quests/luclin/vt-key.html",
+    "category": "End-Game / Quests",
+    "description": "Assemble the Scepter of Shadows from a frame, 10 Lucid Shards across Luclin zones, and a Glowing Orb of Luclinite.",
+    "tags": ["vex thal", "vt key", "scepter of shadows", "lucid shards", "luclin", "akheva ruins", "umbral plains"]
+  },
+  {
+    "title": "Hollowshade Moors War",
+    "url": "/quests/luclin/hollowshade-moors.html",
+    "category": "End-Game / Quests",
+    "description": "How the three-faction zone war between Owlbears, Sonic Wolves, and Grimlings works. How to trigger, lock, and reset it.",
+    "tags": ["hollowshade", "war event", "owlbear", "sonic wolf", "grimling", "luclin", "zone event", "faction"]
+  },
+  {
+    "title": "Voice of the Serpent Farm",
+    "url": "/farms/vots.html",
+    "category": "End-Game / Farms",
+    "description": "Solo bard guide for farming the Voice of the Serpent (+60% singing modifier). Drain, melee, and mez cycle phases.",
+    "tags": ["vots", "voice of the serpent", "farm", "solo", "singing modifier", "necklace", "mana drain", "mez"]
+  },
+  {
+    "title": "Flowing Thought",
+    "url": "/basics/gear/flowing-thought.html",
+    "category": "End-Game / Gear",
+    "description": "FT breakpoints for charm sustain. How much Flowing Thought you need for perma-charm and endless swarm.",
+    "tags": ["flowing thought", "FT", "mana regen", "charm", "sustain", "breakpoints", "gear"]
+  },
+  {
+    "title": "Clickies & Useful Items",
+    "url": "/basics/gear/clickies.html",
+    "category": "End-Game / Gear",
+    "description": "Essential clicky items every Quarm bard should own: JBoots, VoTS, invis clicks, dispel fodder, regen, and illusion masks.",
+    "tags": ["clickies", "items", "jboots", "vots", "tiny cloak", "mosquito boots", "fungi tunic", "gear", "utility"]
   },
   {
     "title": "Vah Shir Cloak Quests",
@@ -61,6 +187,20 @@
     "category": "End-Game / Quests",
     "description": "Complete walkthrough for the bard epic 1.0 quest. Singing Short Sword.",
     "tags": ["epic", "quest", "singing short sword", "walkthrough"]
+  },
+  {
+    "title": "PBAoE XP Penalty",
+    "url": "/misc/xp-penalty.html",
+    "category": "Misc",
+    "description": "How the experience penalty applies to PBAoE damage. Penalty scaling by level difference and enchanter memblur workaround.",
+    "tags": ["xp penalty", "pbae", "aoe", "experience", "level difference", "memblur", "enchanter", "penalty"]
+  },
+  {
+    "title": "Zone Connections",
+    "url": "/misc/zone-connections.html",
+    "category": "Misc",
+    "description": "Visual zone connection map covering Classic, Kunark, Velious, and Luclin. All zone adjacencies in one reference.",
+    "tags": ["zones", "map", "connections", "classic", "kunark", "velious", "luclin", "travel", "zone lines"]
   },
   {
     "title": "Bard Pro",
