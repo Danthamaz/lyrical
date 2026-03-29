@@ -169,8 +169,7 @@ $(function () {
       var html = '';
       for (var i = 0; i < results.length; i++) {
         var item = results[i].item;
-        html += '<a href="' + item.url + '" class="search-result-item"' +
-          (item.url !== '/songs/twisting.html' ? ' data-coming-soon' : '') + '>' +
+        html += '<a href="' + item.url + '" class="search-result-item">' +
           '<div class="search-result-category">' + item.category + '</div>' +
           '<div class="search-result-title">' + item.title + '</div>' +
           '<div class="search-result-desc">' + item.description + '</div>' +
