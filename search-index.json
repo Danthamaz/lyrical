@@ -1,57 +1,71 @@
 [
   {
+    "title": "Character Creation",
+    "url": "/basics/character-creation.html",
+    "category": "Getting Started",
+    "description": "Race selection and starting stat allocation for bards. Half-Elf, Wood Elf, Human, and Vah Shir options.",
+    "tags": ["race", "stats", "stamina", "charisma", "half-elf", "wood elf", "human", "vah shir", "character creation"]
+  },
+  {
+    "title": "Zeal & Setup",
+    "url": "/basics/setup.html",
+    "category": "Getting Started",
+    "description": "Client settings and technical setup. Instrument swapping, lag reduction, swarming keybinds, and FPS.",
+    "tags": ["zeal", "setup", "settings", "instrument swapping", "lag", "fps", "keybinds"]
+  },
+  {
     "title": "Melodies",
     "url": "/basics/songs/melodies.html",
-    "category": "Basics / Songs",
+    "category": "Leveling / Songs",
     "description": "Song twisting, melody commands, and essential songs for Quarm bards. Covers 2, 3, and 4-song twisting and timing.",
     "tags": ["twisting", "melody", "songs", "bard", "macro", "haste", "selo"]
   },
   {
     "title": "PBAoE Swarming",
     "url": "/mechanics/solo/pbae-swarming.html",
-    "category": "Mechanics / Solo",
+    "category": "Leveling / Tactics",
     "description": "AoE kiting technique with PBAoE DoT songs. Song rotations by level, instrument swapping, and group support melodies.",
     "tags": ["swarming", "pbae", "aoe", "kiting", "rotation", "songs", "leveling"]
   },
   {
     "title": "Charm Swarming",
     "url": "/mechanics/solo/charm-swarming.html",
-    "category": "Mechanics / Solo",
+    "category": "Leveling / Tactics",
     "description": "Reverse charm kiting for solo XP and farming. Body pulling, charm technique, and best spots.",
     "tags": ["charm", "kiting", "solo", "xp", "leveling", "reverse charm"]
   },
   {
     "title": "Leveling Route",
     "url": "/basics/leveling/route.html",
-    "category": "Basics / Leveling",
+    "category": "Leveling",
     "description": "Best leveling path for bards on Quarm. Zones, ZEMs, quests, and strategies by level range.",
     "tags": ["leveling", "zones", "xp", "guide", "ZEM", "swarming", "route"]
   },
   {
+    "title": "Instruments",
+    "url": "/basics/gear/instruments.html",
+    "category": "Leveling / Gear",
+    "description": "Instrument progression for bards. Percussion, stringed, brass, and wind instrument best-in-slot by level.",
+    "tags": ["instruments", "percussion", "stringed", "brass", "wind", "gear"]
+  },
+  {
     "title": "Vah Shir Cloak Quests",
     "url": "/quests/luclin/vah-shir-cloak.html",
-    "category": "Quests / Luclin",
+    "category": "End-Game / Quests",
     "description": "Complete guide to Shar Vahl cloak quests for all five Vah Shir classes. Citizenship through Garrison cloak.",
     "tags": ["cloak", "vah shir", "shar vahl", "quest", "jharin", "sonic wolf bane", "citizenship"]
   },
   {
     "title": "Epic 1.0",
     "url": "/quests/kunark/epic.html",
-    "category": "Quests / Kunark",
+    "category": "End-Game / Quests",
     "description": "Complete walkthrough for the bard epic 1.0 quest. Singing Short Sword.",
     "tags": ["epic", "quest", "singing short sword", "walkthrough"]
   },
   {
-    "title": "Instruments",
-    "url": "/basics/gear/instruments.html",
-    "category": "Basics / Gear",
-    "description": "Instrument progression for bards. Percussion, stringed, brass, and wind instrument best-in-slot by level.",
-    "tags": ["instruments", "percussion", "stringed", "brass", "wind", "gear"]
-  },
-  {
     "title": "Bard Pro",
     "url": "/tools/bard-pro.html",
-    "category": "Tools",
+    "category": "Misc",
     "description": "Bard song modifier and stacking calculator. Select your gear, AAs, and instruments to see song values.",
     "tags": ["calculator", "modifiers", "instruments", "AAs", "stacking", "bard pro"]
   }
