@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Blur — Lyri Cal</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <div class="category-label">Leveling / Tactics</div>
+    <h1>Memory Blur</h1>
+    <div class="subtitle">How memory blur works and how to maximize your blur chance</div>
+  </div>
+
+  <div class="section-divider">
+    <img src="/assets/divider-header.svg" alt="">
+  </div>
+
+  <section class="band">
+    <div class="content">
+
+    <!-- What is Memory Blur -->
+    <div class="section-title">
+      <h2>What is Memory Blur</h2>
+    </div>
+    <p>Memory blur (memblur) wipes an NPC's hate list, causing them to forget you and return to their spawn point. It's one of the most useful tools in a bard's kit for managing encounters. Common uses include:</p>
+    <ul>
+      <li><strong>Splitting camps</strong> — blur adds off a multi-pull so you only fight one at a time.</li>
+      <li><strong>Dropping aggro</strong> — blur a mob that's chasing you to reset the fight.</li>
+      <li><strong>Escort quests</strong> — blur escort NPCs to speed them up (though bards have limitations here).</li>
+    </ul>
+
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- Bard Blur vs Direct Blur -->
+    <div class="section-title">
+      <h2>Bard Blur vs Direct Blur</h2>
+    </div>
+    <p>Bards don't get a dedicated blur spell. Instead, blur is a side effect of mesmerize spells — when a mez lands, it includes a blur component. This distinction matters because it comes with several important limitations:</p>
+    <ul>
+      <li><strong>Mez must land first</strong> — the blur component only fires if the mez itself passes the resist check. If the mez is resisted, no blur happens.</li>
+      <li><strong>Re-mezzing skips blur</strong> — if a target is already mezzed and you re-mez it (a refresh), the blur component is skipped entirely. The mez refreshes, but no new blur attempt is made.</li>
+      <li><strong>Mez-immune targets can't be blurred</strong> — if an NPC is immune to mesmerize (unmezzable), bards have no way to blur it.</li>
+      <li><strong>Enchanters have direct blur</strong> — classes like Enchanter get standalone memory blur spells that don't require mez. These work on targets that are mez-immune and can be cast repeatedly without needing to break mez first.</li>
+    </ul>
+
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- The Formula -->
+    <div class="section-title">
+      <h2>The Formula</h2>
+    </div>
+    <p>Memory blur isn't a flat chance — it's calculated from several components that stack together. Understanding the formula helps you know when blur is reliable and when it's going to be a coin flip.</p>
+
+    <h3>Base Chance</h3>
+    <p>Every blur-capable spell has a base value that sets the starting success chance. This varies by spell — higher level mez spells generally have a higher base blur chance.</p>
+
+    <h3>IncreaseChanceMemwipe Bonus</h3>
+    <p>Bonuses from AAs, items, and spell effects that specifically increase memory wipe chance. This is applied as a percentage multiplier on the spell's base chance:</p>
+    <p><code>base += base × bonus / 100</code></p>
+    <p>This modifier is applied <strong>before</strong> the level and CHA modifiers are added.</p>
+
+    <h3>Level Modifier</h3>
+    <p>The target's level determines a bonus (or penalty) to your blur chance:</p>
+    <ul>
+      <li><strong>Target level below 17:</strong> Always 100% success — auto-blur, no roll needed.</li>
+      <li><strong>Target level 17–52:</strong> Bonus = <code>-2.08333 × target_level + 135.4167</code> (higher level = smaller bonus = harder to blur).</li>
+      <li><strong>Target level 53+:</strong> Flat +25 bonus.</li>
+    </ul>
+
+    <table style="width:100%; max-width:400px; border-collapse:collapse; font-size:0.85rem; margin: 1rem 0;">
+      <thead>
+        <tr>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Target Level</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Level Bonus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">17</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+100</td>
+        </tr>
+        <tr>
+          <td style="background: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">30</td>
+          <td style="background: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+73</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">40</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+52</td>
+        </tr>
+        <tr>
+          <td style="background: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">50</td>
+          <td style="background: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+31</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">52</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+27</td>
+        </tr>
+        <tr>
+          <td style="background: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">53+</td>
+          <td style="background: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+25</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>CHA Bonus</h3>
+    <p>Charisma directly impacts blur chance, but only above 150. This is one of the key reasons CHA matters for bards.</p>
+    <ul>
+      <li>Only applies if caster has over 150 CHA.</li>
+      <li>Formula: <code>(CHA - 150) / 10</code>, capped at +15.</li>
+      <li>So 300+ CHA gives the maximum +15% bonus.</li>
+    </ul>
+
+    <table style="width:100%; max-width:400px; border-collapse:collapse; font-size:0.85rem; margin: 1rem 0;">
+      <thead>
+        <tr>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">CHA</th>
+          <th style="background: var(--accent); color: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">Blur Bonus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">150 or less</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+0</td>
+        </tr>
+        <tr>
+          <td style="background: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">175</td>
+          <td style="background: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+2</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">200</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+5</td>
+        </tr>
+        <tr>
+          <td style="background: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">225</td>
+          <td style="background: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+7</td>
+        </tr>
+        <tr>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">250</td>
+          <td style="background: var(--surface); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+10</td>
+        </tr>
+        <tr>
+          <td style="background: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">300+</td>
+          <td style="background: var(--bg); padding: 6px 10px; border: 1px solid var(--border); text-align: center;">+15 (cap)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Final Formula</h3>
+    <p>Putting it all together, the blur chance is calculated in this order:</p>
+    <ol>
+      <li>Start with the spell's base blur chance.</li>
+      <li>Apply IncreaseChanceMemwipe multiplier: <code>base += base × bonus / 100</code>.</li>
+      <li>Add the level modifier (based on target level).</li>
+      <li>Add the CHA bonus (if CHA > 150).</li>
+      <li>Cap the final value at 100%.</li>
+      <li>Roll a random number against the final chance — if the roll is under, the blur succeeds.</li>
+    </ol>
+
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- Immune NPCs -->
+    <div class="section-title">
+      <h2>Immune NPCs</h2>
+    </div>
+    <p>Some NPCs have a special "engage notice" flag that makes them completely immune to memory blur, regardless of your stats or spell power. When you attempt to blur one of these targets, you'll see the message:</p>
+    <p><code>"You can't seem to wipe the mind of this target..."</code></p>
+    <p>There is no way around this — these NPCs simply cannot be blurred by any class or spell.</p>
+
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- Tips -->
+    <div class="section-title">
+      <h2>Tips</h2>
+    </div>
+    <ul>
+      <li><strong>Stack CHA above 150</strong> — every 10 CHA above 150 gives +1% blur chance, up to +15% at 300 CHA. This is one of the best reasons for bards to invest in Charisma gear.</li>
+      <li><strong>You can't re-blur a mezzed target</strong> — the mez must wear off or be broken first. Then re-mez to get another blur attempt. Spamming mez on an already-mezzed mob does nothing for blur.</li>
+      <li><strong>Escort quests need direct blur</strong> — most escort NPCs are immune to mesmerize. Since bard blur requires mez to land, you'll need a class with a direct blur spell (like Enchanter) for escort quest tricks.</li>
+      <li><strong>Higher level targets are harder</strong> — the level modifier drops sharply as target level goes up. Expect more failed blurs on raid-level and high-end dungeon mobs.</li>
+    </ul>
+
+    </div>
+  </section>
+
+  <button class="back-to-top">↑ Top</button>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

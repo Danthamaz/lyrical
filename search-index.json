@@ -91,6 +91,13 @@
     "tags": ["chanting", "solo", "kiting", "fear", "dot", "snare", "chant of flame", "chant of frost"]
   },
   {
+    "title": "Memory Blur",
+    "url": "/mechanics/solo/memblur.html",
+    "category": "Leveling / Tactics",
+    "description": "How memory blur works for bards. Formula breakdown, CHA bonus, level modifiers, and tips for maximizing blur chance.",
+    "tags": ["blur", "memblur", "memory blur", "mez", "charisma", "CHA", "hate list", "aggro", "wipe"]
+  },
+  {
     "title": "AA Leveling Spots",
     "url": "/basics/leveling/aa.html",
     "category": "End-Game",
