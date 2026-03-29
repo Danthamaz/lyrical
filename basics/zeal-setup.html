@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zeal Setup — Lyri Cal</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <div class="category-label">Getting Started</div>
+    <h1>Zeal Setup</h1>
+    <div class="subtitle">Installing and configuring Zeal for Project Quarm</div>
+  </div>
+
+  <div class="section-divider">
+    <img src="/assets/divider-header.svg" alt="">
+  </div>
+
+  <section class="band">
+    <div class="content">
+
+    <!-- What is Zeal -->
+    <div class="section-title">
+      <h2>What is Zeal</h2>
+    </div>
+
+    <p>Zeal is an open-source quality-of-life modification for the TAKP (The Al'Kabor Project) client used on Project Quarm. It adds modern conveniences like an in-game map, customizable keybinds, nameplate options, and dozens of slash commands that make the 1999-era client far more playable.</p>
+    <p>Zeal is developed openly on GitHub with transparent releases. Every build is compiled from public source code, so you can inspect exactly what it does. It is the standard addon that virtually every Quarm player uses.</p>
+
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- Installation -->
+    <div class="section-title">
+      <h2>Installation</h2>
+    </div>
+
+    <ol>
+      <li>Download the latest release ZIP from the <a href="https://github.com/iamclint/Zeal/releases" target="_blank" rel="noopener noreferrer">Zeal GitHub releases page</a>.</li>
+      <li>Extract the contents of the ZIP into your EverQuest game root directory (the folder containing <code>eqgame.exe</code>).</li>
+      <li>Make sure <code>zeal.asi</code> is in the game root folder &mdash; not in a subfolder.</li>
+      <li>Launch the game and test the installation:
+        <ul>
+          <li><code>/zeal version</code> &mdash; displays the installed Zeal version</li>
+          <li><code>/help zeal</code> &mdash; lists all available Zeal commands</li>
+        </ul>
+      </li>
+    </ol>
+    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;"><strong>Note:</strong> If Zeal does not load, ensure your antivirus or Windows Defender is not blocking or quarantining <code>zeal.asi</code>. Adding your EQ folder to the exclusion list usually fixes this.</p>
+
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- File Structure -->
+    <div class="section-title">
+      <h2>File Structure</h2>
+    </div>
+
+    <p>After installation, your game directory will contain the following Zeal-related files and folders:</p>
+
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border); text-align: left;">
+            <th style="padding: 0.5rem 1rem; color: var(--accent);">File / Folder</th>
+            <th style="padding: 0.5rem 1rem; color: var(--accent);">Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 0.5rem 1rem;"><code>zeal.asi</code></td>
+            <td style="padding: 0.5rem 1rem;">Core Zeal module &mdash; must be in the game root</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 0.5rem 1rem;"><code>zeal.pdb</code></td>
+            <td style="padding: 0.5rem 1rem;">Debug symbols (optional, used for crash reporting)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 0.5rem 1rem;"><code>uifiles/zeal/</code></td>
+            <td style="padding: 0.5rem 1rem;">Zeal UI elements (options window, map, nameplates, etc.)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 0.5rem 1rem;"><code>zeal.ini</code></td>
+            <td style="padding: 0.5rem 1rem;">Global Zeal settings (auto-generated on first run)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 0.5rem 1rem;"><code>client.ini</code></td>
+            <td style="padding: 0.5rem 1rem;">Per-character keybinds and UI settings</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 0.5rem 1rem;"><code>zeal_ui_skin.ini</code></td>
+            <td style="padding: 0.5rem 1rem;">Optional skin configuration for 4K UI scaling</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- Essential First Steps -->
+    <div class="section-title">
+      <h2>Essential First Steps</h2>
+    </div>
+
+    <p>Once Zeal is installed, open the Zeal options window in-game with <strong>ALT+O</strong> and navigate to the Zeal tab. Here are the key things to configure right away:</p>
+
+    <div class="section-columns cols-2">
+      <div class="col" style="border-left: 3px solid var(--accent);">
+        <h3>Keybinds</h3>
+        <p>Zeal adds new bindable actions under the Keybinds section. Set up binds for commonly used features like target cycling, strafe, and slow turn. Per-character keybinds are saved in <code>client.ini</code>.</p>
+      </div>
+      <div class="col" style="border-left: 3px solid var(--accent);">
+        <h3>Right-Click to Equip</h3>
+        <p>Enable this in Zeal options. Lets you right-click items in your inventory to equip them instantly &mdash; essential for bard instrument swapping.</p>
+      </div>
+      <div class="col" style="border-left: 3px solid var(--accent);">
+        <h3>Instrument Swapping</h3>
+        <p>With right-click equip enabled, you can swap instruments mid-melody without opening bags. This is critical for maximizing song modifiers during twisting.</p>
+      </div>
+      <div class="col" style="border-left: 3px solid var(--accent);">
+        <h3>Per-Character Keybinds</h3>
+        <p>Zeal supports per-character keybind profiles stored in <code>client.ini</code>. Each character can have their own binds without overwriting your other characters.</p>
+      </div>
+    </div>
+
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- 4K Support -->
+    <div class="section-title">
+      <h2>4K Support</h2>
+    </div>
+
+    <p>Zeal supports native 4K resolution. However, the default EQ UI elements were designed for much lower resolutions and will appear tiny at 4K. To fix this:</p>
+    <ul>
+      <li>Install a custom 2x UI skin that doubles the size of all UI elements.</li>
+      <li>Configure the skin path in <code>zeal_ui_skin.ini</code> in your game root directory.</li>
+      <li>Several community-made 4K skins are available on the Quarm Discord.</li>
+    </ul>
+    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;"><strong>Note:</strong> Without a 2x skin, the UI will be functional but extremely small at 4K. This is a TAKP client limitation, not a Zeal issue.</p>
+
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <!-- To Disable -->
+    <div class="section-title">
+      <h2>To Disable</h2>
+    </div>
+
+    <p>If you ever need to disable Zeal, simply delete <code>zeal.asi</code> from your game root directory. The game will launch without Zeal the next time you start it. Your settings in <code>zeal.ini</code> will be preserved if you reinstall later.</p>
+
+    </div>
+  </section>
+
+  <button class="back-to-top">&#8593; Top</button>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

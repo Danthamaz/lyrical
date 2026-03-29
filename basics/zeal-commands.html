@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zeal Commands — Lyri Cal</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .cmd-search {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      font-family: Georgia, "Times New Roman", Times, serif;
+      background: var(--surface);
+      color: var(--text-body);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      outline: none;
+    }
+    .cmd-search:focus {
+      border-color: var(--accent);
+    }
+    .cmd-search::placeholder {
+      color: var(--text-muted);
+    }
+    .cmd-count {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-bottom: 0.75rem;
+    }
+    .cmd-group-title {
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .cmd-group-title:first-of-type {
+      margin-top: 0;
+    }
+    .cmd-group-title h3 {
+      color: var(--accent);
+      font-size: 1rem;
+      margin: 0;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cmd-row {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.65rem 1rem;
+      margin-bottom: 0.35rem;
+    }
+    .cmd-name {
+      color: var(--accent);
+      font-family: Georgia, "Times New Roman", Times, serif;
+      font-size: 0.9rem;
+      font-weight: bold;
+      flex-shrink: 0;
+      min-width: 160px;
+    }
+    .cmd-desc {
+      color: var(--text-body);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .cmd-desc code {
+      background: rgba(0,0,0,0.2);
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      font-size: 0.82rem;
+    }
+    .cmd-row.hidden { display: none; }
+    .cmd-group-title.hidden { display: none; }
+  </style>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <div class="category-label">Getting Started</div>
+    <h1>Zeal Commands</h1>
+    <div class="subtitle">Complete reference for Zeal slash commands</div>
+  </div>
+
+  <div class="section-divider">
+    <img src="/assets/divider-header.svg" alt="">
+  </div>
+
+  <section class="band">
+    <div class="content">
+
+    <input type="text" class="cmd-search" id="cmd-search" placeholder="Search commands..." autocomplete="off">
+    <div class="cmd-count" id="cmd-count"></div>
+
+    <div id="cmd-list">
+
+      <!-- General -->
+      <div class="cmd-group-title" data-group="general"><h3>General</h3></div>
+      <div class="cmd-row" data-group="general"><span class="cmd-name">/alarm</span><span class="cmd-desc">Sets an alarm timer. <code>/alarm &lt;seconds&gt;</code> &mdash; plays a sound after the specified time. Useful for tracking repops or buff durations.</span></div>
+      <div class="cmd-row" data-group="general"><span class="cmd-name">/aspectratio</span><span class="cmd-desc">Sets a custom aspect ratio for the game window. <code>/aspectratio &lt;value&gt;</code> &mdash; e.g. <code>/aspectratio 1.777</code> for 16:9.</span></div>
+      <div class="cmd-row" data-group="general"><span class="cmd-name">/assist</span><span class="cmd-desc">Enhanced assist command. <code>/assist &lt;name&gt;</code> or <code>/assist group</code> or <code>/assist raid</code> to assist the main assist.</span></div>
+      <div class="cmd-row" data-group="general"><span class="cmd-name">/autofire</span><span class="cmd-desc">Toggles auto-fire for ranged attacks on or off.</span></div>
+      <div class="cmd-row" data-group="general"><span class="cmd-name">/autoaaswitch</span><span class="cmd-desc">Automatically toggles AA experience on/off when you reach your AA goal. <code>/autoaaswitch on|off</code>.</span></div>
+      <div class="cmd-row" data-group="general"><span class="cmd-name">/autoconsent</span><span class="cmd-desc">Automatically consents players when they request to drag your corpse. <code>/autoconsent group|guild|raid on|off</code>.</span></div>
+      <div class="cmd-row" data-group="general"><span class="cmd-name">/autoraidinvite</span><span class="cmd-desc">Automatically accept raid invites. <code>/autoraidinvite on|off</code>.</span></div>
+      <div class="cmd-row" data-group="general"><span class="cmd-name">/fov</span><span class="cmd-desc">Sets the field of view. <code>/fov &lt;value&gt;</code> &mdash; default is 45, higher values show more of the world.</span></div>
+      <div class="cmd-row" data-group="general"><span class="cmd-name">/sit</span><span class="cmd-desc">Enhanced sit command that works more reliably than the default.</span></div>
+      <div class="cmd-row" data-group="general"><span class="cmd-name">/run</span><span class="cmd-desc">Sets run speed multiplier (client-side visual only, does not cheat). <code>/run &lt;value&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="general"><span class="cmd-name">/help zeal</span><span class="cmd-desc">Lists all available Zeal commands in the chat window.</span></div>
+      <div class="cmd-row" data-group="general"><span class="cmd-name">/zeal version</span><span class="cmd-desc">Displays the currently installed Zeal version number.</span></div>
+
+      <!-- Movement & Camera -->
+      <div class="cmd-group-title" data-group="movement"><h3>Movement &amp; Camera</h3></div>
+      <div class="cmd-row" data-group="movement"><span class="cmd-name">/dampenlev</span><span class="cmd-desc">Dampens the camera bounce caused by levitate. <code>/dampenlev on|off</code>.</span></div>
+      <div class="cmd-row" data-group="movement"><span class="cmd-name">/follow</span><span class="cmd-desc">Enhanced follow command with better pathing. <code>/follow</code> on current target.</span></div>
+      <div class="cmd-row" data-group="movement"><span class="cmd-name">/zealcam</span><span class="cmd-desc">Enables Zeal's enhanced camera system with smooth panning and zoom. <code>/zealcam on|off</code>.</span></div>
+      <div class="cmd-row" data-group="movement"><span class="cmd-name">/pandelay</span><span class="cmd-desc">Sets the delay before the camera starts panning when you turn. <code>/pandelay &lt;ms&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="movement"><span class="cmd-name">/selfclickthru</span><span class="cmd-desc">Makes your own character model click-through so you don't target yourself. <code>/selfclickthru on|off</code>.</span></div>
+
+      <!-- Map & Navigation -->
+      <div class="cmd-group-title" data-group="map"><h3>Map &amp; Navigation</h3></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map on|off</span><span class="cmd-desc">Toggles the in-game map overlay on or off.</span></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map size</span><span class="cmd-desc">Sets the map size as a percentage of the screen. <code>/map size &lt;percent&gt;</code> &mdash; e.g. <code>/map size 50</code>.</span></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map marker</span><span class="cmd-desc">Places a marker on the map at specified coordinates. <code>/map marker &lt;y&gt; &lt;x&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map zoom</span><span class="cmd-desc">Sets the map zoom level. <code>/map zoom &lt;value&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map background</span><span class="cmd-desc">Sets the map background opacity. <code>/map background &lt;0-100&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map level</span><span class="cmd-desc">Filters the map to show only the specified level range. <code>/map level &lt;min&gt; &lt;max&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map ring</span><span class="cmd-desc">Adds a distance ring around your position on the map. <code>/map ring &lt;distance&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map grid</span><span class="cmd-desc">Toggles a grid overlay on the map. <code>/map grid on|off</code>.</span></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map labels</span><span class="cmd-desc">Toggles labels for points of interest. <code>/map labels on|off</code>.</span></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map poi</span><span class="cmd-desc">Manages points of interest on the map.</span></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map show_group</span><span class="cmd-desc">Toggles display of group member positions on the map. <code>/map show_group on|off</code>.</span></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map show_raid</span><span class="cmd-desc">Toggles display of raid member positions on the map. <code>/map show_raid on|off</code>.</span></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map line</span><span class="cmd-desc">Draws a line on the map between two points. <code>/map line &lt;y1&gt; &lt;x1&gt; &lt;y2&gt; &lt;x2&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="map"><span class="cmd-name">/map gsay, /map rsay</span><span class="cmd-desc">Broadcasts your current map marker or position to group or raid chat.</span></div>
+
+      <!-- Targeting -->
+      <div class="cmd-group-title" data-group="targeting"><h3>Targeting</h3></div>
+      <div class="cmd-row" data-group="targeting"><span class="cmd-name">/target</span><span class="cmd-desc">Enhanced target command. <code>/target &lt;name&gt;</code> with partial name matching and nearest-first priority.</span></div>
+      <div class="cmd-row" data-group="targeting"><span class="cmd-name">/targetprevious</span><span class="cmd-desc">Cycles back to the previous target in the target list.</span></div>
+      <div class="cmd-row" data-group="targeting"><span class="cmd-name">/targetring</span><span class="cmd-desc">Toggles the target ring displayed under the targeted mob. <code>/targetring on|off</code> or <code>/targetring size &lt;value&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="targeting"><span class="cmd-name">/leftclickcon</span><span class="cmd-desc">Left-clicking a mob will also consider it (show its level/con). <code>/leftclickcon on|off</code>.</span></div>
+      <div class="cmd-row" data-group="targeting"><span class="cmd-name">/inspect target</span><span class="cmd-desc">Inspects the currently targeted player.</span></div>
+      <div class="cmd-row" data-group="targeting"><span class="cmd-name">/rt</span><span class="cmd-desc">Targets the last player who sent you a tell (reply target).</span></div>
+      <div class="cmd-row" data-group="targeting"><span class="cmd-name">/playerclickthru</span><span class="cmd-desc">Makes other player models click-through to prevent accidental targeting. <code>/playerclickthru on|off</code>.</span></div>
+
+      <!-- Songs & Spells -->
+      <div class="cmd-group-title" data-group="songs"><h3>Songs &amp; Spells</h3></div>
+      <div class="cmd-row" data-group="songs"><span class="cmd-name">/melody</span><span class="cmd-desc">Starts a song melody (auto-twist). <code>/melody &lt;slot1&gt; &lt;slot2&gt; ...</code> &mdash; e.g. <code>/melody 1 2 3 4</code> to twist the first four songs.</span></div>
+      <div class="cmd-row" data-group="songs"><span class="cmd-name">/stopsong</span><span class="cmd-desc">Immediately stops the current song or melody.</span></div>
+      <div class="cmd-row" data-group="songs"><span class="cmd-name">/spellset</span><span class="cmd-desc">Memorizes a saved spell/song set. <code>/spellset save &lt;name&gt;</code> or <code>/spellset load &lt;name&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="songs"><span class="cmd-name">/spelleffects</span><span class="cmd-desc">Toggles spell particle effects on or off. <code>/spelleffects on|off</code>.</span></div>
+      <div class="cmd-row" data-group="songs"><span class="cmd-name">/useitem</span><span class="cmd-desc">Uses (clicks) an item in a specific inventory slot. <code>/useitem &lt;slot&gt;</code> &mdash; useful for macro-based clicky usage.</span></div>
+      <div class="cmd-row" data-group="songs"><span class="cmd-name">/timer</span><span class="cmd-desc">Displays a countdown timer on screen. <code>/timer &lt;seconds&gt;</code>.</span></div>
+
+      <!-- Inventory & Items -->
+      <div class="cmd-group-title" data-group="inventory"><h3>Inventory &amp; Items</h3></div>
+      <div class="cmd-row" data-group="inventory"><span class="cmd-name">/autoinventory</span><span class="cmd-desc">Automatically places the item on your cursor into your inventory.</span></div>
+      <div class="cmd-row" data-group="inventory"><span class="cmd-name">/autobank</span><span class="cmd-desc">Automatically deposits the item on your cursor into your bank.</span></div>
+      <div class="cmd-row" data-group="inventory"><span class="cmd-name">/bandolier</span><span class="cmd-desc">Manages weapon and item swap sets. <code>/bandolier save &lt;name&gt;</code>, <code>/bandolier load &lt;name&gt;</code>, <code>/bandolier list</code>.</span></div>
+      <div class="cmd-row" data-group="inventory"><span class="cmd-name">/protect</span><span class="cmd-desc">Protects items from being accidentally sold, traded, or destroyed. <code>/protect on|off</code>.</span></div>
+      <div class="cmd-row" data-group="inventory"><span class="cmd-name">/swap</span><span class="cmd-desc">Swaps items between inventory slots. <code>/swap &lt;slot1&gt; &lt;slot2&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="inventory"><span class="cmd-name">/singleclick</span><span class="cmd-desc">Toggles single-click looting for items in loot window.</span></div>
+      <div class="cmd-row" data-group="inventory"><span class="cmd-name">/locktogglebagslot</span><span class="cmd-desc">Locks a bag slot so it won't auto-fill when using autoinventory.</span></div>
+      <div class="cmd-row" data-group="inventory"><span class="cmd-name">/lootall</span><span class="cmd-desc">Loots all items from the current corpse at once.</span></div>
+      <div class="cmd-row" data-group="inventory"><span class="cmd-name">/lootctrl</span><span class="cmd-desc">Toggles whether Ctrl must be held to loot items. <code>/lootctrl on|off</code>.</span></div>
+      <div class="cmd-row" data-group="inventory"><span class="cmd-name">/lootlast</span><span class="cmd-desc">Re-opens the last looted corpse's loot window.</span></div>
+      <div class="cmd-row" data-group="inventory"><span class="cmd-name">/linkall</span><span class="cmd-desc">Links all items from a container or corpse to chat.</span></div>
+
+      <!-- Corpse Management -->
+      <div class="cmd-group-title" data-group="corpse"><h3>Corpse Management</h3></div>
+      <div class="cmd-row" data-group="corpse"><span class="cmd-name">/corpsedrag</span><span class="cmd-desc">Drags the targeted corpse. Use to move corpses to a safe location for looting or resurrection.</span></div>
+      <div class="cmd-row" data-group="corpse"><span class="cmd-name">/corpsedrop</span><span class="cmd-desc">Drops the corpse you are currently dragging.</span></div>
+      <div class="cmd-row" data-group="corpse"><span class="cmd-name">/hidecorpse</span><span class="cmd-desc">Hides corpses from view. <code>/hidecorpse all</code>, <code>/hidecorpse allbutgroup</code>, <code>/hidecorpse none</code>, or <code>/hidecorpse looted</code>.</span></div>
+      <div class="cmd-row" data-group="corpse"><span class="cmd-name">/tellconsent</span><span class="cmd-desc">Consents a player via tell without being in the same zone. <code>/tellconsent &lt;name&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="corpse"><span class="cmd-name">/replyconsent</span><span class="cmd-desc">Consents the last person who sent you a tell. Shortcut for quick consent during corpse runs.</span></div>
+
+      <!-- Chat & Communication -->
+      <div class="cmd-group-title" data-group="chat"><h3>Chat &amp; Communication</h3></div>
+      <div class="cmd-row" data-group="chat"><span class="cmd-name">/abbreviatedchat</span><span class="cmd-desc">Shortens chat channel names (e.g. "guild" becomes "g"). <code>/abbreviatedchat on|off</code>.</span></div>
+      <div class="cmd-row" data-group="chat"><span class="cmd-name">/classchatcolors</span><span class="cmd-desc">Colors player names in chat by class. <code>/classchatcolors on|off</code>.</span></div>
+      <div class="cmd-row" data-group="chat"><span class="cmd-name">/classicclasses</span><span class="cmd-desc">Uses classic three-letter class abbreviations in UI. <code>/classicclasses on|off</code>.</span></div>
+      <div class="cmd-row" data-group="chat"><span class="cmd-name">/clearchat</span><span class="cmd-desc">Clears all text from the active chat window.</span></div>
+      <div class="cmd-row" data-group="chat"><span class="cmd-name">/timestamp</span><span class="cmd-desc">Adds timestamps to chat messages. <code>/timestamp on|off</code>.</span></div>
+      <div class="cmd-row" data-group="chat"><span class="cmd-name">/tellwindows</span><span class="cmd-desc">Opens tells in separate chat windows per player. <code>/tellwindows on|off</code>.</span></div>
+      <div class="cmd-row" data-group="chat"><span class="cmd-name">/optchat</span><span class="cmd-desc">Opts in or out of custom chat channels. <code>/optchat &lt;channel&gt; on|off</code>.</span></div>
+      <div class="cmd-row" data-group="chat"><span class="cmd-name">/tell (tab completion)</span><span class="cmd-desc">Pressing Tab while typing a <code>/tell</code> command auto-completes player names from recent tells and nearby players.</span></div>
+      <div class="cmd-row" data-group="chat"><span class="cmd-name">/log</span><span class="cmd-desc">Toggles logging of chat to a text file. <code>/log on|off</code>.</span></div>
+      <div class="cmd-row" data-group="chat"><span class="cmd-name">% replacements</span><span class="cmd-desc">Use in macros and chat: <code>%n</code> (your name), <code>%h</code> (target HP%), <code>%loc</code> (your location), <code>%th</code> (target HP value). Works in /gsay, /rsay, and other channels.</span></div>
+
+      <!-- Raid & Group -->
+      <div class="cmd-group-title" data-group="raid"><h3>Raid &amp; Group</h3></div>
+      <div class="cmd-row" data-group="raid"><span class="cmd-name">/lead</span><span class="cmd-desc">Transfers group or raid leadership to the targeted player. <code>/lead &lt;name&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="raid"><span class="cmd-name">/raidmove</span><span class="cmd-desc">Moves a player between raid groups. <code>/raidmove &lt;name&gt; &lt;group#&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="raid"><span class="cmd-name">/raidpromote</span><span class="cmd-desc">Promotes a player to group leader within a raid. <code>/raidpromote &lt;name&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="raid"><span class="cmd-name">/replyraidinvite</span><span class="cmd-desc">Replies to a pending raid invite. <code>/replyraidinvite accept|decline</code>.</span></div>
+      <div class="cmd-row" data-group="raid"><span class="cmd-name">/sortgroup</span><span class="cmd-desc">Sorts your group window by name or role.</span></div>
+      <div class="cmd-row" data-group="raid"><span class="cmd-name">/raidbars</span><span class="cmd-desc">Toggles raid health bars on or off for the raid window.</span></div>
+      <div class="cmd-row" data-group="raid"><span class="cmd-name">/survey</span><span class="cmd-desc">Sends a survey to raid or group. Members can respond with yes/no.</span></div>
+      <div class="cmd-row" data-group="raid"><span class="cmd-name">/consentmonks, /consentrogues, /consentclerics</span><span class="cmd-desc">Consents all monks, rogues, or clerics in the raid for corpse dragging. Useful for quick raid corpse runs.</span></div>
+
+      <!-- UI & Display -->
+      <div class="cmd-group-title" data-group="ui"><h3>UI &amp; Display</h3></div>
+      <div class="cmd-row" data-group="ui"><span class="cmd-name">/nameplate</span><span class="cmd-desc">Controls nameplate display above characters and NPCs. Subcommands: <code>/nameplate on|off</code>, <code>/nameplate colors</code>, <code>/nameplate font &lt;size&gt;</code>, <code>/nameplate x</code>, <code>/nameplate y</code>.</span></div>
+      <div class="cmd-row" data-group="ui"><span class="cmd-name">/tag</span><span class="cmd-desc">Tagging system for labeling players or NPCs. <code>/tag add &lt;name&gt; &lt;label&gt;</code>, <code>/tag remove &lt;name&gt;</code>, <code>/tag list</code>. Tags display under nameplates.</span></div>
+      <div class="cmd-row" data-group="ui"><span class="cmd-name">/fcd</span><span class="cmd-desc">Floating combat damage numbers. <code>/fcd on|off</code> to toggle damage numbers above mobs.</span></div>
+      <div class="cmd-row" data-group="ui"><span class="cmd-name">/showhelm</span><span class="cmd-desc">Toggles display of helmet models on your character. <code>/showhelm on|off</code>.</span></div>
+      <div class="cmd-row" data-group="ui"><span class="cmd-name">/shownames</span><span class="cmd-desc">Toggles player and NPC names above their heads. <code>/shownames on|off</code>.</span></div>
+      <div class="cmd-row" data-group="ui"><span class="cmd-name">/reloadskin</span><span class="cmd-desc">Reloads the UI skin without restarting the client. Useful when testing UI modifications.</span></div>
+      <div class="cmd-row" data-group="ui"><span class="cmd-name">/uilock</span><span class="cmd-desc">Locks all UI windows in place so they cannot be accidentally moved. <code>/uilock on|off</code>.</span></div>
+      <div class="cmd-row" data-group="ui"><span class="cmd-name">/tooltipall</span><span class="cmd-desc">Shows tooltips for all UI elements. <code>/tooltipall on|off</code>.</span></div>
+      <div class="cmd-row" data-group="ui"><span class="cmd-name">/tooltiptimer</span><span class="cmd-desc">Sets the delay before tooltips appear. <code>/tooltiptimer &lt;ms&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="ui"><span class="cmd-name">/tickreverse</span><span class="cmd-desc">Reverses the tick counter to show time remaining instead of time elapsed.</span></div>
+      <div class="cmd-row" data-group="ui"><span class="cmd-name">/uierrors</span><span class="cmd-desc">Toggles display of UI error messages in the chat window. <code>/uierrors on|off</code>.</span></div>
+
+      <!-- Buffs & Stats -->
+      <div class="cmd-group-title" data-group="buffs"><h3>Buffs &amp; Stats</h3></div>
+      <div class="cmd-row" data-group="buffs"><span class="cmd-name">/buffs</span><span class="cmd-desc">Displays a detailed list of your active buffs with remaining duration.</span></div>
+      <div class="cmd-row" data-group="buffs"><span class="cmd-name">/bluecon</span><span class="cmd-desc">Adjusts the shade of blue used for blue-con mobs. <code>/bluecon &lt;value&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="buffs"><span class="cmd-name">/cancelbuff</span><span class="cmd-desc">Cancels a specific buff by name. <code>/cancelbuff &lt;buff name&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="buffs"><span class="cmd-name">/clienthptick</span><span class="cmd-desc">Enables client-side HP tick estimation for smoother health bar updates. <code>/clienthptick on|off</code>.</span></div>
+      <div class="cmd-row" data-group="buffs"><span class="cmd-name">/clientmanatick</span><span class="cmd-desc">Enables client-side mana tick estimation for smoother mana bar updates. <code>/clientmanatick on|off</code>.</span></div>
+      <div class="cmd-row" data-group="buffs"><span class="cmd-name">/mystats</span><span class="cmd-desc">Displays a detailed breakdown of your character's stats, resists, and modifiers.</span></div>
+      <div class="cmd-row" data-group="buffs"><span class="cmd-name">/resetexp</span><span class="cmd-desc">Resets the session experience tracker to zero so you can measure XP from a fresh point.</span></div>
+      <div class="cmd-row" data-group="buffs"><span class="cmd-name">/showlootlockouts</span><span class="cmd-desc">Displays your current loot lockout timers for instanced content.</span></div>
+
+      <!-- System & Output -->
+      <div class="cmd-group-title" data-group="system"><h3>System &amp; Output</h3></div>
+      <div class="cmd-row" data-group="system"><span class="cmd-name">/outputfile</span><span class="cmd-desc">Writes data to a file. <code>/outputfile inventory</code>, <code>/outputfile spellbook</code>, <code>/outputfile raid</code>, <code>/outputfile guild</code>.</span></div>
+      <div class="cmd-row" data-group="system"><span class="cmd-name">/pipe</span><span class="cmd-desc">Pipes text output to an external program or file. <code>/pipe &lt;command&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="system"><span class="cmd-name">/pipedelay</span><span class="cmd-desc">Sets the delay between piped messages to avoid flooding. <code>/pipedelay &lt;ms&gt;</code>.</span></div>
+      <div class="cmd-row" data-group="system"><span class="cmd-name">/pipeverbose</span><span class="cmd-desc">Toggles verbose output for pipe commands. <code>/pipeverbose on|off</code>.</span></div>
+      <div class="cmd-row" data-group="system"><span class="cmd-name">/triggers</span><span class="cmd-desc">Manages text-triggered audio and visual alerts. Set up custom triggers for specific chat messages or game events.</span></div>
+
+    </div>
+
+    </div>
+  </section>
+
+  <button class="back-to-top">&#8593; Top</button>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(function() {
+      var $input = $('#cmd-search');
+      var $rows = $('#cmd-list .cmd-row');
+      var $groups = $('#cmd-list .cmd-group-title');
+      var $count = $('#cmd-count');
+      var total = $rows.length;
+
+      $count.text(total + ' commands');
+
+      $input.on('input', function() {
+        var query = this.value.toLowerCase();
+        if (!query) {
+          $rows.removeClass('hidden');
+          $groups.removeClass('hidden');
+          $count.text(total + ' commands');
+          return;
+        }
+        var visible = 0;
+        var visibleGroups = {};
+        $rows.each(function() {
+          var name = this.children[0].textContent.toLowerCase();
+          var desc = this.children[1].textContent.toLowerCase();
+          if (name.indexOf(query) !== -1 || desc.indexOf(query) !== -1) {
+            this.classList.remove('hidden');
+            visibleGroups[this.getAttribute('data-group')] = true;
+            visible++;
+          } else {
+            this.classList.add('hidden');
+          }
+        });
+        $groups.each(function() {
+          if (visibleGroups[this.getAttribute('data-group')]) {
+            this.classList.remove('hidden');
+          } else {
+            this.classList.add('hidden');
+          }
+        });
+        $count.text(visible + ' of ' + total + ' commands');
+      });
+    });
+  </script>
+</body>
+</html>

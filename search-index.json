@@ -14,6 +14,20 @@
     "tags": ["zeal", "setup", "settings", "instrument swapping", "lag", "fps", "keybinds"]
   },
   {
+    "title": "Zeal Setup",
+    "url": "/basics/zeal-setup.html",
+    "category": "Getting Started",
+    "description": "Installing and configuring Zeal for Project Quarm. Download, file structure, keybinds, right-click equip, 4K support.",
+    "tags": ["zeal", "install", "setup", "configuration", "keybinds", "4k", "zeal.asi", "right-click equip", "instrument swapping"]
+  },
+  {
+    "title": "Zeal Commands",
+    "url": "/basics/zeal-commands.html",
+    "category": "Getting Started",
+    "description": "Complete reference for Zeal slash commands. Map, melody, targeting, nameplates, inventory, raid, and more.",
+    "tags": ["zeal", "commands", "slash commands", "map", "melody", "target", "nameplate", "bandolier", "corpse", "raid", "pipe", "triggers"]
+  },
+  {
     "title": "Server Rules",
     "url": "/basics/server-rules.html",
     "category": "Getting Started",
