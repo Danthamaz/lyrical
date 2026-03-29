@@ -217,9 +217,12 @@ $(function () {
       }
     });
 
-    // Click result — close search, let navigation happen (or coming-soon modal)
-    $(document).on('click', '.search-result-item', function () {
+    // Click result — navigate to the page
+    $(document).on('click', '.search-result-item', function (e) {
+      e.preventDefault();
+      var url = $(this).attr('href');
       closeSearch();
+      window.location.href = url;
     });
   }
 
