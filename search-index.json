@@ -236,5 +236,12 @@
     "category": "Misc",
     "description": "Bard song modifier and stacking calculator. Select your gear, AAs, and instruments to see song values.",
     "tags": ["calculator", "modifiers", "instruments", "AAs", "stacking", "bard pro"]
+  },
+  {
+    "title": "Melody Recommender",
+    "url": "/tools/melody/",
+    "category": "Tools",
+    "description": "Build the optimal twist for your group, raid, or solo session based on class composition, encounter conditions, and gear.",
+    "tags": ["melody", "twist", "songs", "group", "raid", "solo", "haste", "overhaste", "regen", "resist", "slow", "tool"]
   }
 ]
