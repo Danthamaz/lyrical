@@ -60,6 +60,9 @@ var INSTRUMENTS = {
     combine: { name: 'Combine',           mod: 10 },
     pipes:   { name: 'Pipes of Insight',  mod: 18 },
     mahlin:  { name: "Mahlin's Flute",    mod: 24 }
+  },
+  singing: {
+    none: { name: 'None', mod: 0 }
   }
 };
 
@@ -106,7 +109,7 @@ var SONGS = [
     instrument: 'brass',
     category: 'overhaste_v3',
     effects: [
-      { type: 'AttackSpeed3', value: 15, moddable: false }
+      { type: 'Haste3', value: 15, moddable: false }
     ],
     classWeights: {
       warrior: 0.95, rogue: 0.90, monk: 0.85, ranger: 0.60,
@@ -123,7 +126,7 @@ var SONGS = [
     instrument: 'brass',
     category: 'overhaste_v3',
     effects: [
-      { type: 'AttackSpeed3', value: 25, moddable: false }
+      { type: 'Haste3', value: 25, moddable: false }
     ],
     classWeights: {
       warrior: 0.95, rogue: 0.90, monk: 0.85, ranger: 0.60,
@@ -243,7 +246,7 @@ var SONGS = [
     category: 'haste_v1v2',
     eliminateIf: ['haster'],
     effects: [
-      { type: 'AttackSpeed2', value: 105, moddable: false },
+      { type: 'Haste2', value: 105, moddable: false },
       { type: 'AC',           value: 21,  moddable: true  }
     ],
     classWeights: {
@@ -262,7 +265,7 @@ var SONGS = [
     category: 'haste_v1v2',
     eliminateIf: ['haster'],
     effects: [
-      { type: 'AttackSpeed2', value: 110, moddable: false },
+      { type: 'Haste2', value: 110, moddable: false },
       { type: 'AC',           value: 30,  moddable: true  }
     ],
     classWeights: {
@@ -287,7 +290,7 @@ var SONGS = [
       { type: 'AttackSpeed',  value: 120, moddable: false },
       { type: 'STR',          value: 21,  moddable: true  },
       { type: 'ATK',          value: 12,  moddable: true  },
-      { type: 'DamageShield', value: 8,   moddable: true  }
+      { type: 'DS', value: 8,   moddable: true  }
     ],
     classWeights: {
       warrior: 0.90, monk: 0.85, rogue: 0.85, ranger: 0.70,
@@ -308,7 +311,7 @@ var SONGS = [
     instrument: 'stringed',
     category: 'hp_regen',
     effects: [
-      { type: 'CurrentHP', value: 11, moddable: true }
+      { type: 'HP', value: 11, moddable: true }
     ],
     classWeights: {
       warrior: 0.50, cleric: 0.45, paladin: 0.45, ranger: 0.45,
@@ -325,7 +328,7 @@ var SONGS = [
     instrument: 'singing',
     category: 'mana_regen',
     effects: [
-      { type: 'CurrentMana', value: 2, moddable: false }
+      { type: 'Mana', value: 2, moddable: false }
     ],
     classWeights: {
       warrior: 0.0, cleric: 0.70, paladin: 0.35, ranger: 0.35,
@@ -342,7 +345,7 @@ var SONGS = [
     instrument: 'singing',
     category: 'mana_regen',
     effects: [
-      { type: 'CurrentMana', value: 7, moddable: false }
+      { type: 'Mana', value: 7, moddable: false }
     ],
     classWeights: {
       warrior: 0.0, cleric: 0.75, paladin: 0.40, ranger: 0.40,
@@ -359,8 +362,8 @@ var SONGS = [
     instrument: 'stringed',
     category: 'hp_mana_regen',
     effects: [
-      { type: 'CurrentHP',   value: 4, moddable: true },
-      { type: 'CurrentMana', value: 5, moddable: true }
+      { type: 'HP',   value: 4, moddable: true },
+      { type: 'Mana', value: 5, moddable: true }
     ],
     classWeights: {
       warrior: 0.30, cleric: 0.60, paladin: 0.45, ranger: 0.45,
@@ -377,8 +380,8 @@ var SONGS = [
     instrument: 'stringed',
     category: 'hp_mana_regen',
     effects: [
-      { type: 'CurrentHP',   value: 12, moddable: true },
-      { type: 'CurrentMana', value: 11, moddable: true }
+      { type: 'HP',   value: 12, moddable: true },
+      { type: 'Mana', value: 11, moddable: true }
     ],
     classWeights: {
       warrior: 0.30, cleric: 0.75, paladin: 0.50, ranger: 0.50,
@@ -396,8 +399,8 @@ var SONGS = [
     category: 'hp_mana_regen',
     raidOnly: true,
     effects: [
-      { type: 'CurrentHP',   value: 12, moddable: true },
-      { type: 'CurrentMana', value: 11, moddable: true }
+      { type: 'HP',   value: 12, moddable: true },
+      { type: 'Mana', value: 11, moddable: true }
     ],
     classWeights: {
       warrior: 0.30, cleric: 0.75, paladin: 0.50, ranger: 0.50,
@@ -415,8 +418,8 @@ var SONGS = [
     category: 'hp_mana_regen',
     raidOnly: true,
     effects: [
-      { type: 'CurrentHP',   value: 16, moddable: true },
-      { type: 'CurrentMana', value: 15, moddable: true }
+      { type: 'HP',   value: 16, moddable: true },
+      { type: 'Mana', value: 15, moddable: true }
     ],
     classWeights: {
       warrior: 0.35, cleric: 0.85, paladin: 0.55, ranger: 0.55,
@@ -498,7 +501,7 @@ var SONGS = [
     category: 'resist_cold',
     encounterTags: ['cold'],
     effects: [
-      { type: 'DamageShield', value: 11, moddable: true },
+      { type: 'DS', value: 11, moddable: true },
       { type: 'CR',           value: 70, moddable: true },
       { type: 'AC',           value: 20, moddable: true }
     ],
@@ -518,7 +521,7 @@ var SONGS = [
     category: 'resist_disease',
     encounterTags: ['disease'],
     effects: [
-      { type: 'DamageShield', value: 11, moddable: true },
+      { type: 'DS', value: 11, moddable: true },
       { type: 'DR',           value: 70, moddable: true },
       { type: 'AC',           value: 20, moddable: true }
     ],
@@ -538,7 +541,7 @@ var SONGS = [
     category: 'resist_fire',
     encounterTags: ['fire'],
     effects: [
-      { type: 'DamageShield', value: 11, moddable: true },
+      { type: 'DS', value: 11, moddable: true },
       { type: 'FR',           value: 70, moddable: true },
       { type: 'AC',           value: 20, moddable: true }
     ],
@@ -558,7 +561,7 @@ var SONGS = [
     category: 'resist_poison',
     encounterTags: ['poison'],
     effects: [
-      { type: 'DamageShield', value: 11, moddable: true },
+      { type: 'DS', value: 11, moddable: true },
       { type: 'PR',           value: 70, moddable: true },
       { type: 'AC',           value: 20, moddable: true }
     ],
@@ -767,7 +770,7 @@ var SONGS = [
     encounterTags: ['slow'],
     effects: [
       { type: 'AttackSpeed', value: 75,  moddable: false, label: '25% slow' },
-      { type: 'CurrentHP',   value: -32, moddable: true,  label: 'DoT' }
+      { type: 'HP',   value: -32, moddable: true,  label: 'DoT' }
     ],
     classWeights: {
       warrior: 0.70, paladin: 0.65, shadowknight: 0.65, monk: 0.50,
@@ -829,7 +832,7 @@ var SONGS = [
     encounterTags: ['slow'],
     effects: [
       { type: 'AttackSpeed', value: 60,  moddable: false, label: '40% slow' },
-      { type: 'CurrentHP',   value: -25, moddable: true,  label: 'DoT' }
+      { type: 'HP',   value: -25, moddable: true,  label: 'DoT' }
     ],
     classWeights: {
       warrior: 0.70, paladin: 0.65, shadowknight: 0.65, monk: 0.50,
@@ -851,7 +854,7 @@ var SONGS = [
     category: 'dot_ae',
     soloOnly: true,
     effects: [
-      { type: 'CurrentHP', value: -17, moddable: true }
+      { type: 'HP', value: -17, moddable: true }
     ],
     classWeights: {
       warrior: 0.0, cleric: 0.0, paladin: 0.0, ranger: 0.0,
@@ -869,7 +872,7 @@ var SONGS = [
     category: 'dot_ae',
     soloOnly: true,
     effects: [
-      { type: 'CurrentHP', value: -19, moddable: true },
+      { type: 'HP', value: -19, moddable: true },
       { type: 'AC',        value: -61, moddable: true }
     ],
     classWeights: {
@@ -888,7 +891,7 @@ var SONGS = [
     category: 'dot',
     encounterTags: ['resist_debuff'],
     effects: [
-      { type: 'CurrentHP', value: -21, moddable: true  },
+      { type: 'HP', value: -21, moddable: true  },
       { type: 'MR',        value: -17, moddable: false, label: 'MR debuff' }
     ],
     classWeights: {
@@ -907,7 +910,7 @@ var SONGS = [
     category: 'dot',
     encounterTags: ['resist_debuff'],
     effects: [
-      { type: 'CurrentHP', value: -31, moddable: true  },
+      { type: 'HP', value: -31, moddable: true  },
       { type: 'FR',        value: -17, moddable: false, label: 'FR debuff' }
     ],
     classWeights: {
@@ -926,7 +929,7 @@ var SONGS = [
     category: 'dot',
     encounterTags: ['resist_debuff'],
     effects: [
-      { type: 'CurrentHP', value: -31, moddable: true  },
+      { type: 'HP', value: -31, moddable: true  },
       { type: 'DR',        value: -17, moddable: false, label: 'DR debuff' }
     ],
     classWeights: {
@@ -945,7 +948,7 @@ var SONGS = [
     category: 'dot_ae',
     soloOnly: true,
     effects: [
-      { type: 'CurrentHP', value: -485, moddable: true }
+      { type: 'HP', value: -485, moddable: true }
     ],
     classWeights: {
       warrior: 0.0, cleric: 0.0, paladin: 0.0, ranger: 0.0,
@@ -963,7 +966,7 @@ var SONGS = [
     category: 'dot',
     encounterTags: ['resist_debuff'],
     effects: [
-      { type: 'CurrentHP', value: -31, moddable: true  },
+      { type: 'HP', value: -31, moddable: true  },
       { type: 'CR',        value: -17, moddable: false, label: 'CR debuff' }
     ],
     classWeights: {
@@ -982,7 +985,7 @@ var SONGS = [
     category: 'dot',
     encounterTags: ['resist_debuff'],
     effects: [
-      { type: 'CurrentHP', value: -31, moddable: true  },
+      { type: 'HP', value: -31, moddable: true  },
       { type: 'PR',        value: -17, moddable: false, label: 'PR debuff' }
     ],
     classWeights: {
@@ -998,7 +1001,7 @@ var SONGS = [
     name: "Occlusion of Sound",
     level: 55,
     instrument: 'percussion',
-    category: 'dot',
+    category: 'resist_debuff',
     encounterTags: ['resist_debuff'],
     effects: [
       { type: 'CR', value: -10, moddable: false },
@@ -1021,7 +1024,7 @@ var SONGS = [
     category: 'dot_ae',
     encounterTags: ['resist_debuff'],
     effects: [
-      { type: 'CurrentHP', value: -30, moddable: false },
+      { type: 'HP', value: -30, moddable: false },
       { type: 'MR',        value: -15, moddable: false, label: 'MR debuff' }
     ],
     classWeights: {
