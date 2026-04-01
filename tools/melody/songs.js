@@ -71,9 +71,11 @@ var INSTRUMENTS = {
 // ---------------------------------------------------------------------------
 
 var AA_MODS = {
-  instrument_mastery: [0, 1, 2, 3],
-  singing_mastery:    [0, 1, 2, 3],
-  jam_fest:           [0, 1, 2, 3]
+  instrument_mastery: [0, 2, 4, 6],
+  singing_mastery:    [0, 2, 4, 6],
+  // Jam Fest adds to effective casting level (affects base formula values),
+  // separate from instrument modifier bonuses.
+  jam_fest:           [0, 1, 3, 5]
 };
 
 // ---------------------------------------------------------------------------
@@ -129,7 +131,7 @@ var SONGS = [
       { type: 'Haste3', value: 25, moddable: false }
     ],
     classWeights: {
-      warrior: 0.95, rogue: 0.90, monk: 0.85, ranger: 0.60,
+      warrior: 0.95, rogue: 0.90, monk: 0.85, ranger: 0.85,
       beastlord: 0.65, bard: 0.50, paladin: 0.15, shadowknight: 0.15,
       cleric: 0.0, druid: 0.0, shaman: 0.0, necromancer: 0.0,
       wizard: 0.0, magician: 0.0, enchanter: 0.0

@@ -215,18 +215,27 @@ $(function () {
   // -------------------------------------------------------------------------
 
   function calcModifiers() {
-    var instrumentMastery = parseInt($('#gear-instrument-mastery').val(), 10) || 0;
-    var singingMastery    = parseInt($('#gear-singing-mastery').val(), 10) || 0;
-    var puretone          = $('#gear-puretone').is(':checked');
-    var amplification     = $('#gear-amplification').is(':checked');
-    var clickyKey         = $('#gear-clicky').val() || 'none';
+    // Look up actual bonus values from rank indices
+    var instMasteryRank = parseInt($('#gear-instrument-mastery').val(), 10) || 0;
+    var instrumentMastery = AA_MODS.instrument_mastery[instMasteryRank] || 0;
+
+    var singMasteryRank = parseInt($('#gear-singing-mastery').val(), 10) || 0;
+    var singingMastery  = AA_MODS.singing_mastery[singMasteryRank] || 0;
+
+    var epicActive    = $('#gear-epic').is(':checked');
+    var puretone      = $('#gear-puretone').is(':checked');
+    var amplification = $('#gear-amplification').is(':checked');
+    var clickyKey     = $('#gear-clicky').val() || 'none';
 
     var mods = {};
 
     // Instrument skills: percussion, stringed, brass, wind
+    // The Bard Epic (bardvalue=18, bardtype=51) acts as a floor of 18 for all
+    // instrument mods when equipped.
     ['percussion', 'stringed', 'brass', 'wind'].forEach(function (type) {
       var selectedKey = $('#gear-' + type).val() || 'none';
-      var itemMod  = INSTRUMENTS[type][selectedKey] ? INSTRUMENTS[type][selectedKey].mod : 0;
+      var itemMod = INSTRUMENTS[type][selectedKey] ? INSTRUMENTS[type][selectedKey].mod : 0;
+      if (epicActive) itemMod = Math.max(itemMod, 18);
       var spellMod = puretone ? 10 : 0;
       var bestBase = Math.max(itemMod, spellMod);
       var total    = 10 + bestBase + instrumentMastery;
@@ -243,7 +252,10 @@ $(function () {
       };
     });
 
-    // Singing
+    // Singing — the Epic is the singing item (bardtype=51 covers singing too)
+    var singingItemMod = 0;
+    if (epicActive) singingItemMod = Math.max(singingItemMod, 18);
+
     var ampBonus = 0;
     if (amplification) ampBonus += 9; // Amplification at lv60
     if (clickyKey && clickyKey !== 'none' && SINGING_CLICKIES[clickyKey]) {
@@ -251,13 +263,13 @@ $(function () {
     }
     if (ampBonus > 28) ampBonus = 28;
 
-    var singingTotal = 10 + singingMastery + ampBonus;
+    var singingTotal = 10 + Math.max(singingItemMod, ampBonus) + singingMastery;
     var singingCap   = INSTRUMENT_SOFT_CAP + singingMastery;
     if (singingTotal > singingCap) singingTotal = singingCap;
     var singingMultiplier = singingTotal / 10;
 
     mods['singing'] = {
-      itemMod:    0,
+      itemMod:    singingItemMod,
       aaMod:      singingMastery,
       ampMod:     ampBonus,
       total:      singingTotal,
@@ -347,24 +359,18 @@ $(function () {
   // -------------------------------------------------------------------------
 
   function calcSongScore(song, classes, mods) {
+    // Primary score: sum of class weights only.
+    // Instrument mods are displayed in the modifier table and used as a
+    // tiebreaker (higher instrument mod wins when class weight scores are equal),
+    // but they do NOT affect the primary score. This prevents songs with large
+    // raw effect numbers from outranking songs that are truly more valuable for
+    // the group (e.g. Verses of Victory's 240 raw vs Warsong's 25 raw).
     var weightSum = 0;
     classes.forEach(function (classId) {
       var w = song.classWeights[classId];
       if (w) weightSum += w;
     });
-
-    if (weightSum === 0) return 0;
-
-    var mod = mods[song.instrument] || { multiplier: 1 };
-    var effectiveValue = 0;
-
-    song.effects.forEach(function (eff) {
-      var val = Math.abs(eff.value);
-      if (eff.moddable) val = val * mod.multiplier;
-      effectiveValue += val;
-    });
-
-    return weightSum * effectiveValue;
+    return weightSum;
   }
 
   function scoreSongs(classes, mods, encounter) {
