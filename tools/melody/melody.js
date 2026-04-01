@@ -8,6 +8,88 @@
 $(function () {
 
   // -------------------------------------------------------------------------
+  // LOCAL STORAGE PERSISTENCE
+  // -------------------------------------------------------------------------
+
+  var STORAGE_KEY = 'lyrical_melody_gear';
+
+  function saveGearState() {
+    var state = {};
+
+    // Checkboxes
+    state['gear-epic'] = $('#gear-epic').is(':checked');
+    state['gear-amplification'] = $('#gear-amplification').is(':checked');
+    state['gear-puretone'] = $('#gear-puretone').is(':checked');
+
+    // Instrument selects
+    state['gear-percussion'] = $('#gear-percussion').val();
+    state['gear-stringed'] = $('#gear-stringed').val();
+    state['gear-brass'] = $('#gear-brass').val();
+    state['gear-wind'] = $('#gear-wind').val();
+
+    // AA/Skill selects
+    state['gear-instrument-mastery'] = $('#gear-instrument-mastery').val();
+    state['gear-singing-mastery'] = $('#gear-singing-mastery').val();
+    state['gear-jam-fest'] = $('#gear-jam-fest').val();
+
+    // Clicky select
+    state['gear-clicky'] = $('#gear-clicky').val();
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function restoreGearState() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    try {
+      var state = JSON.parse(raw);
+
+      // Restore checkboxes
+      if (state['gear-epic'] !== undefined) {
+        $('#gear-epic').prop('checked', state['gear-epic']);
+      }
+      if (state['gear-amplification'] !== undefined) {
+        $('#gear-amplification').prop('checked', state['gear-amplification']);
+      }
+      if (state['gear-puretone'] !== undefined) {
+        $('#gear-puretone').prop('checked', state['gear-puretone']);
+      }
+
+      // Restore instrument selects
+      if (state['gear-percussion'] !== undefined) {
+        $('#gear-percussion').val(state['gear-percussion']);
+      }
+      if (state['gear-stringed'] !== undefined) {
+        $('#gear-stringed').val(state['gear-stringed']);
+      }
+      if (state['gear-brass'] !== undefined) {
+        $('#gear-brass').val(state['gear-brass']);
+      }
+      if (state['gear-wind'] !== undefined) {
+        $('#gear-wind').val(state['gear-wind']);
+      }
+
+      // Restore AA/Skill selects
+      if (state['gear-instrument-mastery'] !== undefined) {
+        $('#gear-instrument-mastery').val(state['gear-instrument-mastery']);
+      }
+      if (state['gear-singing-mastery'] !== undefined) {
+        $('#gear-singing-mastery').val(state['gear-singing-mastery']);
+      }
+      if (state['gear-jam-fest'] !== undefined) {
+        $('#gear-jam-fest').val(state['gear-jam-fest']);
+      }
+
+      // Restore clicky select
+      if (state['gear-clicky'] !== undefined) {
+        $('#gear-clicky').val(state['gear-clicky']);
+      }
+    } catch (e) {
+      // Silently ignore corrupt state
+    }
+  }
+
+  // -------------------------------------------------------------------------
   // INIT
   // -------------------------------------------------------------------------
 
@@ -16,6 +98,7 @@ $(function () {
     populateRaidGrid();
     populateInstrumentDropdowns();
     populateClickyDropdown();
+    restoreGearState();
     bindEvents();
     recalculate();
   }
@@ -533,6 +616,7 @@ $(function () {
     var encounter = getEncounterConditions();
     var results   = scoreSongs(classes, mods, encounter);
     renderResults(results);
+    saveGearState();
   }
 
   // -------------------------------------------------------------------------
