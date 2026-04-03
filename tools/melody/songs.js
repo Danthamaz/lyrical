@@ -45,8 +45,8 @@ var INSTRUMENTS = {
   stringed: {
     none:    { name: 'None',              mod: 0  },
     combine: { name: 'Combine',           mod: 10 },
-    howler:  { name: "Lute of the Howler", mod: 20 },
-    lyran:   { name: "Lyran's Lute",      mod: 24 }
+    howler:  { name: "Lute of the Howler", mod: 22 },
+    lyran:   { name: "Lyran's Mystical Lute", mod: 25 }
   },
   brass: {
     none:        { name: 'None',              mod: 0  },
