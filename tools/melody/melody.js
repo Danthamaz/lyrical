@@ -225,7 +225,7 @@ $(function () {
   // -------------------------------------------------------------------------
 
   function isMeleeSolo() {
-    return getActiveMode() === 'solo' && $('.solo-btn.active').data('style') === 'melee';
+    return getActiveMode() === 'solo';
   }
 
   function updateMeleePanelVisibility() {
@@ -449,14 +449,6 @@ $(function () {
       $(this).addClass('active');
       $('.mode-panel').removeClass('active');
       $('#mode-' + mode).addClass('active');
-      updateMeleePanelVisibility();
-      recalculate();
-    });
-
-    // Solo style buttons
-    $(document).on('click', '.solo-btn', function () {
-      $('.solo-btn').removeClass('active');
-      $(this).addClass('active');
       updateMeleePanelVisibility();
       recalculate();
     });
