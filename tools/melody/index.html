@@ -92,6 +92,46 @@
     .runnerup-song .melody-song-tag { background: rgba(100,100,100,0.1); border-color: var(--text-muted); color: var(--text-muted); }
     .results-empty { color: var(--text-muted); font-style: italic; font-size: 0.85rem; padding: 1rem 0; }
 
+    /* Melee panels */
+    .melee-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1rem; margin-bottom: 1.5rem; }
+    .melee-panel-title { color: var(--accent); font-family: Georgia, serif; font-size: 0.85rem; font-weight: normal; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 0.75rem; }
+    .melee-profile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+    .melee-weapon-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .melee-weapon-label { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .melee-field label { display: block; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .melee-field input[type="number"], .melee-field input[type="text"] {
+      width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 4px;
+      color: var(--text); font-size: 0.85rem; padding: 0.4rem 0.5rem; font-family: inherit;
+      box-sizing: border-box;
+    }
+    .melee-field input:focus { border-color: var(--accent-muted); outline: none; }
+    .melee-field-row { display: flex; gap: 0.5rem; }
+    .melee-field-row .melee-field { flex: 1; }
+
+    /* NPC lookup */
+    #npc-search { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 0.85rem; padding: 0.5rem 0.6rem; font-family: inherit; box-sizing: border-box; }
+    #npc-search:focus { border-color: var(--accent-muted); outline: none; }
+    #npc-results { max-height: 200px; overflow-y: auto; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 0.75rem; }
+    .npc-result-item { padding: 0.4rem 0.6rem; cursor: pointer; font-size: 0.85rem; color: var(--text-body); border-bottom: 1px solid var(--border-subtle); }
+    .npc-result-item:hover { background: rgba(212,130,74,0.08); color: var(--accent); }
+    .npc-stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; font-size: 0.82rem; }
+    .npc-stat { color: var(--text-body); }
+    .npc-stat strong { color: var(--accent); }
+
+    /* Melee sim results */
+    .sim-summary { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1rem; margin-bottom: 1rem; }
+    .sim-summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem; font-size: 0.85rem; }
+    .sim-stat-label { color: var(--text-muted); }
+    .sim-stat-value { color: var(--text-body); text-align: right; font-variant-numeric: tabular-nums; }
+    .sim-stat-value.sustainable { color: #6a9955; }
+    .sim-stat-value.unsustainable { color: #d4564a; }
+    .sim-contribution { color: var(--text-muted); font-size: 0.78rem; margin-top: 0.15rem; }
+    .melee-runnerup { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 0.6rem 0.8rem; margin-bottom: 0.4rem; opacity: 0.7; font-size: 0.82rem; }
+    .melee-runnerup-songs { color: var(--text-body); }
+    .melee-runnerup-stats { color: var(--text-muted); font-size: 0.78rem; margin-top: 0.2rem; }
+    .melee-runnerup .sustainable { color: #6a9955; }
+    .melee-runnerup .unsustainable { color: #d4564a; }
+
     /* Responsive */
     @media (max-width: 600px) {
       .group-slots { grid-template-columns: repeat(2, 1fr); }
@@ -100,6 +140,9 @@
       .encounter-row { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
       .encounter-row label { min-width: auto; }
       .mode-tab { padding: 0.5rem 1rem; font-size: 0.82rem; }
+      .melee-profile-grid { grid-template-columns: repeat(2, 1fr); }
+      .melee-weapon-grid { grid-template-columns: 1fr; }
+      .npc-stat-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -179,6 +222,96 @@
         <button class="solo-btn active" data-style="kiting">Kiting</button>
         <button class="solo-btn" data-style="swarming">Swarming</button>
         <button class="solo-btn" data-style="charm">Charm</button>
+        <button class="solo-btn" data-style="melee">Melee</button>
+      </div>
+    </div>
+
+    <!-- Melee Solo: Character Profile -->
+    <div class="melee-panel" id="melee-profile" style="display:none;">
+      <h3 class="melee-panel-title">Character Profile</h3>
+      <div class="melee-profile-grid">
+        <div class="melee-field">
+          <label for="mp-level">Level</label>
+          <input type="number" id="mp-level" value="60" min="1" max="65">
+        </div>
+        <div class="melee-field">
+          <label for="mp-hp">Max HP</label>
+          <input type="number" id="mp-hp" value="3353" min="1">
+        </div>
+        <div class="melee-field">
+          <label for="mp-regen">HP / Tick</label>
+          <input type="number" id="mp-regen" value="13" min="0">
+        </div>
+        <div class="melee-field">
+          <label for="mp-item-haste">Item Haste %</label>
+          <input type="number" id="mp-item-haste" value="36" min="0" max="100">
+        </div>
+        <div class="melee-field">
+          <label for="mp-buff-haste">Buff Haste %</label>
+          <input type="number" id="mp-buff-haste" value="40" min="0" max="100">
+        </div>
+        <div class="melee-field">
+          <label for="mp-ds">Always-on DS</label>
+          <input type="number" id="mp-ds" value="0" min="0">
+        </div>
+      </div>
+      <h3 class="melee-panel-title" style="margin-top:1rem;">Weapons</h3>
+      <div class="melee-weapon-grid">
+        <div class="melee-weapon">
+          <div class="melee-weapon-label">Primary</div>
+          <div class="melee-field">
+            <label for="mp-pri-name">Name</label>
+            <input type="text" id="mp-pri-name" value="Scimitar of Shissar Slaying">
+          </div>
+          <div class="melee-field-row">
+            <div class="melee-field">
+              <label for="mp-pri-dmg">Base Dmg</label>
+              <input type="number" id="mp-pri-dmg" value="15" min="0">
+            </div>
+            <div class="melee-field">
+              <label for="mp-pri-bonus">Bonus Dmg</label>
+              <input type="number" id="mp-pri-bonus" value="11" min="0">
+            </div>
+            <div class="melee-field">
+              <label for="mp-pri-delay">Delay</label>
+              <input type="number" id="mp-pri-delay" value="19" min="1">
+            </div>
+          </div>
+        </div>
+        <div class="melee-weapon">
+          <div class="melee-weapon-label">Secondary</div>
+          <div class="melee-field">
+            <label for="mp-sec-name">Name</label>
+            <input type="text" id="mp-sec-name" value="Singing Short Sword">
+          </div>
+          <div class="melee-field-row">
+            <div class="melee-field">
+              <label for="mp-sec-dmg">Base Dmg</label>
+              <input type="number" id="mp-sec-dmg" value="16" min="0">
+            </div>
+            <div class="melee-field">
+              <label for="mp-sec-bonus">Bonus Dmg</label>
+              <input type="number" id="mp-sec-bonus" value="0" min="0">
+            </div>
+            <div class="melee-field">
+              <label for="mp-sec-delay">Delay</label>
+              <input type="number" id="mp-sec-delay" value="25" min="1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Melee Solo: NPC Lookup -->
+    <div class="melee-panel" id="melee-npc" style="display:none;">
+      <h3 class="melee-panel-title">NPC Target</h3>
+      <div class="melee-field" style="margin-bottom:0.75rem;">
+        <label for="npc-search">Search by ID or Name</label>
+        <input type="text" id="npc-search" placeholder="e.g. 89018 or blood_of_chottal">
+      </div>
+      <div id="npc-results" style="display:none;"></div>
+      <div id="npc-selected" style="display:none;">
+        <div class="npc-stat-grid" id="npc-stat-grid"></div>
       </div>
     </div>
 
@@ -349,6 +482,14 @@
     </div>
     <div id="melody-runnerups"></div>
 
+    <!-- Melee Sim Results (hidden unless melee mode) -->
+    <div id="melee-sim-output" style="display:none;">
+      <div class="section-title"><h2>Combat Summary</h2></div>
+      <div id="melee-combat-summary"></div>
+      <div class="section-title"><h2>Runner-Up Melodies</h2></div>
+      <div id="melee-runnerups"></div>
+    </div>
+
   </div>
 
   <button class="back-to-top">&#8593; Top</button>
@@ -356,6 +497,7 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="/js/main.js"></script>
   <script src="/tools/melody/songs.js"></script>
+  <script src="/tools/melody/melee-sim.js"></script>
   <script src="/tools/melody/melody.js"></script>
 </body>
 </html>
