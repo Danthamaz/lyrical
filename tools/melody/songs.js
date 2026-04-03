@@ -39,8 +39,8 @@ var INSTRUMENTS = {
   percussion: {
     none:    { name: 'None',              mod: 0  },
     combine: { name: 'Combine',           mod: 10 },
-    selos:   { name: "Selo's Drums",      mod: 18 },
-    drum_of_beast: { name: 'Drum of the Beast', mod: 24 }
+    selos:   { name: "Selo's Drums of the March", mod: 24 },
+    drum_of_beast: { name: 'Drums of the Beast', mod: 26 }
   },
   stringed: {
     none:    { name: 'None',              mod: 0  },
@@ -51,15 +51,14 @@ var INSTRUMENTS = {
   brass: {
     none:        { name: 'None',              mod: 0  },
     combine:     { name: 'Combine',           mod: 10 },
-    mcvax:       { name: "McVaxius' Horn",    mod: 18 },
-    immaculate:  { name: 'Immaculate Horn',   mod: 22 },
-    denon:       { name: "Denon's Horn",      mod: 24 }
+    mcvax:       { name: "McVaxius' Horn of War", mod: 23 },
+    immaculate:  { name: 'Immaculate Shell Horn', mod: 24 },
+    denon:       { name: "Denon's Horn of Dissonance", mod: 24 }
   },
   wind: {
     none:    { name: 'None',              mod: 0  },
     combine: { name: 'Combine',           mod: 10 },
-    pipes:   { name: 'Pipes of Insight',  mod: 18 },
-    mahlin:  { name: "Mahlin's Flute",    mod: 24 }
+    eternal: { name: 'Flute of Eternal Night', mod: 22 }
   },
   singing: {
     none: { name: 'None', mod: 0 }
