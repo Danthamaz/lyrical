@@ -90,6 +90,280 @@ $(function () {
   }
 
   // -------------------------------------------------------------------------
+  // MELEE PROFILE PERSISTENCE
+  // -------------------------------------------------------------------------
+
+  var MELEE_STORAGE_KEY = 'lyrical_melody_melee_profile';
+
+  var MELEE_FIELDS = [
+    'mp-level', 'mp-hp', 'mp-regen', 'mp-item-haste', 'mp-buff-haste', 'mp-ds',
+    'mp-pri-name', 'mp-pri-dmg', 'mp-pri-bonus', 'mp-pri-delay',
+    'mp-sec-name', 'mp-sec-dmg', 'mp-sec-bonus', 'mp-sec-delay'
+  ];
+
+  function saveMeleeProfile() {
+    var state = {};
+    MELEE_FIELDS.forEach(function (id) {
+      state[id] = $('#' + id).val();
+    });
+    localStorage.setItem(MELEE_STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function restoreMeleeProfile() {
+    var raw = localStorage.getItem(MELEE_STORAGE_KEY);
+    if (!raw) return;
+    try {
+      var state = JSON.parse(raw);
+      MELEE_FIELDS.forEach(function (id) {
+        if (state[id] !== undefined) {
+          $('#' + id).val(state[id]);
+        }
+      });
+    } catch (e) { /* ignore corrupt state */ }
+  }
+
+  function getMeleeProfile() {
+    return {
+      level:      parseInt($('#mp-level').val(), 10) || 60,
+      maxHp:      parseInt($('#mp-hp').val(), 10) || 1,
+      hpPerTick:  parseInt($('#mp-regen').val(), 10) || 0,
+      itemHaste:  parseInt($('#mp-item-haste').val(), 10) || 0,
+      buffHaste:  parseInt($('#mp-buff-haste').val(), 10) || 0,
+      alwaysOnDs: parseInt($('#mp-ds').val(), 10) || 0,
+      priDmg:     parseInt($('#mp-pri-dmg').val(), 10) || 0,
+      priBonus:   parseInt($('#mp-pri-bonus').val(), 10) || 0,
+      priDelay:   parseInt($('#mp-pri-delay').val(), 10) || 19,
+      secDmg:     parseInt($('#mp-sec-dmg').val(), 10) || 0,
+      secBonus:   parseInt($('#mp-sec-bonus').val(), 10) || 0,
+      secDelay:   parseInt($('#mp-sec-delay').val(), 10) || 25
+    };
+  }
+
+  // -------------------------------------------------------------------------
+  // NPC LOOKUP
+  // -------------------------------------------------------------------------
+
+  var npcData = null;
+  var npcLoading = false;
+  var selectedNpc = null;
+
+  function loadNpcData(callback) {
+    if (npcData) { callback(npcData); return; }
+    if (npcLoading) return;
+    npcLoading = true;
+    $.getJSON('/tools/melody/npcs.json', function (data) {
+      npcData = data;
+      npcLoading = false;
+      callback(data);
+    }).fail(function () {
+      npcLoading = false;
+      $('#npc-results').html('<div class="results-empty">Failed to load NPC data.</div>').show();
+    });
+  }
+
+  function searchNpcs(query) {
+    if (!query || query.length < 2) {
+      $('#npc-results').hide();
+      return;
+    }
+    loadNpcData(function (data) {
+      var q = query.toLowerCase();
+      var isNumeric = /^\d+$/.test(q);
+      var matches = data.filter(function (npc) {
+        if (isNumeric) return String(npc.id) === q;
+        return npc.name.toLowerCase().indexOf(q) !== -1;
+      }).slice(0, 20);
+
+      if (matches.length === 0) {
+        $('#npc-results').html('<div class="results-empty" style="padding:0.4rem 0.6rem;">No matches</div>').show();
+        return;
+      }
+
+      if (isNumeric && matches.length === 1) {
+        selectNpc(matches[0]);
+        $('#npc-results').hide();
+        return;
+      }
+
+      var html = '';
+      matches.forEach(function (npc) {
+        html += '<div class="npc-result-item" data-npc-id="' + npc.id + '">' +
+                  '<strong>' + npc.name.replace(/_/g, ' ') + '</strong> ' +
+                  '<span style="color:var(--text-muted)">Lv ' + npc.level + ' · ' + npc['class'] + ' · ' + npc.hp + ' HP</span>' +
+                '</div>';
+      });
+      $('#npc-results').html(html).show();
+    });
+  }
+
+  function selectNpc(npc) {
+    selectedNpc = npc;
+    var html =
+      '<div class="npc-stat"><strong>Name:</strong> ' + npc.name.replace(/_/g, ' ') + '</div>' +
+      '<div class="npc-stat"><strong>Level:</strong> ' + npc.level + '</div>' +
+      '<div class="npc-stat"><strong>Class:</strong> ' + npc['class'] + '</div>' +
+      '<div class="npc-stat"><strong>HP:</strong> ' + npc.hp.toLocaleString() + '</div>' +
+      '<div class="npc-stat"><strong>Damage:</strong> ' + npc.min_dmg + '–' + npc.max_dmg + '</div>' +
+      '<div class="npc-stat"><strong>Atk Delay:</strong> ' + npc.attack_delay + '</div>' +
+      '<div class="npc-stat"><strong>AC:</strong> ' + npc.ac + '</div>' +
+      '<div class="npc-stat"><strong>Slow Mit:</strong> ' + (npc.slow_mitigation || 0) + '%</div>' +
+      '<div class="npc-stat"><strong>Resists:</strong> MR ' + npc.resists.mr + ' CR ' + npc.resists.cr +
+        ' DR ' + npc.resists.dr + ' FR ' + npc.resists.fr + ' PR ' + npc.resists.pr + '</div>';
+    $('#npc-stat-grid').html(html);
+    $('#npc-selected').show();
+    $('#npc-results').hide();
+    recalculate();
+  }
+
+  // -------------------------------------------------------------------------
+  // MELEE MODE UI
+  // -------------------------------------------------------------------------
+
+  function isMeleeSolo() {
+    return getActiveMode() === 'solo' && $('.solo-btn.active').data('style') === 'melee';
+  }
+
+  function updateMeleePanelVisibility() {
+    var melee = isMeleeSolo();
+    $('#melee-profile').toggle(melee);
+    $('#melee-npc').toggle(melee);
+    $('#melee-sim-output').toggle(melee);
+    // Standard panels hide in melee mode
+    // #melody-results stays visible (reused for top melody in both modes)
+    $('.encounter-panel').toggle(!melee);
+    $('#melody-runnerups').toggle(!melee).prev('.section-title').toggle(!melee);
+  }
+
+  // -------------------------------------------------------------------------
+  // MELEE SIM RENDERING
+  // -------------------------------------------------------------------------
+
+  function formatTime(seconds) {
+    if (seconds === Infinity) return '\u221e';
+    if (seconds < 0) return '\u2014';
+    var m = Math.floor(seconds / 60);
+    var s = Math.round(seconds % 60);
+    return m > 0 ? m + 'm ' + s + 's' : s + 's';
+  }
+
+  function renderMeleeResults(simResult, mods) {
+    var $melody = $('#melody-results');
+    var $summary = $('#melee-combat-summary');
+    var $runnerUps = $('#melee-runnerups');
+
+    $melody.empty();
+    $('#melody-runnerups').empty();
+
+    if (!simResult.best) {
+      $summary.html('<div class="results-empty">No results \u2014 select an NPC target.</div>');
+      $runnerUps.empty();
+      return;
+    }
+
+    var best = simResult.best;
+
+    // Top melody
+    var melodyHtml = '';
+    best.combo.forEach(function (song) {
+      var contrib = getMeleeContribution(song, best);
+      melodyHtml +=
+        '<div class="melody-song">' +
+          '<div class="melody-song-icon">&#9835;</div>' +
+          '<div class="melody-song-info">' +
+            '<div class="melody-song-name">' + song.name + '</div>' +
+            '<div class="melody-song-meta">' + song.instrument.charAt(0).toUpperCase() + song.instrument.slice(1) + '</div>' +
+            '<div class="sim-contribution">' + contrib + '</div>' +
+          '</div>' +
+        '</div>';
+    });
+    $melody.html(melodyHtml);
+
+    // Combat summary
+    var susClass = best.sustainable ? 'sustainable' : 'unsustainable';
+    var susLabel = best.sustainable ? 'SUSTAINABLE' : 'UNSUSTAINABLE';
+    var marginStr = best.survivalMargin === Infinity ? '\u221e' :
+      (best.survivalMargin >= 0 ? '+' : '') + formatTime(best.survivalMargin);
+
+    var summaryHtml =
+      '<div class="sim-summary"><div class="sim-summary-grid">' +
+        '<div class="sim-stat-label">Your DPS</div>' +
+        '<div class="sim-stat-value">' + best.totalPlayerDps.toFixed(1) +
+          ' <span style="font-size:0.75rem;color:var(--text-muted)">(melee ' + best.meleeDps.toFixed(1) +
+          ' + DoT ' + best.dotDps.toFixed(1) + ' + DS ' + best.dsDps.toFixed(1) +
+          (best.ddDps > 0 ? ' + DD ' + best.ddDps.toFixed(1) : '') + ')</span></div>' +
+        '<div class="sim-stat-label">Total Haste</div>' +
+        '<div class="sim-stat-value">' + best.totalHaste + '%</div>' +
+        '<div class="sim-stat-label">Mob DPS (raw)</div>' +
+        '<div class="sim-stat-value">' + best.mobBaseDps.toFixed(1) + '</div>' +
+        '<div class="sim-stat-label">Mob DPS (after slow/stun)</div>' +
+        '<div class="sim-stat-value">' + best.mobReducedDps.toFixed(1) +
+          (best.slowPct > 0 ? ' <span style="font-size:0.75rem;color:var(--text-muted)">(' + Math.round(best.slowPct) + '% slow)</span>' : '') + '</div>' +
+        '<div class="sim-stat-label">HP Regen / sec</div>' +
+        '<div class="sim-stat-value">' + best.regenPerSec.toFixed(1) + '</div>' +
+        '<div class="sim-stat-label">Net Incoming DPS</div>' +
+        '<div class="sim-stat-value">' + best.netIncomingDps.toFixed(1) + '</div>' +
+        '<div class="sim-stat-label">Time to Kill</div>' +
+        '<div class="sim-stat-value">' + formatTime(best.timeToKill) + '</div>' +
+        '<div class="sim-stat-label">Time to Die</div>' +
+        '<div class="sim-stat-value">' + formatTime(best.timeToDie) + '</div>' +
+        '<div class="sim-stat-label">Verdict</div>' +
+        '<div class="sim-stat-value ' + susClass + '">' + susLabel + ' (' + marginStr + ')</div>' +
+      '</div></div>';
+    $summary.html(summaryHtml);
+
+    // Runner-ups
+    var ruHtml = '';
+    simResult.runnerUps.forEach(function (r) {
+      var names = r.combo.map(function (s) { return s.name; }).join(' \u00b7 ');
+      var rSus = r.sustainable ? 'sustainable' : 'unsustainable';
+      var rLabel = r.sustainable ? 'OK' : 'DIES';
+      var rMargin = r.survivalMargin === Infinity ? '\u221e' :
+        (r.survivalMargin >= 0 ? '+' : '') + formatTime(r.survivalMargin);
+      ruHtml +=
+        '<div class="melee-runnerup">' +
+          '<div class="melee-runnerup-songs">' + names + '</div>' +
+          '<div class="melee-runnerup-stats">' +
+            'Kill: ' + formatTime(r.timeToKill) + ' \u00b7 DPS: ' + r.totalPlayerDps.toFixed(1) + ' \u00b7 ' +
+            '<span class="' + rSus + '">' + rLabel + ' (' + rMargin + ')</span>' +
+          '</div>' +
+        '</div>';
+    });
+    if (!ruHtml) ruHtml = '<div class="results-empty">No runner-ups.</div>';
+    $runnerUps.html(ruHtml);
+  }
+
+  function getMeleeContribution(song, result) {
+    if (song.isAmplification) return 'Boosts singing modifier for other songs in melody';
+    var lvl = parseInt($('#mp-level').val(), 10) || 60;
+    var parts = [];
+    if (song.hasteType === 'v3') parts.push('+' + song.hastePct + '% overhaste');
+    if (song.hasteType === 'v1v2') {
+      var h = meleeScaleValue(song.hastePct, lvl);
+      parts.push(h + '% spell haste');
+    }
+    if (song.slowPct > 0) parts.push(song.slowPct + '% slow');
+    if (song.dotPerTick) {
+      var d = meleeScaleValue(song.dotPerTick, lvl);
+      parts.push('DoT ' + d + '/tick');
+    }
+    if (song.dsValue) {
+      var ds = meleeScaleValue(song.dsValue, lvl);
+      parts.push('DS ' + ds);
+    }
+    if (song.stunSec > 0) parts.push(song.stunSec + 's stun');
+    if (song.ddDmg > 0) parts.push(song.ddDmg + ' DD');
+    if (song.hpRegenPerTick) {
+      var r = meleeScaleValue(song.hpRegenPerTick, lvl);
+      parts.push('+' + r + ' HP/tick');
+    }
+    if (song.acBonus) parts.push('+AC');
+    if (song.absorbPerHit) parts.push('Absorb ' + song.absorbPerHit + '/hit');
+    if (song.strBonus) parts.push('+STR');
+    if (song.atkBonus) parts.push('+ATK');
+    return parts.join(' \u00b7 ') || '\u2014';
+  }
+
+  // -------------------------------------------------------------------------
   // INIT
   // -------------------------------------------------------------------------
 
@@ -99,6 +373,7 @@ $(function () {
     populateInstrumentDropdowns();
     populateClickyDropdown();
     restoreGearState();
+    restoreMeleeProfile();
     bindEvents();
     recalculate();
   }
@@ -169,6 +444,7 @@ $(function () {
       $(this).addClass('active');
       $('.mode-panel').removeClass('active');
       $('#mode-' + mode).addClass('active');
+      updateMeleePanelVisibility();
       recalculate();
     });
 
@@ -176,6 +452,7 @@ $(function () {
     $(document).on('click', '.solo-btn', function () {
       $('.solo-btn').removeClass('active');
       $(this).addClass('active');
+      updateMeleePanelVisibility();
       recalculate();
     });
 
@@ -203,10 +480,36 @@ $(function () {
       '#gear-instrument-mastery',
       '#gear-singing-mastery',
       '#gear-jam-fest',
-      '#gear-clicky'
+      '#gear-clicky',
+      // Melee profile fields
+      '#mp-level', '#mp-hp', '#mp-regen', '#mp-item-haste', '#mp-buff-haste', '#mp-ds',
+      '#mp-pri-dmg', '#mp-pri-bonus', '#mp-pri-delay',
+      '#mp-sec-dmg', '#mp-sec-bonus', '#mp-sec-delay'
     ];
     $(document).on('change', changeSelectors.join(','), function () {
       recalculate();
+    });
+
+    // Weapon name save handler
+    $(document).on('change', '#mp-pri-name, #mp-sec-name', function () {
+      saveMeleeProfile();
+    });
+
+    // NPC search
+    var npcSearchTimer = null;
+    $(document).on('input', '#npc-search', function () {
+      clearTimeout(npcSearchTimer);
+      var val = $(this).val();
+      npcSearchTimer = setTimeout(function () { searchNpcs(val); }, 200);
+    });
+
+    // NPC result click
+    $(document).on('click', '.npc-result-item', function () {
+      var npcId = parseInt($(this).data('npc-id'), 10);
+      loadNpcData(function (data) {
+        var npc = data.find(function (n) { return n.id === npcId; });
+        if (npc) selectNpc(npc);
+      });
     });
   }
 
@@ -618,11 +921,23 @@ $(function () {
   function recalculate() {
     var mods      = calcModifiers();
     updateModTable(mods);
+
+    if (isMeleeSolo()) {
+      saveMeleeProfile();
+      saveGearState();
+      if (!selectedNpc) return;
+      var profile = getMeleeProfile();
+      var simResult = runMeleeSim(profile, selectedNpc, mods);
+      renderMeleeResults(simResult, mods);
+      return;
+    }
+
     var classes   = getGroupComposition();
     var encounter = getEncounterConditions();
     var results   = scoreSongs(classes, mods, encounter);
     renderResults(results);
     saveGearState();
+    saveMeleeProfile();
   }
 
   // -------------------------------------------------------------------------
