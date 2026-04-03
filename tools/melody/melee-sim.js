@@ -294,7 +294,8 @@ function simCombo(combo, profile, npc, mods) {
   // -------------------------------------------------------------------------
   // 5. Song DPS (DoT, DS, DD stun)
   // -------------------------------------------------------------------------
-  var TWIST_CYCLE = 15; // 5 songs * 3 sec each
+  var TWIST_CYCLE = 15;  // 5 songs * 3 sec each
+  var STUN_RECAST = 300; // Brusco's has a 5-minute recast
 
   var attackDelay  = npc.attack_delay || 30;
   var mobAttackSec = 1 / (attackDelay / 10);
@@ -326,7 +327,7 @@ function simCombo(combo, profile, npc, mods) {
     // Brusco's: stun DD + melee lockout
     if (song.stunSec > 0 || song.ddDmg > 0) {
       if (song.ddDmg > 0) {
-        ddDps += song.ddDmg * (1 - resistRate) / TWIST_CYCLE;
+        ddDps += song.ddDmg * (1 - resistRate) / STUN_RECAST;
       }
     }
   });
@@ -343,7 +344,7 @@ function simCombo(combo, profile, npc, mods) {
   var stunUptimeRatio = 0;
   combo.forEach(function (song) {
     if (song.stunSec > 0) {
-      stunUptimeRatio = song.stunSec * (1 - resistRate) / TWIST_CYCLE;
+      stunUptimeRatio = song.stunSec * (1 - resistRate) / STUN_RECAST;
     }
   });
 
