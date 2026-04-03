@@ -107,6 +107,7 @@
     .melee-field input:focus { border-color: var(--accent-muted); outline: none; }
     .melee-field-row { display: flex; gap: 0.5rem; }
     .melee-field-row .melee-field { flex: 1; }
+    .melee-maintenance-label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-body); font-size: 0.85rem; cursor: pointer; }
 
     /* NPC lookup */
     #npc-search { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 0.85rem; padding: 0.5rem 0.6rem; font-family: inherit; box-sizing: border-box; }
@@ -299,6 +300,14 @@
             </div>
           </div>
         </div>
+      </div>
+      <h3 class="melee-panel-title" style="margin-top:1rem;">Maintenance Songs</h3>
+      <div class="melee-maintenance">
+        <label class="melee-maintenance-label">
+          <input type="checkbox" id="mp-angstlich" class="toggle-check">
+          <span>Angstlich's Assonance</span>
+          <span style="color:var(--text-muted); font-size:0.78rem;"> — 40% slow + DoT, recast every 60s</span>
+        </label>
       </div>
     </div>
 

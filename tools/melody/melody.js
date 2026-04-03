@@ -106,6 +106,7 @@ $(function () {
     MELEE_FIELDS.forEach(function (id) {
       state[id] = $('#' + id).val();
     });
+    state['mp-angstlich'] = $('#mp-angstlich').is(':checked');
     localStorage.setItem(MELEE_STORAGE_KEY, JSON.stringify(state));
   }
 
@@ -119,6 +120,9 @@ $(function () {
           $('#' + id).val(state[id]);
         }
       });
+      if (state['mp-angstlich'] !== undefined) {
+        $('#mp-angstlich').prop('checked', state['mp-angstlich']);
+      }
     } catch (e) { /* ignore corrupt state */ }
   }
 
@@ -135,7 +139,8 @@ $(function () {
       priDelay:   parseInt($('#mp-pri-delay').val(), 10) || 19,
       secDmg:     parseInt($('#mp-sec-dmg').val(), 10) || 0,
       secBonus:   parseInt($('#mp-sec-bonus').val(), 10) || 0,
-      secDelay:   parseInt($('#mp-sec-delay').val(), 10) || 25
+      secDelay:   parseInt($('#mp-sec-delay').val(), 10) || 25,
+      angstlichActive: $('#mp-angstlich').is(':checked')
     };
   }
 
@@ -484,7 +489,8 @@ $(function () {
       // Melee profile fields
       '#mp-level', '#mp-hp', '#mp-regen', '#mp-item-haste', '#mp-buff-haste', '#mp-ds',
       '#mp-pri-dmg', '#mp-pri-bonus', '#mp-pri-delay',
-      '#mp-sec-dmg', '#mp-sec-bonus', '#mp-sec-delay'
+      '#mp-sec-dmg', '#mp-sec-bonus', '#mp-sec-delay',
+      '#mp-angstlich'
     ];
     $(document).on('change', changeSelectors.join(','), function () {
       recalculate();

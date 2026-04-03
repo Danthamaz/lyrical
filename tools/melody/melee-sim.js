@@ -336,6 +336,17 @@ function simCombo(combo, profile, npc, mods) {
   var alwaysOnDs = profile.alwaysOnDs || 0;
   dsDps += alwaysOnDs * mobAttackSec;
 
+  // Angstlich's Assonance: maintenance slow + DoT (not a melody slot)
+  var angstlichDotDps = 0;
+  var angstlichSlow = 0;
+  if (profile.angstlichActive) {
+    // DoT: 25/tick at L60, scales to 27 at L65
+    var angDot = meleeScaleValue({ min: 25, max: 27, minLvl: 60, maxLvl: 65 }, playerLevel);
+    angstlichDotDps = angDot / 6;
+    dotDps += angstlichDotDps;
+    angstlichSlow = 40;
+  }
+
   var totalPlayerDps = meleeDps + dotDps + dsDps + ddDps;
 
   // -------------------------------------------------------------------------
@@ -355,8 +366,8 @@ function simCombo(combo, profile, npc, mods) {
   var maxDmg = npc.max_dmg || 30;
   var mobAvgDmg = (minDmg + maxDmg) / 2;
 
-  // Best slow from combo
-  var bestSlow = 0;
+  // Best slow from combo + Angstlich's maintenance
+  var bestSlow = angstlichSlow;
   combo.forEach(function (song) {
     if (song.slowPct > bestSlow) bestSlow = song.slowPct;
   });
