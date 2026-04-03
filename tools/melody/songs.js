@@ -45,7 +45,7 @@ var INSTRUMENTS = {
   stringed: {
     none:    { name: 'None',              mod: 0  },
     combine: { name: 'Combine',           mod: 10 },
-    kelin:   { name: "Kelin's Lute",      mod: 18 },
+    howler:  { name: "Lute of the Howler", mod: 20 },
     lyran:   { name: "Lyran's Lute",      mod: 24 }
   },
   brass: {
