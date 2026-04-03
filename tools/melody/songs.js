@@ -1035,6 +1035,53 @@ var SONGS = [
       rogue: 0.0, shaman: 0.0, necromancer: 0.30, wizard: 0.40,
       magician: 0.40, enchanter: 0.30, beastlord: 0.0
     }
+  },
+
+  // -------------------------------------------------------------------------
+  // Self Haste (Jonthan's Inspiration)
+  // -------------------------------------------------------------------------
+
+  {
+    id: 1762,
+    name: "Jonthan's Inspiration",
+    level: 58,
+    instrument: 'singing',
+    category: 'haste_v1v2',
+    eliminateIf: ['haster'],
+    effects: [
+      { type: 'AttackSpeed', value: 161, moddable: false, label: '61% haste' },
+      { type: 'STR',         value: 17,  moddable: true  },
+      { type: 'ATK',         value: 13,  moddable: true  }
+    ],
+    classWeights: {
+      warrior: 0.90, rogue: 0.85, monk: 0.85, ranger: 0.75,
+      beastlord: 0.70, bard: 0.70, paladin: 0.50, shadowknight: 0.50,
+      cleric: 0.05, druid: 0.05, shaman: 0.05, necromancer: 0.0,
+      wizard: 0.0, magician: 0.0, enchanter: 0.0
+    }
+  },
+
+  // -------------------------------------------------------------------------
+  // Stun DD (Brusco's Bombastic Bellow)
+  // -------------------------------------------------------------------------
+
+  {
+    id: 1754,
+    name: "Brusco's Bombastic Bellow",
+    level: 53,
+    instrument: 'singing',
+    category: 'stun_dd',
+    soloOnly: true,
+    effects: [
+      { type: 'Stun',    value: 8, moddable: false, label: '8s stun' },
+      { type: 'HP', value: -222, moddable: false, label: '222 DD' }
+    ],
+    classWeights: {
+      warrior: 0.0, cleric: 0.0, paladin: 0.0, ranger: 0.0,
+      shadowknight: 0.0, druid: 0.0, monk: 0.0, bard: 0.80,
+      rogue: 0.0, shaman: 0.0, necromancer: 0.0, wizard: 0.0,
+      magician: 0.0, enchanter: 0.0, beastlord: 0.0
+    }
   }
 
 ];
