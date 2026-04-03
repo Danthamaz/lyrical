@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Melody Recommender — Lyri Cal</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* Mode tabs */
+    .mode-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+    .mode-tab { background: none; border: none; border-bottom: 2px solid transparent; color: var(--text-muted); font-size: 0.9rem; letter-spacing: 0.06em; padding: 0.6rem 1.5rem; cursor: pointer; transition: color 0.2s, border-color 0.2s; font-family: Georgia, serif; }
+    .mode-tab:hover { color: var(--accent); }
+    .mode-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .mode-panel { display: none; }
+    .mode-panel.active { display: block; }
+
+    /* Group slots */
+    .group-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+    .group-slot label { display: block; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .group-slot select, .gear-group select, .encounter-row select, #raid-role-select {
+      width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+      color: var(--text); font-size: 0.85rem; padding: 0.5rem 0.6rem; font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .group-slot select:focus, .gear-group select:focus, .encounter-row select:focus { border-color: var(--accent-muted); outline: none; }
+    .group-slot--bard select { color: var(--accent); border-color: var(--accent-muted); }
+
+    /* Raid grid */
+    .raid-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1rem; }
+    .raid-class { display: flex; align-items: center; gap: 0.5rem; }
+    .raid-class label { color: var(--text-body); font-size: 0.82rem; flex: 1; }
+    .raid-class input[type="number"] {
+      width: 48px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+      color: var(--text); font-size: 0.85rem; padding: 0.3rem 0.4rem; text-align: center; font-family: inherit;
+    }
+    .raid-class input[type="number"]:focus { border-color: var(--accent-muted); outline: none; }
+    .raid-role { margin-bottom: 1.5rem; }
+    .raid-role label { color: var(--text-muted); font-size: 0.8rem; margin-right: 0.5rem; }
+    .raid-role select { width: auto; display: inline-block; }
+
+    /* Encounter panel */
+    .encounter-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1rem; margin-bottom: 1.5rem; }
+    .encounter-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+    .encounter-row:last-child { margin-bottom: 0; }
+    .encounter-row label { color: var(--text-body); font-size: 0.85rem; min-width: 140px; flex-shrink: 0; }
+    .encounter-row select { width: auto; }
+    .dmg-type-toggles { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .dmg-toggle { background: var(--bg); border: 1px solid var(--border); border-radius: 3px; color: var(--text-muted); font-size: 0.78rem; padding: 0.3rem 0.7rem; cursor: pointer; transition: all 0.2s; }
+    .dmg-toggle:hover { border-color: var(--accent-muted); }
+    .dmg-toggle.active { border-color: var(--accent); color: var(--accent); background: rgba(212,130,74,0.1); }
+
+    /* Toggle checkbox */
+    .toggle-check { appearance: none; -webkit-appearance: none; width: 16px; height: 16px; border: 1px solid var(--accent-muted); border-radius: 3px; background: var(--bg); cursor: pointer; position: relative; transition: background 0.15s, border-color 0.15s; flex-shrink: 0; }
+    .toggle-check:checked { background: var(--accent); border-color: var(--accent); }
+    .toggle-check:checked::after { content: "\2713"; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: var(--bg); font-size: 10px; }
+
+    /* Gear panel */
+    .gear-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1rem; margin-bottom: 1.5rem; }
+    .gear-row { display: flex; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+    .gear-row:last-child { margin-bottom: 0; }
+    .gear-group { flex: 1; min-width: 140px; }
+    .gear-group label { display: block; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .gear-group input[type="checkbox"] { margin-top: 0.35rem; }
+
+    /* Modifier table */
+    .mod-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.82rem; }
+    .mod-table th { text-align: left; color: var(--accent); font-family: Georgia, serif; font-weight: normal; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border); }
+    .mod-table td { color: var(--text-body); padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--border-subtle); }
+    .mod-table tr:nth-child(even) td { background: rgba(0,0,0,0.15); }
+    .mod-table td:last-child { color: var(--accent); font-weight: 600; }
+
+    /* Results */
+    .melody-song { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; display: flex; align-items: flex-start; gap: 1rem; padding: 0.85rem 1rem; margin-bottom: 0.5rem; }
+    .melody-song-icon { color: var(--accent); font-size: 1.3rem; flex-shrink: 0; }
+    .melody-song-info { flex: 1; }
+    .melody-song-name { color: var(--accent); font-family: Georgia, serif; font-size: 0.95rem; margin-bottom: 0.15rem; }
+    .melody-song-meta { color: var(--text-muted); font-size: 0.775rem; margin-bottom: 0.3rem; }
+    .melody-song-effects { color: var(--text-body); font-size: 0.85rem; line-height: 1.5; }
+    .melody-song-tag { display: inline-block; background: rgba(212,130,74,0.1); border: 1px solid var(--accent-muted); color: var(--accent); font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 3px; margin-top: 0.3rem; letter-spacing: 0.03em; }
+    .melody-song-score { flex-shrink: 0; text-align: right; min-width: 60px; }
+    .score-bar { height: 6px; background: var(--border); border-radius: 3px; margin-top: 0.3rem; overflow: hidden; }
+    .score-bar-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.3s; }
+    .score-value { color: var(--text-muted); font-size: 0.75rem; font-variant-numeric: tabular-nums; }
+    .runnerup-song { opacity: 0.65; }
+    .runnerup-song .melody-song-tag { background: rgba(100,100,100,0.1); border-color: var(--text-muted); color: var(--text-muted); }
+    .results-empty { color: var(--text-muted); font-style: italic; font-size: 0.85rem; padding: 1rem 0; }
+
+    /* Melee panels */
+    .melee-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1rem; margin-bottom: 1.5rem; }
+    .melee-panel-title { color: var(--accent); font-family: Georgia, serif; font-size: 0.85rem; font-weight: normal; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 0.75rem; }
+    .melee-profile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+    .melee-weapon-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .melee-weapon-label { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .melee-field label { display: block; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .melee-field input[type="number"], .melee-field input[type="text"] {
+      width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 4px;
+      color: var(--text); font-size: 0.85rem; padding: 0.4rem 0.5rem; font-family: inherit;
+      box-sizing: border-box;
+    }
+    .melee-field input:focus { border-color: var(--accent-muted); outline: none; }
+    .melee-field-row { display: flex; gap: 0.5rem; }
+    .melee-field-row .melee-field { flex: 1; }
+    .melee-maintenance-label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-body); font-size: 0.85rem; cursor: pointer; }
+
+    /* NPC lookup */
+    #npc-search { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 0.85rem; padding: 0.5rem 0.6rem; font-family: inherit; box-sizing: border-box; }
+    #npc-search:focus { border-color: var(--accent-muted); outline: none; }
+    #npc-results { max-height: 200px; overflow-y: auto; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 0.75rem; }
+    .npc-result-item { padding: 0.4rem 0.6rem; cursor: pointer; font-size: 0.85rem; color: var(--text-body); border-bottom: 1px solid var(--border-subtle); }
+    .npc-result-item:hover { background: rgba(212,130,74,0.08); color: var(--accent); }
+    .npc-stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; font-size: 0.82rem; }
+    .npc-stat { color: var(--text-body); }
+    .npc-stat strong { color: var(--accent); }
+
+    /* Melee sim results */
+    .sim-summary { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1rem; margin-bottom: 1rem; }
+    .sim-summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem; font-size: 0.85rem; }
+    .sim-stat-label { color: var(--text-muted); }
+    .sim-stat-value { color: var(--text-body); text-align: right; font-variant-numeric: tabular-nums; }
+    .sim-stat-value.sustainable { color: #6a9955; }
+    .sim-stat-value.unsustainable { color: #d4564a; }
+    .sim-contribution { color: var(--text-muted); font-size: 0.78rem; margin-top: 0.15rem; }
+    .melee-runnerup { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 0.6rem 0.8rem; margin-bottom: 0.4rem; opacity: 0.7; font-size: 0.82rem; }
+    .melee-runnerup-songs { color: var(--text-body); }
+    .melee-runnerup-stats { color: var(--text-muted); font-size: 0.78rem; margin-top: 0.2rem; }
+    .melee-runnerup .sustainable { color: #6a9955; }
+    .melee-runnerup .unsustainable { color: #d4564a; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .group-slots { grid-template-columns: repeat(2, 1fr); }
+      .raid-grid { grid-template-columns: repeat(2, 1fr); }
+      .gear-row { flex-direction: column; gap: 0.5rem; }
+      .encounter-row { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+      .encounter-row label { min-width: auto; }
+      .mode-tab { padding: 0.5rem 1rem; font-size: 0.82rem; }
+      .melee-profile-grid { grid-template-columns: repeat(2, 1fr); }
+      .melee-weapon-grid { grid-template-columns: 1fr; }
+      .npc-stat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <div class="category-label">Tools</div>
+    <h1>Melody Recommender</h1>
+    <div class="subtitle">Build the optimal twist for your group, raid, or solo session.</div>
+  </div>
+
+  <div class="section-divider">
+    <img src="/assets/divider.svg" alt="">
+  </div>
+
+  <div class="content" id="melody-app">
+
+    <!-- Mode Tabs -->
+    <div class="mode-tabs">
+      <button class="mode-tab active" data-mode="group">Group</button>
+      <button class="mode-tab" data-mode="raid">Raid</button>
+      <button class="mode-tab" data-mode="solo">Solo</button>
+    </div>
+
+    <!-- Group Mode Panel -->
+    <div class="mode-panel active" id="mode-group">
+      <div class="group-slots">
+        <div class="group-slot">
+          <label for="slot-1">Slot 1</label>
+          <select id="slot-1" class="class-select"></select>
+        </div>
+        <div class="group-slot">
+          <label for="slot-2">Slot 2</label>
+          <select id="slot-2" class="class-select"></select>
+        </div>
+        <div class="group-slot">
+          <label for="slot-3">Slot 3</label>
+          <select id="slot-3" class="class-select"></select>
+        </div>
+        <div class="group-slot">
+          <label for="slot-4">Slot 4</label>
+          <select id="slot-4" class="class-select"></select>
+        </div>
+        <div class="group-slot">
+          <label for="slot-5">Slot 5</label>
+          <select id="slot-5" class="class-select"></select>
+        </div>
+        <div class="group-slot group-slot--bard">
+          <label for="slot-6">Slot 6</label>
+          <select id="slot-6" class="class-select" disabled>
+            <option value="bard">Bard</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Raid Mode Panel -->
+    <div class="mode-panel" id="mode-raid">
+      <div class="raid-grid" id="raid-class-grid">
+        <!-- Populated by melody.js from CLASSES in songs.js -->
+      </div>
+      <div class="raid-role">
+        <label for="raid-role-select">Bard's Role</label>
+        <select id="raid-role-select">
+          <option value="tank">Tank Group</option>
+          <option value="melee">Melee Group</option>
+          <option value="caster">Caster Group</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Solo Mode Panel -->
+    <div class="mode-panel" id="mode-solo">
+    </div>
+
+    <!-- Melee Solo: Character Profile -->
+    <div class="melee-panel" id="melee-profile" style="display:none;">
+      <h3 class="melee-panel-title">Character Profile</h3>
+      <div class="melee-profile-grid">
+        <div class="melee-field">
+          <label for="mp-level">Level</label>
+          <input type="number" id="mp-level" value="60" min="1" max="65">
+        </div>
+        <div class="melee-field">
+          <label for="mp-hp">Max HP</label>
+          <input type="number" id="mp-hp" value="3353" min="1">
+        </div>
+        <div class="melee-field">
+          <label for="mp-regen">HP / Tick</label>
+          <input type="number" id="mp-regen" value="13" min="0">
+        </div>
+        <div class="melee-field">
+          <label for="mp-item-haste">Item Haste %</label>
+          <input type="number" id="mp-item-haste" value="36" min="0" max="100">
+        </div>
+        <div class="melee-field">
+          <label for="mp-buff-haste">Buff Haste %</label>
+          <input type="number" id="mp-buff-haste" value="40" min="0" max="100">
+        </div>
+        <div class="melee-field">
+          <label for="mp-ds">Always-on DS</label>
+          <input type="number" id="mp-ds" value="0" min="0">
+        </div>
+      </div>
+      <h3 class="melee-panel-title" style="margin-top:1rem;">Weapons</h3>
+      <div class="melee-weapon-grid">
+        <div class="melee-weapon">
+          <div class="melee-weapon-label">Primary</div>
+          <div class="melee-field">
+            <label for="mp-pri-name">Name</label>
+            <input type="text" id="mp-pri-name" value="Scimitar of Shissar Slaying">
+          </div>
+          <div class="melee-field-row">
+            <div class="melee-field">
+              <label for="mp-pri-dmg">Base Dmg</label>
+              <input type="number" id="mp-pri-dmg" value="15" min="0">
+            </div>
+            <div class="melee-field">
+              <label for="mp-pri-bonus">Bonus Dmg</label>
+              <input type="number" id="mp-pri-bonus" value="11" min="0">
+            </div>
+            <div class="melee-field">
+              <label for="mp-pri-delay">Delay</label>
+              <input type="number" id="mp-pri-delay" value="19" min="1">
+            </div>
+          </div>
+        </div>
+        <div class="melee-weapon">
+          <div class="melee-weapon-label">Secondary</div>
+          <div class="melee-field">
+            <label for="mp-sec-name">Name</label>
+            <input type="text" id="mp-sec-name" value="Singing Short Sword">
+          </div>
+          <div class="melee-field-row">
+            <div class="melee-field">
+              <label for="mp-sec-dmg">Base Dmg</label>
+              <input type="number" id="mp-sec-dmg" value="16" min="0">
+            </div>
+            <div class="melee-field">
+              <label for="mp-sec-bonus">Bonus Dmg</label>
+              <input type="number" id="mp-sec-bonus" value="0" min="0">
+            </div>
+            <div class="melee-field">
+              <label for="mp-sec-delay">Delay</label>
+              <input type="number" id="mp-sec-delay" value="25" min="1">
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3 class="melee-panel-title" style="margin-top:1rem;">Maintenance Songs</h3>
+      <div class="melee-maintenance">
+        <label class="melee-maintenance-label">
+          <input type="checkbox" id="mp-angstlich" class="toggle-check">
+          <span>Angstlich's Assonance</span>
+          <span style="color:var(--text-muted); font-size:0.78rem;"> — 40% slow + DoT, recast every 60s</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Melee Solo: NPC Lookup -->
+    <div class="melee-panel" id="melee-npc" style="display:none;">
+      <h3 class="melee-panel-title">NPC Target</h3>
+      <div class="melee-field" style="margin-bottom:0.75rem;">
+        <label for="npc-search">Search by ID or Name</label>
+        <input type="text" id="npc-search" placeholder="e.g. 89018 or blood_of_chottal">
+      </div>
+      <div id="npc-results" style="display:none;"></div>
+      <div id="npc-selected" style="display:none;">
+        <div class="npc-stat-grid" id="npc-stat-grid"></div>
+      </div>
+    </div>
+
+    <!-- Encounter Conditions -->
+    <div class="encounter-panel">
+      <div class="encounter-row">
+        <label>Mob Damage Type</label>
+        <div class="dmg-type-toggles">
+          <button class="dmg-toggle" data-dmg="fire">Fire</button>
+          <button class="dmg-toggle" data-dmg="cold">Cold</button>
+          <button class="dmg-toggle" data-dmg="poison">Poison</button>
+          <button class="dmg-toggle" data-dmg="disease">Disease</button>
+          <button class="dmg-toggle" data-dmg="magic">Magic</button>
+        </div>
+      </div>
+      <div class="encounter-row">
+        <label for="slow-needed">Slow Needed</label>
+        <select id="slow-needed">
+          <option value="auto">Auto</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="encounter-row">
+        <label for="slow-immune">Slow-Immune Mob</label>
+        <input type="checkbox" id="slow-immune" class="toggle-check">
+      </div>
+      <div class="encounter-row">
+        <label for="resist-debuff">Resist Debuff Useful</label>
+        <input type="checkbox" id="resist-debuff" class="toggle-check">
+      </div>
+    </div>
+
+    <!-- Gear & Modifiers -->
+    <div class="gear-panel">
+      <div class="gear-row">
+        <div class="gear-group">
+          <label for="gear-epic">Epic (Singing Short Sword)</label>
+          <input type="checkbox" id="gear-epic" class="toggle-check">
+        </div>
+        <div class="gear-group">
+          <label for="gear-amplification">Amplification</label>
+          <input type="checkbox" id="gear-amplification" class="toggle-check">
+        </div>
+        <div class="gear-group">
+          <label for="gear-puretone">Puretone</label>
+          <input type="checkbox" id="gear-puretone" class="toggle-check">
+        </div>
+      </div>
+      <div class="gear-row">
+        <div class="gear-group">
+          <label for="gear-percussion">Drums</label>
+          <select id="gear-percussion"></select>
+        </div>
+        <div class="gear-group">
+          <label for="gear-stringed">Stringed</label>
+          <select id="gear-stringed"></select>
+        </div>
+        <div class="gear-group">
+          <label for="gear-brass">Brass</label>
+          <select id="gear-brass"></select>
+        </div>
+        <div class="gear-group">
+          <label for="gear-wind">Wind</label>
+          <select id="gear-wind"></select>
+        </div>
+      </div>
+      <div class="gear-row">
+        <div class="gear-group">
+          <label for="gear-instrument-mastery">Instrument Mastery</label>
+          <select id="gear-instrument-mastery">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div class="gear-group">
+          <label for="gear-singing-mastery">Singing Mastery</label>
+          <select id="gear-singing-mastery">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div class="gear-group">
+          <label for="gear-jam-fest">Jam Fest</label>
+          <select id="gear-jam-fest">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div class="gear-group">
+          <label for="gear-clicky">Singing Clicky</label>
+          <select id="gear-clicky"></select>
+        </div>
+      </div>
+
+      <table class="mod-table" id="mod-table">
+        <thead>
+          <tr>
+            <th>Skill</th>
+            <th>Item</th>
+            <th>AA</th>
+            <th>Amp</th>
+            <th>Total</th>
+            <th>Multiplier</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Percussion</td>
+            <td id="mod-percussion-item">—</td>
+            <td id="mod-percussion-aa">—</td>
+            <td id="mod-percussion-amp">—</td>
+            <td id="mod-percussion-total">—</td>
+            <td id="mod-percussion-mult">—</td>
+          </tr>
+          <tr>
+            <td>Stringed</td>
+            <td id="mod-stringed-item">—</td>
+            <td id="mod-stringed-aa">—</td>
+            <td id="mod-stringed-amp">—</td>
+            <td id="mod-stringed-total">—</td>
+            <td id="mod-stringed-mult">—</td>
+          </tr>
+          <tr>
+            <td>Brass</td>
+            <td id="mod-brass-item">—</td>
+            <td id="mod-brass-aa">—</td>
+            <td id="mod-brass-amp">—</td>
+            <td id="mod-brass-total">—</td>
+            <td id="mod-brass-mult">—</td>
+          </tr>
+          <tr>
+            <td>Wind</td>
+            <td id="mod-wind-item">—</td>
+            <td id="mod-wind-aa">—</td>
+            <td id="mod-wind-amp">—</td>
+            <td id="mod-wind-total">—</td>
+            <td id="mod-wind-mult">—</td>
+          </tr>
+          <tr>
+            <td>Singing</td>
+            <td id="mod-singing-item">—</td>
+            <td id="mod-singing-aa">—</td>
+            <td id="mod-singing-amp">—</td>
+            <td id="mod-singing-total">—</td>
+            <td id="mod-singing-mult">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Results -->
+    <div class="section-title">
+      <h2>Recommended Melody</h2>
+    </div>
+    <div id="melody-results">
+      <div class="results-empty">Configure your group and gear above to see recommendations.</div>
+    </div>
+
+    <div class="section-title">
+      <h2>Runner-Ups</h2>
+    </div>
+    <div id="melody-runnerups"></div>
+
+    <!-- Melee Sim Results (hidden unless melee mode) -->
+    <div id="melee-sim-output" style="display:none;">
+      <div class="section-title"><h2>Combat Summary</h2></div>
+      <div id="melee-combat-summary"></div>
+      <div class="section-title"><h2>Runner-Up Melodies</h2></div>
+      <div id="melee-runnerups"></div>
+    </div>
+
+  </div>
+
+  <button class="back-to-top">&#8593; Top</button>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/tools/melody/songs.js"></script>
+  <script src="/tools/melody/melee-sim.js"></script>
+  <script src="/tools/melody/melody.js"></script>
+</body>
+</html>
