@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best-in-Slot: Attack Focus — Lyri Cal</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .bis-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+    .bis-table th {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .bis-table td {
+      background: var(--surface);
+      padding: 0.6rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .bis-table tr:hover td {
+      background: #1c1414;
+    }
+    .bis-table .slot-name {
+      color: var(--text);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .bis-table .item-link {
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .bis-table .item-link:hover {
+      color: var(--text);
+    }
+    .bis-table .key-stat {
+      color: var(--text-body);
+      white-space: nowrap;
+    }
+    .bis-table .source {
+      color: var(--text-body);
+      font-size: 0.88rem;
+    }
+    .bis-table .alt-note {
+      display: block;
+      margin-top: 0.35rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .bis-table .garbage-note {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .totals-box {
+      border: 1px solid var(--accent-muted);
+      background: var(--surface);
+      padding: 1.2rem 1.6rem;
+      border-radius: 6px;
+      margin: 2rem 0;
+      text-align: center;
+    }
+    .totals-box h3 {
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      font-size: 1.1rem;
+    }
+    .totals-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .totals-stat {
+      text-align: center;
+    }
+    .totals-stat .value {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .totals-stat .label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    @media (max-width: 640px) {
+      .bis-table {
+        font-size: 0.85rem;
+      }
+      .bis-table th,
+      .bis-table td {
+        padding: 0.45rem 0.5rem;
+      }
+      .bis-table .source {
+        font-size: 0.8rem;
+      }
+      .totals-grid {
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <div class="category-label">Gear / End-Game</div>
+    <h1>Best-in-Slot: Attack Focus</h1>
+    <div class="subtitle">Maximizing worn ATK for end-game bard melee. 41% haste, 15 FT, 235 worn ATK.</div>
+  </div>
+
+  <div class="section-divider">
+    <img src="/assets/divider-header.svg" alt="">
+  </div>
+
+  <!-- ============================================================
+       Overview
+       ============================================================ -->
+  <section class="band">
+    <div class="content">
+
+    <div class="section-title">
+      <h2>Overview</h2>
+    </div>
+
+    <p>This is the BiS set for bards focused on maximizing worn attack power. The majority of pieces come from Vex Thal. The total set provides 41% haste, 15 Flowing Thought, and 235 worn ATK (230 if opting for Umbral Vambraces over Mark of Shadows on the arm slot).</p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Gear Slots
+       ============================================================ -->
+  <section class="band">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <div class="section-title">
+      <h2>Gear Slots</h2>
+    </div>
+
+    <table class="bis-table">
+      <thead>
+        <tr>
+          <th>Slot</th>
+          <th>Item</th>
+          <th>Key Stat</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Ear 1 -->
+        <tr>
+          <td class="slot-name">Ear 1</td>
+          <td><a class="item-link" href="https://www.pdqi.cc/item/Earring%20of%20Eradication" target="_blank" rel="noopener">Earring of Eradication</a></td>
+          <td class="key-stat">15 ATK</td>
+          <td class="source">Aten Ha Ra</td>
+        </tr>
+        <!-- Ear 2 -->
+        <tr>
+          <td class="slot-name">Ear 2</td>
+          <td>
+            <a class="item-link" href="https://www.pdqi.cc/item/Earring%20of%20Battle" target="_blank" rel="noopener">Earring of Battle</a>
+            <span class="alt-note">Alt: <a href="https://www.pdqi.cc/item/Earring%20of%20Falling%20Stars" target="_blank" rel="noopener">Earring of Falling Stars</a> (10 ATK, Thall Va Kelun, VT)</span>
+          </td>
+          <td class="key-stat">10 ATK</td>
+          <td class="source">Va Xi Aten Ha Ra (VT)</td>
+        </tr>
+        <!-- Neck -->
+        <tr>
+          <td class="slot-name">Neck</td>
+          <td><a class="item-link" href="https://www.pdqi.cc/item/Talisman%20of%20Vah%20Kerrath" target="_blank" rel="noopener">Talisman of Vah Kerrath</a></td>
+          <td class="key-stat">20 ATK, FT8</td>
+          <td class="source">Aten Ha Ra</td>
+        </tr>
+        <!-- Face -->
+        <tr>
+          <td class="slot-name">Face</td>
+          <td><a class="item-link" href="https://www.pdqi.cc/item/Crimson%20Runed%20Mask" target="_blank" rel="noopener">Crimson Runed Mask</a></td>
+          <td class="key-stat">30 ATK</td>
+          <td class="source">Aten Ha Ra</td>
+        </tr>
+        <!-- Head -->
+        <tr>
+          <td class="slot-name">Head</td>
+          <td>
+            <a class="item-link" href="https://www.pdqi.cc/item/Great%20Helm%20of%20True%20Vision" target="_blank" rel="noopener">Great Helm of True Vision</a>
+            <span class="alt-note garbage-note">Garbage slot</span>
+          </td>
+          <td class="key-stat">&mdash;</td>
+          <td class="source">Arch Lich</td>
+        </tr>
+        <!-- Ring 1 -->
+        <tr>
+          <td class="slot-name">Ring 1</td>
+          <td><a class="item-link" href="https://www.pdqi.cc/item/Hoop%20of%20Chaos" target="_blank" rel="noopener">Hoop of Chaos</a></td>
+          <td class="key-stat">10 ATK</td>
+          <td class="source">Thall Xundraux Diabo</td>
+        </tr>
+        <!-- Ring 2 -->
+        <tr>
+          <td class="slot-name">Ring 2</td>
+          <td><a class="item-link" href="https://www.pdqi.cc/item/Starred%20Yttrium%20Ring" target="_blank" rel="noopener">Starred Yttrium Ring</a></td>
+          <td class="key-stat">FT5</td>
+          <td class="source">Seru</td>
+        </tr>
+        <!-- Arm -->
+        <tr>
+          <td class="slot-name">Arm</td>
+          <td>
+            <a class="item-link" href="https://www.pdqi.cc/item/Mark%20of%20Shadows" target="_blank" rel="noopener">Mark of Shadows</a>
+            <span class="alt-note">Alt: <a href="https://www.pdqi.cc/item/Umbral%20Vambraces" target="_blank" rel="noopener">Umbral Vambraces</a> (15 ATK, Diabo Xi Va Temariel) &mdash; drops total to 230 ATK</span>
+          </td>
+          <td class="key-stat">20 ATK</td>
+          <td class="source">Kaas Thox Xi Aten Ha Ra (VT)</td>
+        </tr>
+        <!-- Wrist 1 -->
+        <tr>
+          <td class="slot-name">Wrist 1</td>
+          <td>
+            <a class="item-link" href="https://www.pdqi.cc/item/Cloudy%20Mark" target="_blank" rel="noopener">Cloudy Mark</a>
+            <span class="alt-note">Alt: Flex SWC</span>
+          </td>
+          <td class="key-stat">10 ATK</td>
+          <td class="source">Va Xi Aten Ha Ra</td>
+        </tr>
+        <!-- Wrist 2 -->
+        <tr>
+          <td class="slot-name">Wrist 2</td>
+          <td><a class="item-link" href="https://www.pdqi.cc/item/Umbracite%20Bracer" target="_blank" rel="noopener">Umbracite Bracer</a></td>
+          <td class="key-stat">10 ATK</td>
+          <td class="source">Thall Va Xakra</td>
+        </tr>
+        <!-- Hand -->
+        <tr>
+          <td class="slot-name">Hand</td>
+          <td><a class="item-link" href="https://www.pdqi.cc/item/Sanguine%20Gloves" target="_blank" rel="noopener">Sanguine Gloves</a></td>
+          <td class="key-stat">15 ATK</td>
+          <td class="source">Thall Va Kelun</td>
+        </tr>
+        <!-- Shoulder -->
+        <tr>
+          <td class="slot-name">Shoulder</td>
+          <td><a class="item-link" href="https://www.pdqi.cc/item/Pauldrons%20of%20Seething%20Darkness" target="_blank" rel="noopener">Pauldrons of Seething Darkness</a></td>
+          <td class="key-stat">20 ATK</td>
+          <td class="source">Va Xi Aten Ha Ra</td>
+        </tr>
+        <!-- Chest -->
+        <tr>
+          <td class="slot-name">Chest</td>
+          <td><a class="item-link" href="https://www.pdqi.cc/item/Great%20Shadow%20Platemail" target="_blank" rel="noopener">Great Shadow Platemail</a></td>
+          <td class="key-stat">50 ATK</td>
+          <td class="source">Aten Ha Ra</td>
+        </tr>
+        <!-- Back -->
+        <tr>
+          <td class="slot-name">Back</td>
+          <td>
+            <a class="item-link" href="https://www.pdqi.cc/item/Great%20Cloak%20of%20Shadows" target="_blank" rel="noopener">Great Cloak of Shadows</a>
+            <span class="alt-note">Alt: <a href="https://www.pdqi.cc/item/Cloak%20of%20Destruction" target="_blank" rel="noopener">Cloak of Destruction</a> (flex), <a href="https://www.pdqi.cc/item/Shadowsong%20Cloak" target="_blank" rel="noopener">Shadowsong Cloak</a> (inventory swap)</span>
+          </td>
+          <td class="key-stat">15 ATK</td>
+          <td class="source">Thall Xundraux Diabo</td>
+        </tr>
+        <!-- Waist -->
+        <tr>
+          <td class="slot-name">Waist</td>
+          <td>
+            <a class="item-link" href="https://www.pdqi.cc/item/Belt%20of%20Mastery" target="_blank" rel="noopener">Belt of Mastery</a>
+            <span class="alt-note">Alt: <a href="https://www.pdqi.cc/item/Dain%20Belt" target="_blank" rel="noopener">Dain Belt</a> (flex)</span>
+          </td>
+          <td class="key-stat">10 ATK</td>
+          <td class="source">Kaas Thox Xi Aten Ha Ra</td>
+        </tr>
+        <!-- Leg -->
+        <tr>
+          <td class="slot-name">Leg</td>
+          <td><a class="item-link" href="https://www.pdqi.cc/item/Shimmering%20Black%20Greaves" target="_blank" rel="noopener">Shimmering Black Greaves</a></td>
+          <td class="key-stat">FT2</td>
+          <td class="source">VT Trash</td>
+        </tr>
+        <!-- Boot -->
+        <tr>
+          <td class="slot-name">Boot</td>
+          <td>
+            <a class="item-link" href="https://www.pdqi.cc/item/Envenomed%20Moccasins" target="_blank" rel="noopener">Envenomed Moccasins</a>
+            <span class="alt-note">Alt: VT Trash boots (click effect)</span>
+          </td>
+          <td class="key-stat">Haste (41%)</td>
+          <td class="source">&mdash;</td>
+        </tr>
+        <!-- Primary -->
+        <tr>
+          <td class="slot-name">Primary</td>
+          <td><a class="item-link" href="https://www.pdqi.cc/item/Lava%20Infused%20Bludgeon" target="_blank" rel="noopener">Lava Infused Bludgeon</a></td>
+          <td class="key-stat">BiS MH</td>
+          <td class="source">&mdash;</td>
+        </tr>
+        <!-- Secondary -->
+        <tr>
+          <td class="slot-name">Secondary</td>
+          <td>
+            <a class="item-link" href="https://www.pdqi.cc/item/Singing%20Short%20Sword" target="_blank" rel="noopener">Singing Short Sword (Epic)</a>
+            <span class="alt-note">Swap to primary for tank/rogue groups</span>
+          </td>
+          <td class="key-stat">Offhand/swap</td>
+          <td class="source">&mdash;</td>
+        </tr>
+        <!-- Alt weapons -->
+        <tr>
+          <td class="slot-name">Alt Weapons</td>
+          <td>
+            <a class="item-link" href="https://www.pdqi.cc/item/Salindrite" target="_blank" rel="noopener">Salindrite</a> (High AC),
+            <a class="item-link" href="https://www.pdqi.cc/item/Render%20of%20Souls" target="_blank" rel="noopener">Render of Souls</a> (lifetap/low AC)
+            <span class="alt-note">Situational swaps</span>
+          </td>
+          <td class="key-stat">&mdash;</td>
+          <td class="source">&mdash;</td>
+        </tr>
+        <!-- Range -->
+        <tr>
+          <td class="slot-name">Range</td>
+          <td><a class="item-link" href="https://www.pdqi.cc/item/Horn%20of%20Shadows" target="_blank" rel="noopener">Horn of Shadows</a></td>
+          <td class="key-stat">Brass Mod</td>
+          <td class="source">&mdash;</td>
+        </tr>
+      </tbody>
+    </table>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Totals Summary
+       ============================================================ -->
+  <section class="band">
+    <div class="band-divider"><img src="/assets/divider-band.svg" alt=""></div>
+    <div class="content">
+
+    <div class="section-title">
+      <h2>Totals Summary</h2>
+    </div>
+
+    <div class="totals-box">
+      <h3>Set Totals</h3>
+      <div class="totals-grid">
+        <div class="totals-stat">
+          <span class="value">235</span>
+          <span class="label">Worn ATK</span>
+        </div>
+        <div class="totals-stat">
+          <span class="value">41%</span>
+          <span class="label">Haste</span>
+        </div>
+        <div class="totals-stat">
+          <span class="value">15</span>
+          <span class="label">Flowing Thought</span>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </section>
+
+  <button class="back-to-top">&#8593; Top</button>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
