@@ -133,6 +133,13 @@
     "tags": ["sebilis", "seb key", "trakanon idol", "old sebilis", "trakanon's teeth", "emperor ganak", "kunark"]
   },
   {
+    "title": "Veeshan's Peak Key",
+    "url": "/quests/kunark/vp-key.html",
+    "category": "End-Game / Quests",
+    "description": "How to obtain the Key of Veeshan to enter Veeshan's Peak. Assemble three tribal medallions (Obulus, Jarsath, Kylong), kill Trakanon, and turn in to Emperor Ganak.",
+    "tags": ["veeshan's peak", "vp key", "key of veeshan", "medallion", "obulus", "jarsath", "kylong", "trakanon", "emperor ganak", "kunark", "ring of scale"]
+  },
+  {
     "title": "Coldain Prayer Shawl",
     "url": "/quests/velious/shawl.html",
     "category": "End-Game / Quests",
@@ -145,20 +152,6 @@
     "category": "End-Game / Quests",
     "description": "Ten-stage Coldain Ring War quest from Ring 1 through the Dain Ring. Step-by-step guide for all ten rings.",
     "tags": ["dain ring", "coldain ring", "ring war", "velious", "quest", "thurgadin", "ring of dain"]
-  },
-  {
-    "title": "Sleeper's Key",
-    "url": "/quests/velious/st-key.html",
-    "category": "End-Game / Quests",
-    "description": "Obtain the Sleeper's Key from Jaled Dar's Shade in Dragon Necropolis by turning in any one of six dragon talismans.",
-    "tags": ["sleeper's key", "jaled dar", "dragon necropolis", "velious", "talisman", "sleeper's tomb", "first brood"]
-  },
-  {
-    "title": "Sleeper's Tomb Key",
-    "url": "/quests/velious/sleepers-tomb-key.html",
-    "category": "End-Game / Quests",
-    "description": "Full guide to the Sleeper's Key, the four Warders, their loot tables, and the replacement key from Nelef the Trader.",
-    "tags": ["sleeper's tomb", "warders", "kerafyrm", "primal velium", "ancient prismatic", "velious", "eastern wastes"]
   },
   {
     "title": "Ssraeshza Temple Key",
